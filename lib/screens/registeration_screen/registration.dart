@@ -25,9 +25,7 @@ class Registration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int borderRadius=15;
     var backColor=Colors.grey.withOpacity(0.14);
-    var padding=EdgeInsets.symmetric(horizontal: 20,vertical: 18);
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
       body: SafeArea(child: Padding(
@@ -117,6 +115,19 @@ class Registration extends StatelessWidget {
                          borderRadius:BorderRadius.circular(15)
                      ) ,
                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Checkbox(value: true, onChanged: (value){},),
+                      Expanded(
+                        child: Text("By continuing you accept our Privacy Policy and Term of Use",maxLines: 2,overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(color: Colors.black.withOpacity(0.7)),),
+                      ),
+
+
+                    ],
                   )
 
 
