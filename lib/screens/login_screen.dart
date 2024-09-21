@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/screens/forget_pass_page.dart';
+import 'package:market_hub_application/screens/home/home.dart';
 import 'package:market_hub_application/screens/registeration_screen/registration.dart';
 import 'package:market_hub_application/utility/theme.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
@@ -50,13 +51,16 @@ class LoginScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 60),
             child: OtpPinField(
+
               fieldHeight: 60,
               fieldWidth: 50,
+
 
               autoFillEnable: false,
               textInputAction: TextInputAction.done,
               onSubmit: (text) {
                 print('Entered pin is $text');
+                Get.offAll(Home());
               },
               onChange: (x) {
                 Print.p(x.toString());
