@@ -7,30 +7,29 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: AppTheme.backgroundColor,body: Padding(
-      padding: const EdgeInsets.all(28.0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: SizedBox(child: Row(
+    return SafeArea(
+      child: Scaffold(backgroundColor: AppTheme.backgroundColor,body: Padding(
+        padding: const EdgeInsets.all(28.0),
+        child: Column(
+          children: [
+            SizedBox(child: Row(
               children: [
                 Image.asset("assets/splash_screeen_img/logo.png",height: 70,width: 70,),
                 Expanded(child: Text(" Hello Abhishek! 👋",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700,),)),
                 CircleAvatar(backgroundImage: AssetImage('assets/splash_screeen_img/defult_profile.png'),backgroundColor: Colors.grey.shade200,radius: 25,)
               ],
             ),),
-          ),
-          Text("Your market updates will be displayed here.",style: GoogleFonts.poppins(
-              fontSize: 17, color: Color(0xff646464)),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Divider(color: Colors.grey,),
-          ),
-          Expanded(child: Placeholder())
-        ],
-      ),
-    ),);
+            Text("Your market updates will be displayed here.",style: GoogleFonts.poppins(
+                fontSize: 17, color: Color(0xff646464)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Divider(color: Colors.grey,),
+            ),
+            Expanded(child: Placeholder())
+          ],
+        ),
+      ),),
+    );
   }
 }
