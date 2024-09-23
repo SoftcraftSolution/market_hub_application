@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^6.2.1
   image_picker: ^1.1.2
   otp_pin_field: ^1.2.9+1
+  flutter_svg: ^1.1.6
 
 
 dev_dependencies:
@@ -66,6 +67,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/splash_screeen_img/
+    - assets/icon/
+    - assets/metals/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

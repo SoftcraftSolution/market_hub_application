@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market_hub_application/screens/profile_screen.dart';
 import 'package:market_hub_application/utility/theme.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +18,11 @@ class HomePage extends StatelessWidget {
               children: [
                 Image.asset("assets/splash_screeen_img/logo.png",height: 70,width: 70,),
                 Expanded(child: Text(" Hello Abhishek! 👋",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700,),)),
-                CircleAvatar(backgroundImage: AssetImage('assets/splash_screeen_img/defult_profile.png'),backgroundColor: Colors.grey.shade200,radius: 25,)
+                GestureDetector(
+                    onTap: (){
+                      Get.to(ProfileScreen());
+                    },
+                    child: CircleAvatar(backgroundImage: AssetImage('assets/splash_screeen_img/defult_profile.png'),backgroundColor: Colors.grey.shade200,radius: 25,))
               ],
             ),),
             Text("Your market updates will be displayed here.",style: GoogleFonts.poppins(

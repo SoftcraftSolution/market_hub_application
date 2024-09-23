@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/screens/home/home_con.dart';
 import 'package:market_hub_application/screens/main_screen/alert_page.dart';
 import 'package:market_hub_application/screens/main_screen/future_page.dart';
@@ -29,9 +29,9 @@ class Home extends StatelessWidget {
             ),
           ),
           child: NavigationBar(
-            height: 100,
+            height: 90,
             elevation: 0.8,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.grey.withOpacity(0.08),
             onDestinationSelected: (int index) {
               homeCon.setPageIndex(index);
               Print.p("index=$index");
@@ -40,31 +40,28 @@ class Home extends StatelessWidget {
             selectedIndex: homeCon.pageIndex.value,
             destinations: <Widget>[
               NavigationDestination(
-                selectedIcon: Icon(Icons.home, size: 34, color: homeCon.pageIndex.value == 0 ? Color(0xFF1918BC) : Colors.grey),
-                icon: Icon(Icons.home_outlined, color: homeCon.pageIndex.value == 0 ? Color(0xFF1918BC) : Colors.grey),
-                label: 'Home',
+                selectedIcon:SvgPicture.asset("assets/icon/s-home.svg",height: 26,) ,
+                icon: SvgPicture.asset("assets/icon/home.svg",height: 26,),
+              label: 'Home',
               ),
               NavigationDestination(
-                selectedIcon: Icon(Icons.auto_graph, size: 34, color: homeCon.pageIndex.value == 1 ? Color(0xFF1918BC) : Colors.grey),
-                icon: Icon(Icons.auto_graph, color: homeCon.pageIndex.value == 1 ? Color(0xFF1918BC) : Colors.grey),
+                selectedIcon:SvgPicture.asset("assets/icon/s-future.svg",height: 26,) ,
+                icon: SvgPicture.asset("assets/icon/future.svg",height: 26,),
                 label: 'Future',
               ),
               NavigationDestination(
-                selectedIcon: Icon(Icons.label, size: 34, color: homeCon.pageIndex.value == 2 ? Color(0xFF1918BC) : Colors.grey),
-                icon: Transform.rotate(
-                  child: Icon(Icons.label, color: homeCon.pageIndex.value == 2 ? Color(0xFF1918BC) : Colors.grey),
-                  angle: 2.0,
-                ),
+                selectedIcon:SvgPicture.asset("assets/icon/s-spot.svg",height: 26,) ,
+                icon: SvgPicture.asset("assets/icon/spot.svg",height: 26,),
                 label: 'Spot Price',
               ),
               NavigationDestination(
-                selectedIcon: Icon(Icons.notifications, size: 34, color: homeCon.pageIndex.value == 3 ? Color(0xFF1918BC) : Colors.grey),
-                icon: Icon(Icons.notifications, color: homeCon.pageIndex.value == 3 ? Color(0xFF1918BC) : Colors.grey),
+                selectedIcon:SvgPicture.asset("assets/icon/s-alert.svg",height: 26,) ,
+                icon: SvgPicture.asset("assets/icon/alert.svg",height: 26,),
                 label: 'Alert',
               ),
               NavigationDestination(
-                selectedIcon: Icon(Icons.bookmark_sharp, size: 34, color: homeCon.pageIndex.value == 4 ? Color(0xFF1918BC) : Colors.grey),
-                icon: Icon(Icons.bookmark_sharp, color: homeCon.pageIndex.value == 4 ? Color(0xFF1918BC) : Colors.grey),
+                selectedIcon:SvgPicture.asset("assets/icon/s-watch.svg",height: 26,) ,
+                icon: SvgPicture.asset("assets/icon/watch.svg",height: 26,),
                 label: 'Watchlist',
               ),
             ],
