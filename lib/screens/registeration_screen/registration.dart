@@ -60,7 +60,7 @@ class Registration extends StatelessWidget {
                           StandaredTextFeild(
                               placeholder: "Enter Full Name",
                               controller: nameCon),
-                          SizedBox(height: 16),
+                          // SizedBox(height: 16),
                           // phone number
                           Container(
                             decoration: BoxDecoration(
@@ -103,20 +103,20 @@ class Registration extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 20),
                           StandaredTextFeild(
                             placeholder: "Enter Pincode",
                             controller: pincodeCon,
                             keyType: TextInputType.number,
                             maxLength: 6,
                           ),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                           StandaredTextFeild(
                               placeholder: "Enter City", controller: cityCon),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                           StandaredTextFeild(
                               placeholder: "Enter State", controller: stateCon),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                           Obx(
                             ()=> TextField(
 
@@ -147,23 +147,27 @@ class Registration extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Checkbox(
-                                  value: true,
-                                  onChanged: (value) {},
-                                  activeColor: AppTheme.primeryColor, // Color of the checkbox when checked
-                                  checkColor: Colors.white,  // Color of the checkmark
-                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduces touch target size
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    // side: BorderSide(color: Colors.grey,width: 2)
-                                    // Rounded corners
+                              Obx(
+                                ()=> Transform.scale(
+                                  scale: 1.3,
+                                  child: Checkbox(
+                                    value: controller.isAcceptedTerms.value,
+                                    onChanged: (value) {
+                                      controller.setTerms(value!);
+                                    },
+                                    activeColor: AppTheme.primeryColor, // Color of the checkbox when checked
+                                    checkColor: Colors.white,  // Color of the checkmark
+                                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduces touch target size
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      // side: BorderSide(color: Colors.grey,width: 2)
+                                      // Rounded corners
+                                    ),
                                   ),
                                 ),
                               ),

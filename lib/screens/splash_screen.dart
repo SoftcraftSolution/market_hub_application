@@ -12,7 +12,7 @@ import 'package:market_hub_application/utility/theme.dart';
 class SplashScreen extends StatelessWidget {
    SplashScreen({super.key}){
      Future.delayed(Duration(seconds: 2),()async{
-       Get.off(ProfileScreen());
+       Get.off(Registration());
      });
   }
 
