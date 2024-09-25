@@ -25,7 +25,7 @@ class VerifyNumber extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 26),
               child: Text(
-                "Forget PIN ?",
+               title,
                 style: GoogleFonts.poppins(
                     fontSize: 26, fontWeight: FontWeight.w700),
               ),
@@ -35,7 +35,7 @@ class VerifyNumber extends StatelessWidget {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width*0.75,
                 child: Text(textAlign: TextAlign.center,
-                  "Enter your Phone number to reset your PIN.",
+                  subTitle,
                   style: GoogleFonts.poppins(
                       fontSize: 18, color: Color(0xff646464)),
                 ),
