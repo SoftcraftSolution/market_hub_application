@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/screens/admin_approval_screen.dart';
 import 'package:market_hub_application/screens/success_page.dart';
+import 'package:market_hub_application/services/api_services.dart';
 import 'package:market_hub_application/utility/theme.dart';
+import 'package:market_hub_application/utility/wrap_over_hive.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../modules/button.dart';
@@ -11,6 +13,8 @@ import '../utility/utiliity.dart';
 
 class EnterPinScreen extends StatelessWidget {
   bool isResetPinPage;
+  String fotp="";
+  String sotp="";
    EnterPinScreen({super.key,this.isResetPinPage=false});
 
   @override
@@ -59,10 +63,10 @@ class EnterPinScreen extends StatelessWidget {
                           autoFillEnable: false,
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
-                            print('Entered pin is $text');
+                           fotp=text;
                           },
                           onChange: (x) {
-                            Print.p(x.toString());
+                            // Print.p(x.toString());
                           },
                           otpPinFieldInputType: OtpPinFieldInputType.none,
                   
@@ -112,10 +116,10 @@ class EnterPinScreen extends StatelessWidget {
                           autoFillEnable: false,
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
-                            print('Entered pin is $text');
+                            sotp=text;
                           },
                           onChange: (x) {
-                            Print.p(x.toString());
+                            // Print.p(x.toString());
                           },
                           otpPinFieldInputType: OtpPinFieldInputType.none,
                   
@@ -167,9 +171,20 @@ class EnterPinScreen extends StatelessWidget {
     );
   }
 
-  void onVerify() {
-    Print.p("on Continue...");
-    Get.to(SuccessPage(title: "Successful",subTitle: "Your PIN has been successfully set up and is now ready to use",nextPage: AdminApprovalScreen(),));
+  void onVerify()async {
+if(fotp==sotp){
+  var userData=await WrapOverHive.getUserData("userDetails");
+  var response=await ApiServices.setPinApiService(pin: fotp, phoneNumber: userData!["phoneNumber"].toString());
+  Print.p(response.toString());
+  if(response!=null){
+        Get.to(SuccessPage(
+          title: "Successful",
+          subTitle:
+              "Your PIN has been successfully set up and is now ready to use",
+          nextPage: AdminApprovalScreen(),
+        ));
+      }
+    }
     // Get.to(SuccessPage(title: "Request Submitted",subTitle: "Your request for a free 1-week trial has been submitted and is pending approval.We'll notify you once it's activated!",));
 
   }

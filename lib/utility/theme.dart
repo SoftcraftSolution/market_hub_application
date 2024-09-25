@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
@@ -89,4 +90,9 @@ class StandaredTextFeild  extends StatelessWidget
       ),
     );
   }
+}
+Future<bool?> standaredToast({required String msg, bool isErrorMsg = false})
+async
+{
+  return Fluttertoast.showToast(msg: msg,backgroundColor: Colors.grey,textColor: isErrorMsg?Color(0xFFED6366):Colors.white);
 }

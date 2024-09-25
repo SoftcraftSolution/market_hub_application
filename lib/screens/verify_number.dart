@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/modules/button.dart';
-import 'package:market_hub_application/screens/verifyNumber.dart';
+import 'package:market_hub_application/screens/verify_otp.dart';
 import 'package:market_hub_application/utility/theme.dart';
 
-class ForgetPassPage extends StatelessWidget {
-  const ForgetPassPage({super.key});
+class VerifyNumber extends StatelessWidget {
+  String title;
+  String subTitle;
+   VerifyNumber({required this.title,required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
     var phno=TextEditingController();
+    var countryCode=TextEditingController(text: "+91");
     return Scaffold(appBar: AppBar(leading: BackButton(),backgroundColor: Colors.transparent,),
     backgroundColor: AppTheme.backgroundColor,
     body: Padding(
@@ -55,11 +58,12 @@ class ForgetPassPage extends StatelessWidget {
                       SizedBox(
                         width: 60,
                         child: TextField(
+                          controller: countryCode,
                           maxLength: 3,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                               counterText: '',
-                              hintText: '+91  |',
+                              hintText: '+91 |',
                               hintStyle: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w400),
                               border: InputBorder.none),
@@ -86,7 +90,7 @@ class ForgetPassPage extends StatelessWidget {
           ],
         )),
         StandaredButton(title: "Continue", onPass: (){
-          Get.to(Verifynumber());
+          // Get.to(Verifynumber());
         })
 
       ],),

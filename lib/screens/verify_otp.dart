@@ -4,13 +4,17 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/modules/button.dart';
 import 'package:market_hub_application/screens/enter_pin.dart';
+import 'package:market_hub_application/screens/login_screen.dart';
 import 'package:market_hub_application/utility/theme.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../utility/utiliity.dart';
 
-class Verifynumber extends StatelessWidget {
-  const Verifynumber({super.key});
+class VerifyOtp extends StatelessWidget {
+  String otp;
+  String enteredOtp="";
+  // bool isRegistration;
+   VerifyOtp({required this.otp,});
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +63,10 @@ class Verifynumber extends StatelessWidget {
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
                             print('Entered pin is $text');
+                            enteredOtp=text;
                           },
                           onChange: (x) {
-                            Print.p(x.toString());
+                            // Print.p(x.toString());
                           },
                           otpPinFieldInputType: OtpPinFieldInputType.none,
 
@@ -113,7 +118,11 @@ class Verifynumber extends StatelessWidget {
   }
 
   void onVerify() {
-    Print.p("on Continue...");
-    Get.to(EnterPinScreen());
+   if(otp==enteredOtp){
+      Get.to(EnterPinScreen());
+   }else{
+     standaredToast(msg: "Wrong pin",isErrorMsg: true);
+   }
+
   }
 }

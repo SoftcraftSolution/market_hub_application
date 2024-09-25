@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:market_hub_application/screens/forget_pass_page.dart';
+import 'package:market_hub_application/screens/verify_number.dart';
 import 'package:market_hub_application/screens/home/home.dart';
 import 'package:market_hub_application/screens/login_screen.dart';
 import 'package:market_hub_application/screens/profile_screen.dart';

@@ -9,7 +9,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:market_hub_application/modules/button.dart';
 import 'package:market_hub_application/screens/login_screen.dart';
 import 'package:market_hub_application/screens/registeration_screen/controller.dart';
-import 'package:market_hub_application/screens/verifyNumber.dart';
+import 'package:market_hub_application/screens/verify_number.dart';
+import 'package:market_hub_application/screens/verify_otp.dart';
+import 'package:market_hub_application/services/api_services.dart';
+import 'package:market_hub_application/utility/wrap_over_hive.dart';
 
 import '../../utility/theme.dart';
 import '../../utility/utiliity.dart';
@@ -22,6 +25,10 @@ class Registration extends StatelessWidget {
   TextEditingController stateCon = TextEditingController();
   TextEditingController cityCon = TextEditingController();
   TextEditingController imgCon = TextEditingController();
+  TextEditingController phnoCon = TextEditingController();
+  TextEditingController countryCodeCon = TextEditingController(text: "+91");
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +66,8 @@ class Registration extends StatelessWidget {
                           // name
                           StandaredTextFeild(
                               placeholder: "Enter Full Name",
-                              controller: nameCon),
+                              controller: nameCon,
+                          maxLength: 50,),
                           // SizedBox(height: 16),
                           // phone number
                           Container(
@@ -77,6 +85,7 @@ class Registration extends StatelessWidget {
                                   SizedBox(
                                     width: 60,
                                     child: TextField(
+                                      controller: countryCodeCon,
                                       maxLength: 3,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
@@ -89,6 +98,7 @@ class Registration extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: TextField(
+                                      controller: phnoCon,
                                       keyboardType: TextInputType.number,
                                       maxLength: 10,
                                       decoration: InputDecoration(
@@ -108,7 +118,7 @@ class Registration extends StatelessWidget {
                             placeholder: "Enter Pincode",
                             controller: pincodeCon,
                             keyType: TextInputType.number,
-                            maxLength: 6,
+                            maxLength: 8,
                           ),
                           // const SizedBox(height: 16),
                           StandaredTextFeild(
@@ -219,7 +229,7 @@ class Registration extends StatelessWidget {
   Widget bottomLine() {
     return GestureDetector(
       onTap: () {
-       Get.to(LoginScreen());
+       Get.to(VerifyNumber(title: "Verification",subTitle: "Enter your Phone number for Verification.",));
       },
       child: RichText(
           text: TextSpan(children: [
@@ -241,8 +251,56 @@ class Registration extends StatelessWidget {
     controller.setFileName(selected!.path.split("/").last);
   }
 
-  void onRegister(){
-    Get.to(Verifynumber());
+  void onRegister()async
+  {
+    var fullName=this.nameCon.text;
+    var countryCode=this.countryCodeCon.text;
+    var phno=this.phnoCon.text;
+    var pincode=this.pincodeCon.text;
+    var city=this.cityCon.text;
+    var state=this.stateCon.text;
+    var visityCard=this.imgCon.text;
+    try{
+      if (fullName != "") {
+        if((countryCode.length>=2) && (countryCode.contains("+"))){
+          if(phno.length==10){
+            if(pincode.length>=4 && pincode.length<=8)
+            {
+              if(city!="" && state!=""){
+                if(controller.isAcceptedTerms.value){
+                  var response=await ApiServices.registrationApiService(fullname: fullName, phoneNumber: "$countryCode$phno", pincode: pincode, city: city, state: state,visitingCard: visityCard);
+              Print.p("response=>$response");
+               if(response!=null){
+                 Print.p((response!=null).toString());
+                 Get.to(VerifyOtp(otp: response["otp"].toString()));
+                 WrapOverHive.setUserData("userDetails", response["registration"]);
+               }
+                }else{
+                  standaredToast(msg: "Accept Term and Conditions");
+                }
+              }else{
+                standaredToast(msg: "Invailid City or State");
+              }
+
+            }else{
+              standaredToast(msg: "Invailid Pincode");
+            }
+
+          }else{
+            standaredToast(msg: "Invailid Phone number");
+          }
+
+        }else{
+          standaredToast(msg: "Invailid Country Code");
+        }
+
+      }else{
+        standaredToast(msg: "full name required");
+      }
+    }
+    catch(e){
+      standaredToast(msg: "Something went wrong...");
+    }
   }
 }
 

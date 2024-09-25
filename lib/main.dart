@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:market_hub_application/screens/splash_screen.dart';
+import 'package:market_hub_application/services/api_services.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  ApiServices.dio.interceptors.add(PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    responseBody: true,
+    responseHeader: false,
+    error: true,
+    compact: true,
+    maxWidth: 90,
+  )
+  );
+  await Hive.initFlutter();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +30,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       home: SplashScreen(),
     );
   }

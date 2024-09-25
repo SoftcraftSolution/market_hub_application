@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:market_hub_application/screens/forget_pass_page.dart';
+import 'package:market_hub_application/screens/verify_number.dart';
 import 'package:market_hub_application/screens/home/home.dart';
 import 'package:market_hub_application/screens/registeration_screen/registration.dart';
 import 'package:market_hub_application/utility/theme.dart';
@@ -130,6 +130,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
   void onChangePin(){
-    Get.to(ForgetPassPage());
+    Get.to(VerifyNumber(title: "Forget PIN ?",subTitle: "Enter your Phone number to reset your PIN.",));
   }
 }
