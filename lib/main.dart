@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:market_hub_application/screens/splash_screen.dart';
-import 'package:market_hub_application/services/api_services.dart';
+import 'package:market_hub_application/core/api/api_services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import 'splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  ApiServices.dio.interceptors.add(PrettyDioLogger(
+  BaseApiServices.dio.interceptors.add(PrettyDioLogger(
     requestHeader: true,
     requestBody: true,
     responseBody: true,

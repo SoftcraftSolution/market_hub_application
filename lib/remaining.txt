@@ -1,0 +1,7 @@
+for rahul bhay-
+   change /user/create-pin to updatepin
+pandding
+
+verify number
+verify otp
+set pin
