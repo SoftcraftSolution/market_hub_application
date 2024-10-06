@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 
 import 'package:market_hub_application/core/theme/theme.dart';
-import 'package:market_hub_application/core/utils/utiliity.dart';
+import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:market_hub_application/features/alert/ui/alert_page.dart';
 import 'package:market_hub_application/features/future/ui/future_page.dart';
 import 'package:market_hub_application/features/home/ui/home_page.dart';

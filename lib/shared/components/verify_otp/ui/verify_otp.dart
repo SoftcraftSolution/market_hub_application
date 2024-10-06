@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market_hub_application/shared/components/verify_otp/controller/verify_otp_controller.dart';
 import 'package:market_hub_application/shared/widget/button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/shared/components/update_pin/ui/set_pin.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../../../../core/constants/color_constant.dart';
-import '../../../../core/utils/utiliity.dart';
+import '../../../../core/utils/utils.dart';
 
 class VerifyOtp extends StatelessWidget {
   String otp;
   String enteredOtp="";
+  Widget nextPage;
   // bool isRegistration;
-   VerifyOtp({required this.otp,});
+   VerifyOtp({required this.otp,required this.nextPage});
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +107,9 @@ class VerifyOtp extends StatelessWidget {
             SizedBox(
               height: 100,
               child: Center(
-                child: StandaredButton(
+                child: CustomButton(
                   title: "Continue",
-                  onPass: onVerify,
+                  onPress: VerifyOTPController(enteredOtp: enteredOtp,otp: otp,nextPage: nextPage).onVerify,
                 ),
               ),
             )
@@ -117,12 +119,5 @@ class VerifyOtp extends StatelessWidget {
     );
   }
 
-  void onVerify() {
-   if(otp==enteredOtp){
-      Get.to(EnterPinScreen());
-   }else{
-     standaredToast(msg: "Wrong pin",isErrorMsg: true);
-   }
 
-  }
 }

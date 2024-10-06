@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/features/user/login/widgets/login_buttom_line.dart';
 import 'package:market_hub_application/shared/components/verify_number/ui/verify_number.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
-import '../../../../core/utils/utiliity.dart';
+import '../../../../core/utils/utils.dart';
 import '../../naviagtion/ui/navigation.dart';
 import '../../registration/ui/registration.dart';
 
@@ -97,7 +98,7 @@ class LoginScreen extends StatelessWidget {
               OtpPinFieldDecoration.defaultPinBoxDecoration,
             ),
           ),
-          bottomLine(),
+          LoginButtomLine(),
           GestureDetector(
             onTap: onChangePin,
             child: Padding(
@@ -114,23 +115,8 @@ class LoginScreen extends StatelessWidget {
     ),
     );
   }
-  Widget bottomLine() {
-    return GestureDetector(
-      onTap: () {
-        Get.to(Registration());
-      },
-      child: RichText(
-          text: TextSpan(children: [
-            TextSpan(
-                text: 'Don’t have an account yet? ',
-                style: GoogleFonts.poppins(fontSize: 16, color: Colors.black)),
-            TextSpan(
-                text: 'Register',
-                style: GoogleFonts.poppins(color: Color(0xff1918BC), fontSize: 16)),
-          ])),
-    );
-  }
+
   void onChangePin(){
-    Get.to(VerifyNumber(title: "Forget PIN ?",subTitle: "Enter your Phone number to reset your PIN.",));
+    // Get.to(VerifyNumber(title: "Forget PIN ?",subTitle: "Enter your Phone number to reset your PIN.",));
   }
 }

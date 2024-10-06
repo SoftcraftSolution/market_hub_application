@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/shared/components/verify_number/controller/verify_number_controller.dart';
 import 'package:market_hub_application/shared/widget/button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 
 class VerifyNumber extends StatelessWidget {
   String title;
   String subTitle;
-   VerifyNumber({required this.title,required this.subTitle});
+  Widget nextPage;
+  var controller;
+   VerifyNumber({required this.title,required this.subTitle,required this.nextPage});
 
   @override
   Widget build(BuildContext context) {
-    var phno=TextEditingController();
-    var countryCode=TextEditingController(text: "+91");
+   controller=VerifyNumberController(title: title, nextPage: nextPage, subTitle: subTitle);
     return Scaffold(appBar: AppBar(leading: BackButton(),backgroundColor: Colors.transparent,),
     backgroundColor: ColorConstants.backgroundColor,
     body: Padding(
@@ -58,7 +60,7 @@ class VerifyNumber extends StatelessWidget {
                       SizedBox(
                         width: 60,
                         child: TextField(
-                          controller: countryCode,
+                          controller: controller.countryCode,
                           maxLength: 3,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
@@ -89,11 +91,9 @@ class VerifyNumber extends StatelessWidget {
             // StandaredTextFeild(placeholder: "Phone Number", controller: phno,keyType: TextInputType.number,maxLength: ,)
           ],
         )),
-        StandaredButton(title: "Continue", onPass: (){
-          // Get.to(Verifynumber());
-        })
+        CustomButton(title: "Continue", onPress: controller.onVerifyNumber
 
-      ],),
+        )],),
     ),
     );
   }

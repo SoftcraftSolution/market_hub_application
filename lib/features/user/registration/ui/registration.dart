@@ -7,29 +7,23 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/features/user/registration/widgets/buttom_line.dart';
+import 'package:market_hub_application/features/user/registration/widgets/or_divider_widget.dart';
 import 'package:market_hub_application/shared/widget/button.dart';
 import 'package:market_hub_application/core/api/api_services.dart';
 import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 import 'package:market_hub_application/shared/components/verify_number/ui/verify_number.dart';
 
 import '../../../../core/theme/theme.dart';
-import '../../../../core/utils/utiliity.dart';
+import '../../../../core/utils/utils.dart';
 
 import '../../../../shared/components/verify_otp/ui/verify_otp.dart';
+import '../../../../shared/widget/text_field.dart';
 import '../controllers/controller.dart';
 
 class Registration extends StatelessWidget {
 
   var controller = Get.put(RegistrationCon());
-  TextEditingController nameCon = TextEditingController();
-  TextEditingController pincodeCon = TextEditingController();
-  TextEditingController stateCon = TextEditingController();
-  TextEditingController cityCon = TextEditingController();
-  TextEditingController imgCon = TextEditingController();
-  TextEditingController phnoCon = TextEditingController();
-  TextEditingController countryCodeCon = TextEditingController(text: "+91");
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +59,9 @@ class Registration extends StatelessWidget {
                       child: Column(
                         children: [
                           // name
-                          StandaredTextFeild(
+                          CustomTextFeild(
                               placeholder: "Enter Full Name",
-                              controller: nameCon,
+                              controller: controller.nameCon,
                           maxLength: 50,),
                           // SizedBox(height: 16),
                           // phone number
@@ -86,7 +80,7 @@ class Registration extends StatelessWidget {
                                   SizedBox(
                                     width: 60,
                                     child: TextField(
-                                      controller: countryCodeCon,
+                                      controller: controller.countryCodeCon,
                                       maxLength: 3,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
@@ -99,7 +93,7 @@ class Registration extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: TextField(
-                                      controller: phnoCon,
+                                      controller: controller.phnoCon,
                                       keyboardType: TextInputType.number,
                                       maxLength: 10,
                                       decoration: InputDecoration(
@@ -115,18 +109,18 @@ class Registration extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          StandaredTextFeild(
+                          CustomTextFeild(
                             placeholder: "Enter Pincode",
-                            controller: pincodeCon,
+                            controller: controller.pincodeCon,
                             keyType: TextInputType.number,
                             maxLength: 8,
                           ),
                           // const SizedBox(height: 16),
-                          StandaredTextFeild(
-                              placeholder: "Enter City", controller: cityCon),
+                          CustomTextFeild(
+                              placeholder: "Enter City", controller: controller.cityCon),
                           // const SizedBox(height: 16),
-                          StandaredTextFeild(
-                              placeholder: "Enter State", controller: stateCon),
+                          CustomTextFeild(
+                              placeholder: "Enter State", controller: controller.stateCon),
                           // const SizedBox(height: 16),
                           Obx(
                             ()=> TextField(
@@ -199,12 +193,12 @@ class Registration extends StatelessWidget {
                   )),
               Column(
                 children: [
-                  StandaredButton(
+                  CustomButton(
                     title: "Register",
-                    onPass: onRegister,
+                    onPress: controller.onRegister,
                   ),
-                  or(),
-                  bottomLine()
+                  OrDividerWidget(),
+                 ButtomLine()
                 ],
               ),
             ],
@@ -213,96 +207,18 @@ class Registration extends StatelessWidget {
       ),
     );
   }
-  Widget or() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(child: Divider()),
-          Text(" Or "),
-          Expanded(child: Divider()),
-        ],
-      ),
-    );
-  }
 
-  Widget bottomLine() {
-    return GestureDetector(
-      onTap: () {
-       Get.to(VerifyNumber(title: "Verification",subTitle: "Enter your Phone number for Verification.",));
-      },
-      child: RichText(
-          text: TextSpan(children: [
-            TextSpan(
-                text: 'Already have an account? ',
-                style: GoogleFonts.poppins(fontSize: 16, color: Colors.black)),
-            TextSpan(
-                text: 'Login',
-                style: GoogleFonts.poppins(color: Colors.blue, fontSize: 16)),
-          ])),
-    );
-  }
+
 
   void selectImage() async {
     var selected = await ImagePicker().pickImage(source: ImageSource.gallery);
     Print.p(selected!.path);
-    imgCon.text=selected!.path;
+    controller.imgCon.text=selected!.path;
     controller.setUploadState(true);
     controller.setFileName(selected!.path.split("/").last);
   }
 
-  void onRegister()async
-  {
-    var fullName=this.nameCon.text;
-    var countryCode=this.countryCodeCon.text;
-    var phno=this.phnoCon.text;
-    var pincode=this.pincodeCon.text;
-    var city=this.cityCon.text;
-    var state=this.stateCon.text;
-    var visityCard=this.imgCon.text;
-    try{
-      if (fullName != "") {
-        if((countryCode.length>=2) && (countryCode.contains("+"))){
-          if(phno.length==10){
-            if(pincode.length>=4 && pincode.length<=8)
-            {
-              if(city!="" && state!=""){
-                if(controller.isAcceptedTerms.value){
-                  var response=await BaseApiServices.registrationApiService(fullname: fullName, phoneNumber: "$countryCode$phno", pincode: pincode, city: city, state: state,visitingCard: visityCard);
-              Print.p("response=>$response");
-               if(response!=null){
-                 Print.p((response!=null).toString());
-                 Get.to(VerifyOtp(otp: response["otp"].toString()));
-                 WrapOverHive.setUserData("userDetails", response["registration"]);
-               }
-                }else{
-                  standaredToast(msg: "Accept Term and Conditions");
-                }
-              }else{
-                standaredToast(msg: "Invailid City or State");
-              }
 
-            }else{
-              standaredToast(msg: "Invailid Pincode");
-            }
-
-          }else{
-            standaredToast(msg: "Invailid Phone number");
-          }
-
-        }else{
-          standaredToast(msg: "Invailid Country Code");
-        }
-
-      }else{
-        standaredToast(msg: "full name required");
-      }
-    }
-    catch(e){
-      standaredToast(msg: "Something went wrong...");
-    }
-  }
 }
 
 

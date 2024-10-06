@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
+// this file is for useer data locallization meethoods like storring data and deleting data
+
+import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 
-class Print{
-  static void p(String value){
-    debugPrint('YOUR LOG  ====> $value');
-  }
-}
-
+// storing data in locally
 Future<bool> localizeUserData(Map<dynamic,dynamic> data) async{
   try{
 
@@ -24,7 +21,7 @@ Future<bool> localizeUserData(Map<dynamic,dynamic> data) async{
   }
 
 }
-
+// deleting  data of user
 Future<bool> logOut()async{
   try{
     var result=await WrapOverHive.clearUserData();

@@ -1,25 +1,52 @@
-import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
-import 'package:market_hub_application/core/theme/theme.dart';
 
+class CustomButton extends StatefulWidget {
+  final String title;
+   VoidCallback onPress;
 
-class StandaredButton extends StatelessWidget
-{
-  String title;
-  VoidCallback onPass;
-  StandaredButton({required this.title,required this.onPass});
+  CustomButton({required this.title, required this.onPress});
 
-  Widget build(BuildContext context)
-  {
-    var titleStyle=GoogleFonts.poppins(fontWeight: FontWeight.w700,fontSize: 18,color: Colors.white);
+  @override
+  _CustomButtonState createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  bool _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var titleStyle = GoogleFonts.poppins(
+      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      color: Colors.white,
+    );
+
     return GestureDetector(
-      onTap: onPass,
-      child: Container(decoration:BoxDecoration(color:ColorConstants.primeryColor,borderRadius: BorderRadius.circular(15)),
-        
+      onTap: () async {
+        setState(() {
+          _isLoading = true; // Show the progress indicator
+        });
+        await widget.onPress; // Execute the method
+        setState(() {
+          _isLoading = false; // Hide the progress indicator
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorConstants.primeryColor,
+          borderRadius: BorderRadius.circular(15),
+        ),
         height: 60,
-        child: Center(child:Text(title,style: titleStyle,)),),
+        child: Center(
+          child: _isLoading
+              ? CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          )
+              : Text(widget.title, style: titleStyle),
+        ),
+      ),
     );
   }
 }

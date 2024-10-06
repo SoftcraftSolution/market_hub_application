@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:market_hub_application/core/utils/utiliity.dart';
+import 'package:market_hub_application/core/utils/utils.dart';
 
 
 class WrapOverHive{

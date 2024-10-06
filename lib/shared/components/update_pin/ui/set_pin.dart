@@ -6,20 +6,27 @@ import 'package:market_hub_application/shared/components/success_page.dart';
 import 'package:market_hub_application/core/api/api_services.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
+import 'package:market_hub_application/shared/components/update_pin/controller/set_pin_controller.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../../../widget/button.dart';
-import '../../../../core/utils/utiliity.dart';
+import '../../../../core/utils/utils.dart';
 import '../../../../features/user/registration/ui/admin_approval_screen.dart';
 
 class EnterPinScreen extends StatelessWidget {
-  bool isResetPinPage;
+
   String fotp="";
   String sotp="";
-   EnterPinScreen({super.key,this.isResetPinPage=false});
+  bool isResetEnterPinPage;
+  Widget nextPage;
+
+   EnterPinScreen({super.key,required this.nextPage,required this.isResetEnterPinPage,});
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(backgroundColor: ColorConstants.backgroundColor,
     appBar: AppBar(
       backgroundColor: Colors.transparent,
@@ -41,7 +48,7 @@ class EnterPinScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: Text(
-                            isResetPinPage?"Reset PIN":"Enter PIN",
+                        isResetEnterPinPage?"Reset PIN":"Enter PIN",
                           style: GoogleFonts.poppins(
                               fontSize: 26, fontWeight: FontWeight.w700),
                         ),
@@ -160,9 +167,9 @@ class EnterPinScreen extends StatelessWidget {
           SizedBox(
             height: 100,
             child: Center(
-              child: StandaredButton(
+              child: CustomButton(
                 title: "Continue",
-                onPass: onVerify,
+                onPress:  SetPinController(fotp: fotp, sotp: sotp,nextPage: nextPage).onVerify,
               ),
             ),
           )
@@ -172,21 +179,5 @@ class EnterPinScreen extends StatelessWidget {
     );
   }
 
-  void onVerify()async {
-if(fotp==sotp){
-  var userData=await WrapOverHive.getUserData("userDetails");
-  var response=await BaseApiServices.setPinApiService(pin: fotp, phoneNumber: userData!["phoneNumber"].toString());
-  Print.p(response.toString());
-  if(response!=null){
-        Get.to(SuccessPage(
-          title: "Successful",
-          subTitle:
-              "Your PIN has been successfully set up and is now ready to use",
-          nextPage: AdminApprovalScreen(),
-        ));
-      }
-    }
-    // Get.to(SuccessPage(title: "Request Submitted",subTitle: "Your request for a free 1-week trial has been submitted and is pending approval.We'll notify you once it's activated!",));
 
-  }
 }
