@@ -10,25 +10,28 @@ class RegistrationApiService{
       {required String fullname,
         required String phoneNumber,
         required String pincode,
-        required String city,
-        required String state,
-        String visitingCard = ""}) async {
+        required String email,
+        required String whatsappNumber,
+        required String pin,
+        required String planName,
+
+        required String visitingCard }) async {
     // Print.p("in Login api ");
     try {
 
       var finalPath = "${ApiConstants.baseUrl}${ApiConstants.registrationEndPoint}";
       FormData data =FormData.fromMap({
         "fullName": fullname,
+        "email":email,
+        "whatsappNumber":whatsappNumber,
         "phoneNumber": phoneNumber,
         "pincode": pincode,
-        "city": city,
-        "state": state,
+        "visitingCard":MultipartFile.fromFile(visitingCard),
+        "pin":pin,
+        "planName":planName
+
       });
-      if (visitingCard != "") {
-        var file=await MultipartFile.fromFile(visitingCard);
-        data.files.add(MapEntry(
-            "visitingCard",file ));
-      }
+
 
       // data= FormData.fromMap(data);
       Response res = await BaseApiServices.dio.post(finalPath, data: data);

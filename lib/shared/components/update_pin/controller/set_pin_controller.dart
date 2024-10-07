@@ -15,7 +15,7 @@ class SetPinController
   Widget nextPage;
   SetPinController({required this.fotp,required this.sotp,required this.nextPage});
 
-  void onVerify()async {
+  Future<void> onVerify()async {
     if(fotp==sotp){
       var userData=await WrapOverHive.getUserData("userDetails");
       var response=await SetPinApiService().setPinApiService(pin: fotp, phoneNumber: userData!["phoneNumber"].toString());

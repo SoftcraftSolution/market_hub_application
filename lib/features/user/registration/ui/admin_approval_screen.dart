@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/core/constants/text_style_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/features/user/login/ui/login_screen.dart';
 
@@ -34,16 +35,13 @@ class AdminApprovalScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Text(
                     "Your profile is under review",
-                    style: GoogleFonts.poppins(
-                        fontSize: 26, fontWeight: FontWeight.w700),
+                    style: TextStyleConstant.headerTextStyle,
                   ),
                 ),
                 Text(
                   "To ensure our community maintains its quality, we don't accept all profiles.",
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                      fontSize: 18, color: Color(0xff646464)),
-                ),
+                  style: TextStyleConstant.subHeaderTextStyle,)
               ],
             ),
           ),

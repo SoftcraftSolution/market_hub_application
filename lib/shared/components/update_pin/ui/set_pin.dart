@@ -9,7 +9,7 @@ import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 import 'package:market_hub_application/shared/components/update_pin/controller/set_pin_controller.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
-import '../../../widget/button.dart';
+import '../../../widget/custom_button.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../features/user/registration/ui/admin_approval_screen.dart';
 

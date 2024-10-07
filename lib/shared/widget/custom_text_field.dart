@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/core/constants/text_style_constant.dart';
 
 class CustomTextFeild  extends StatelessWidget
 {
@@ -17,8 +19,9 @@ class CustomTextFeild  extends StatelessWidget
 
       padding: const EdgeInsets.only(bottom: 20),
       child: TextField(
+
         controller: controller,
-        style: GoogleFonts.poppins(fontWeight: FontWeight.w300),
+        style: TextStyleConstant.textFieldStyle,
         keyboardType: keyType,
         maxLength: maxLength,
 
@@ -31,16 +34,16 @@ class CustomTextFeild  extends StatelessWidget
           counterText: '',
 
 
-          hintStyle: GoogleFonts.poppins(fontWeight: FontWeight.w400),
+          hintStyle: TextStyleConstant.textFieldStyle,
           focusedBorder: OutlineInputBorder(
 
               borderSide: BorderSide(width: 1,color: Colors.grey),
-              borderRadius:BorderRadius.circular(15)
+              borderRadius:BorderRadius.circular(20)
           ) ,
           enabledBorder:OutlineInputBorder(
 
               borderSide: BorderSide(width: 1,color: Colors.grey.withOpacity(0.8)),
-              borderRadius:BorderRadius.circular(15)
+              borderRadius:BorderRadius.circular(20)
           ) ,
 
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../shared/components/verify_number/ui/verify_number.dart';
+
 
 class ButtomLine extends StatelessWidget {
   const ButtomLine({super.key});

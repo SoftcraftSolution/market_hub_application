@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
-import 'package:market_hub_application/shared/components/verify_number/controller/verify_number_controller.dart';
-import 'package:market_hub_application/shared/widget/button.dart';
+import 'package:market_hub_application/shared/widget/custom_button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+
+import '../controller/verify_number_controller.dart';
 
 class VerifyNumber extends StatelessWidget {
   String title;

@@ -9,7 +9,7 @@ class VerifyOTPController{
   Widget nextPage;
   VerifyOTPController({required this.enteredOtp,required this.otp,required this.nextPage});
 
-  void onVerify() {
+  Future<void> onVerify() async{
     if(otp==enteredOtp){
       Get.to(nextPage);
     }else{
