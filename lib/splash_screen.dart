@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/features/plans/ui/plans_page.dart';
 
 
 import 'features/user/registration/ui/registration.dart';
@@ -11,7 +12,7 @@ import 'features/user/registration/ui/registration.dart';
 class SplashScreen extends StatelessWidget {
    SplashScreen({super.key}){
      Future.delayed(Duration(seconds: 2),()async{
-       Get.off(Registration());
+       Get.off(PlansPage(isTrial: true,));
      });
   }
 

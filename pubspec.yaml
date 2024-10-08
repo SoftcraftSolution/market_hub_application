@@ -44,6 +44,7 @@ dependencies:
   dio: ^5.7.0
   pretty_dio_logger: ^1.4.0
   fluttertoast: ^8.2.8
+  carousel_slider: ^5.0.0
 
 
 dev_dependencies:
