@@ -5,18 +5,20 @@ import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/constants/text_style_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 
+import '../../core/utils/utils.dart';
+
 class SuccessPage extends StatelessWidget {
   String title;
   String subTitle;
   var nextPage;
-  SuccessPage({super.key,required this.title, this.nextPage=null,required this.subTitle}) {
-    nextPage!=null?Future.delayed(Duration(seconds: 1), () {
-      Get.to(nextPage);
-    }):"";
-  }
+  SuccessPage({this.title="", this.nextPage=null, this.subTitle=""}) ;
 
   @override
   Widget build(BuildContext context) {
+    Print.p("in build method (success page)");
+    nextPage!=null?Future.delayed(Duration(seconds: 1), () {
+      Get.to(nextPage);
+    }):"";
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
       body: Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:market_hub_application/core/api/api_services.dart';
+import 'package:market_hub_application/shared/components/success_page.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'splash_screen.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      getPages: [
+        GetPage(name: "/successPage", page: ()=>SuccessPage())
+      ],
       home: SplashScreen(),
     );
   }

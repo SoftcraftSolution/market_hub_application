@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class VerifyNumberController{
+class VerifyEmailController{
   String title;
   String subTitle;
   Widget nextPage;
   var phno=TextEditingController();
   var countryCode=TextEditingController(text: "+91");
-  VerifyNumberController({required this.title,required this.nextPage,required this.subTitle});
+  VerifyEmailController({required this.title,required this.nextPage,required this.subTitle});
 
   void onVerifyNumber(){
 

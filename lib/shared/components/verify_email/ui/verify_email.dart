@@ -5,18 +5,18 @@ import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/shared/widget/custom_button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 
-import '../controller/verify_number_controller.dart';
+import '../controller/verify_email_controller.dart';
 
-class VerifyNumber extends StatelessWidget {
+class VerifyEmail extends StatelessWidget {
   String title;
   String subTitle;
   Widget nextPage;
   var controller;
-   VerifyNumber({required this.title,required this.subTitle,required this.nextPage});
+   VerifyEmail({required this.title,required this.subTitle,required this.nextPage});
 
   @override
   Widget build(BuildContext context) {
-   controller=VerifyNumberController(title: title, nextPage: nextPage, subTitle: subTitle);
+   controller=VerifyEmailController(title: title, nextPage: nextPage, subTitle: subTitle);
     return Scaffold(appBar: AppBar(leading: BackButton(),backgroundColor: Colors.transparent,),
     backgroundColor: ColorConstants.backgroundColor,
     body: Padding(

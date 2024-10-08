@@ -41,7 +41,7 @@ class RegistrationApiService{
       // });
     } catch (e) {
       // Print.p("Some thing went wrong in login");
-      Print.p("in edit note Exception:${e.toString()}");
+      Print.p("in registration Exception:${e.toString()}");
       customToast(msg: "Something went wrong regisration");
     }
   }

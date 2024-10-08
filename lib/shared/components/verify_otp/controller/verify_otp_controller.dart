@@ -5,12 +5,13 @@ import '../../../../core/utils/utils.dart';
 
 class VerifyOTPController{
   String otp;
-  String enteredOtp;
+  TextEditingController enteredOtp=TextEditingController();
   Widget nextPage;
-  VerifyOTPController({required this.enteredOtp,required this.otp,required this.nextPage});
+  VerifyOTPController({required this.otp,required this.nextPage});
 
   Future<void> onVerify() async{
-    if(otp==enteredOtp){
+
+    if(otp==enteredOtp.text){
       Get.to(nextPage);
     }else{
       customToast(msg: "Wrong pin",isErrorMsg: true);

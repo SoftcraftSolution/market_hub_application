@@ -13,13 +13,14 @@ import '../../../../core/utils/utils.dart';
 
 class VerifyOtp extends StatelessWidget {
   String otp;
-  String enteredOtp="";
   Widget nextPage;
+  var controller;
   // bool isRegistration;
    VerifyOtp({required this.otp,required this.nextPage});
 
   @override
   Widget build(BuildContext context) {
+    controller=VerifyOTPController(otp: otp,nextPage: nextPage);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -58,6 +59,7 @@ class VerifyOtp extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 80),
                         child: OtpPinField(
+
                           fieldHeight: 60,
                           fieldWidth: 50,
 
@@ -65,7 +67,7 @@ class VerifyOtp extends StatelessWidget {
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
                             print('Entered pin is $text');
-                            enteredOtp=text;
+                            controller.enteredOtp.text=text;
                           },
                           onChange: (x) {
                             // Print.p(x.toString());
@@ -109,7 +111,7 @@ class VerifyOtp extends StatelessWidget {
               child: Center(
                 child: CustomButton(
                   title: "Continue",
-                  onPress: VerifyOTPController(enteredOtp: enteredOtp,otp: otp,nextPage: nextPage).onVerify,
+                  onPress: controller.onVerify,
                 ),
               ),
             )
