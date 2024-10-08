@@ -15,18 +15,17 @@ import '../../../../features/user/registration/ui/admin_approval_screen.dart';
 
 class EnterPinScreen extends StatelessWidget {
 
-  String fotp="";
-  String sotp="";
+
   bool isResetEnterPinPage;
   Widget nextPage;
-
+  var controller;
    EnterPinScreen({super.key,required this.nextPage,required this.isResetEnterPinPage,});
 
   @override
   Widget build(BuildContext context) {
 
 
-
+controller=SetPinController(nextPage: nextPage);
     return Scaffold(backgroundColor: ColorConstants.backgroundColor,
     appBar: AppBar(
       backgroundColor: Colors.transparent,
@@ -71,7 +70,7 @@ class EnterPinScreen extends StatelessWidget {
                           autoFillEnable: false,
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
-                           fotp=text;
+                           controller.fotp.text=text;
                           },
                           onChange: (x) {
                             // Print.p(x.toString());
@@ -124,7 +123,7 @@ class EnterPinScreen extends StatelessWidget {
                           autoFillEnable: false,
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
-                            sotp=text;
+                            controller.sotp.text=text;
                           },
                           onChange: (x) {
                             // Print.p(x.toString());
@@ -169,7 +168,7 @@ class EnterPinScreen extends StatelessWidget {
             child: Center(
               child: CustomButton(
                 title: "Continue",
-                onPress:  SetPinController(fotp: fotp, sotp: sotp,nextPage: nextPage).onVerify,
+                onPress:  controller.onVerify,
               ),
             ),
           )

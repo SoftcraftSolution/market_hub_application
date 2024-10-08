@@ -63,102 +63,11 @@ class Registration extends StatelessWidget {
                               placeholder: "Enter Full Name",
                               controller: controller.nameCon,
                           maxLength: 50,),
-                          // SizedBox(height: 16),
-                          // whatsapp phone number
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       color: Colors.grey.withOpacity(0.14),
-                          //       border: Border.all(
-                          //           color: Colors.grey.withOpacity(0.8)),
-                          //       borderRadius: BorderRadius.circular(15)),
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.symmetric(
-                          //         vertical: 6, horizontal: 15),
-                          //     child: Row(
-                          //       mainAxisSize: MainAxisSize.min,
-                          //       children: [
-                          //         SizedBox(
-                          //           width: 35,
-                          //           child: TextField(
-                          //             controller: controller.countryCodeCon,
-                          //             maxLength: 3,
-                          //             keyboardType: TextInputType.number,
-                          //             decoration: InputDecoration(
-                          //                 counterText: '',
-                          //                 hintText: '+91  |',
-                          //                 hintStyle: GoogleFonts.poppins(
-                          //                     fontWeight: FontWeight.w400),
-                          //                 border: InputBorder.none),
-                          //           ),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          //           child: Container(height: 30,decoration: BoxDecoration(border: Border.all(color: Colors.grey.withOpacity(0.5))),),
-                          //         ),
-                          //         Expanded(
-                          //           child: TextField(
-                          //             controller: controller.phnoCon,
-                          //             keyboardType: TextInputType.number,
-                          //             maxLength: 10,
-                          //             decoration: InputDecoration(
-                          //                 counterText: "",
-                          //                 hintText: 'Enter WhatsApp Number',
-                          //                 hintStyle: GoogleFonts.poppins(
-                          //                     fontWeight: FontWeight.w400),
-                          //                 border: InputBorder.none),
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
+
                           PhoneNumberTextField(numberCon: controller.whatsappPhnoCon, countryCodeCon: controller.whatsappCountryCodeCon, placeHolder: "Enter WhatsApp Number"),
                           const SizedBox(height: 20),
                           PhoneNumberTextField(numberCon: controller.phnoCon, countryCodeCon: controller.countryCodeCon, placeHolder: "Enter Phone Number"),
-                          // alernative phone number
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //       color: Colors.grey.withOpacity(0.14),
-                          //       border: Border.all(
-                          //           color: Colors.grey.withOpacity(0.8)),
-                          //       borderRadius: BorderRadius.circular(15)),
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.symmetric(
-                          //         vertical: 6, horizontal: 15),
-                          //     child: Row(
-                          //       mainAxisSize: MainAxisSize.min,
-                          //       children: [
-                          //         SizedBox(
-                          //           width: 60,
-                          //           child: TextField(
-                          //             controller: controller.countryCodeCon,
-                          //             maxLength: 3,
-                          //             keyboardType: TextInputType.number,
-                          //             decoration: InputDecoration(
-                          //                 counterText: '',
-                          //                 hintText: '+91  |',
-                          //                 hintStyle: GoogleFonts.poppins(
-                          //                     fontWeight: FontWeight.w400),
-                          //                 border: InputBorder.none),
-                          //           ),
-                          //         ),
-                          //         Expanded(
-                          //           child: TextField(
-                          //             controller: controller.phnoCon,
-                          //             keyboardType: TextInputType.number,
-                          //             maxLength: 10,
-                          //             decoration: InputDecoration(
-                          //                 counterText: "",
-                          //                 hintText: 'Enter Phone Number',
-                          //                 hintStyle: GoogleFonts.poppins(
-                          //                     fontWeight: FontWeight.w400),
-                          //                 border: InputBorder.none),
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
+
                           const SizedBox(height: 20),
                           CustomTextFeild(
                             placeholder: "Enter Email Address",
