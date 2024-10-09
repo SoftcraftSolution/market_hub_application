@@ -12,7 +12,7 @@ import 'features/user/registration/ui/registration.dart';
 class SplashScreen extends StatelessWidget {
    SplashScreen({super.key}){
      Future.delayed(Duration(seconds: 2),()async{
-       Get.off(PlansPage(isTrial: true,));
+       Get.off(Registration());
      });
   }
 

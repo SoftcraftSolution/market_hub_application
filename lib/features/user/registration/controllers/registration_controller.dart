@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:market_hub_application/core/models/user_deatail_model.dart';
+import 'package:market_hub_application/core/models/user_detail_model.dart';
+import 'package:market_hub_application/features/plans/ui/plans_page.dart';
 import 'package:market_hub_application/features/user/registration/api/registration_api_service.dart';
 import 'package:market_hub_application/features/user/registration/ui/admin_approval_screen.dart';
 import 'package:market_hub_application/shared/components/success_page.dart';
@@ -88,7 +89,7 @@ class RegistrationCon extends GetxController {
                                   title: "Successful",
                                   subTitle:
                                       "Your PIN has been successfully set up and is now ready to use",
-                                  nextPage: AdminApprovalScreen(),
+                                  nextPage: PlansPage(isTrial: true),
                                 ),
                                 isResetEnterPinPage: false)));
                   } else {

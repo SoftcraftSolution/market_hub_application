@@ -17,7 +17,7 @@ class SuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Print.p("in build method (success page)");
     nextPage!=null?Future.delayed(Duration(seconds: 1), () {
-      Get.to(nextPage);
+      Get.off(nextPage);
     }):"";
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,

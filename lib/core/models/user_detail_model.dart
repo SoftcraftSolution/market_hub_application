@@ -22,4 +22,18 @@ class UserDetail {
   void setPlan({required String plan}){
     this.plan=plan;
   }
+  String toString() {
+    return {
+      'name': name,
+      'whatsappNumber': whatsappNumber,
+      'phoneNumber': phoneNumber,
+      'email': email,
+      'pincode': pincode,
+      'visitingCard': visitingCard.path, // Store the file path
+      'pin': pin,
+      'plan': plan,
+    }.toString();
+  }
+
+
 }
