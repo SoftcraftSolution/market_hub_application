@@ -17,6 +17,7 @@ class CardIndexTraker extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(18),
+
       ),
       clipBehavior: Clip.hardEdge,
       child: Row(

@@ -7,8 +7,9 @@ import '../../core/utils/utils.dart';
 class CustomButton extends StatefulWidget {
   final String title;
   Future<void> Function() onPress;
+  double fontSize;
 
-  CustomButton({required this.title, required this.onPress});
+  CustomButton({required this.title, required this.onPress,this.fontSize=18});
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -21,7 +22,7 @@ class _CustomButtonState extends State<CustomButton> {
   Widget build(BuildContext context) {
     var titleStyle = GoogleFonts.poppins(
       fontWeight: FontWeight.w700,
-      fontSize: 18,
+      fontSize: widget.fontSize,
       color: Colors.white,
     );
 
