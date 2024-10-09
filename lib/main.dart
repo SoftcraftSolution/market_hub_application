@@ -9,16 +9,8 @@ import 'splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  BaseApiServices.dio.interceptors.add(PrettyDioLogger(
-    requestHeader: true,
-    requestBody: true,
-    responseBody: true,
-    responseHeader: false,
-    error: true,
-    compact: true,
-    maxWidth: 90,
-  )
-  );
+
+
   await Hive.initFlutter();
   runApp(const MyApp());
 

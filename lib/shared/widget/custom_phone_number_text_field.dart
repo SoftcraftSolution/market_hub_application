@@ -29,7 +29,7 @@ class PhoneNumberTextField extends StatelessWidget {
               width: 35,
               child: TextField(
                 style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w500,color:ColorConstants.textFieldTextColor),
+                    fontWeight: FontWeight.w500,color:ColorConstants.greyColor),
                 controller: countryCodeCon,
                 maxLength: 3,
                 textAlign: TextAlign.center,
@@ -39,7 +39,7 @@ class PhoneNumberTextField extends StatelessWidget {
                     counterText: '',
                     hintText: '+91  |',
                     hintStyle: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500,color:ColorConstants.textFieldTextColor),
+                        fontWeight: FontWeight.w500,color:ColorConstants.greyColor),
                     border: InputBorder.none),
               ),
             ),
@@ -56,7 +56,7 @@ class PhoneNumberTextField extends StatelessWidget {
                     counterText: "",
                     hintText: placeHolder,
                     hintStyle: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500,color:ColorConstants.textFieldTextColor),
+                        fontWeight: FontWeight.w500,color:ColorConstants.greyColor),
                     border: InputBorder.none),
               ),
             ),

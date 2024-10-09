@@ -92,7 +92,7 @@ class Registration extends StatelessWidget {
                                 fillColor: backColor,
                                 hintText: controller.isUploaded.value?controller.finalName.value:"Visiting Card",
                                 hintStyle: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,color:ColorConstants.textFieldTextColor),
+                                    fontWeight: FontWeight.w500,color:ColorConstants.greyColor),
                                 suffixIcon: Icon(
                                   Icons.upload,
                                   color: Colors.black.withOpacity(0.6),

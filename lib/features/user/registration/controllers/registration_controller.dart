@@ -69,7 +69,7 @@ class RegistrationCon extends GetxController {
               if (pincode.length >= 4 && pincode.length <= 8) {
                 if (visitingCard != "") {
                   if (isAcceptedTerms.value) {
-                    // Print.p("all done:$visityCard");
+
                     user = UserDetail(
                         phoneNumber: "$countryCode$phno",
                         pincode: pincode,
