@@ -3,32 +3,25 @@ import 'package:market_hub_application/core/api/api_services.dart';
 import 'package:market_hub_application/core/constants/api_constant.dart';
 
 import '../../../../core/models/response_structure.dart';
+import '../../../../core/models/user_detail_model.dart';
 import '../../../../core/utils/utils.dart';
 
 class RegistrationApiService{
    Future<Map<String, dynamic>?> registrationApiService(
-      {required String fullname,
-        required String phoneNumber,
-        required String pincode,
-        required String email,
-        required String whatsappNumber,
-        required String pin,
-        required String planName,
-
-        required String visitingCard }) async {
+      {required UserDetail user }) async {
     // Print.p("in Login api ");
     try {
 
       var finalPath = "${ApiConstants.baseUrl}${ApiConstants.registrationEndPoint}";
       FormData data =FormData.fromMap({
-        "fullName": fullname,
-        "email":email,
-        "whatsappNumber":whatsappNumber,
-        "phoneNumber": phoneNumber,
-        "pincode": pincode,
-        "visitingCard":MultipartFile.fromFile(visitingCard),
-        "pin":pin,
-        "planName":planName
+        "fullName": user.name,
+        "email":user.email,
+        "whatsappNumber":user.whatsappNumber,
+        "phoneNumber": user.phoneNumber,
+        "pincode": user.pincode,
+        "visitingCard":await MultipartFile.fromFile(user.visitingCard.path),
+        "pin":user.pin,
+        "planName":user.plan
 
       });
 
@@ -42,7 +35,7 @@ class RegistrationApiService{
     } catch (e) {
       // Print.p("Some thing went wrong in login");
       Print.p("in registration Exception:${e.toString()}");
-      customToast(msg: "Something went wrong regisration");
+      customToast(msg: "Something went wrong registration");
     }
   }
 

@@ -14,7 +14,15 @@ import '../utils/utils.dart';
 
 class BaseApiServices {
 
-  static var dio=Dio()..interceptors.add(ErrorInterceptor());
+  static var dio=Dio()..interceptors.add(PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    responseBody: true,
+    responseHeader: false,
+    error: true,
+    compact: true,
+    maxWidth: 90,
+  ))..interceptors.add(ErrorInterceptor());
 
 
 

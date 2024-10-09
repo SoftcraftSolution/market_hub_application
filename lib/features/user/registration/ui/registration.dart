@@ -172,10 +172,12 @@ class Registration extends StatelessWidget {
 
   void selectImage() async {
     var selected = await ImagePicker().pickImage(source: ImageSource.gallery);
-    Print.p(selected!.path);
-    controller.imgCon.text=selected!.path;
-    controller.setUploadState(true);
-    controller.setFileName(selected!.path.split("/").last);
+    if(selected!=null){
+      Print.p(selected.path);
+      controller.imgCon.text = selected.path;
+      controller.setUploadState(true);
+      controller.setFileName(selected.path.split("/").last);
+    }
   }
 
 

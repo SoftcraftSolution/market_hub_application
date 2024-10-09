@@ -11,7 +11,8 @@ class DialogService {
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
-          icon: Icon(Icons.error_outline,color: ColorConstants.redColor,size: 60,),
+          backgroundColor: ColorConstants.backgroundColor,
+          icon: Icon(Icons.error_outline,color: ColorConstants.redColor,size: 80,),
           title: Text('No Internet Connection',style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700,),),
           content: Text(textAlign: TextAlign.center,'Please check your internet settings and try again.',style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w500,color: ColorConstants.greyColor),),
          actionsAlignment: MainAxisAlignment.center,

@@ -32,6 +32,7 @@ class VerifyEmailApiService{
       // });
     } catch (e) {
       // Print.p("Some thing went wrong in login");
+
       Print.p("in verify email Exception:${e.toString()}");
       customToast(msg: "Something went wrong verify email");
     }

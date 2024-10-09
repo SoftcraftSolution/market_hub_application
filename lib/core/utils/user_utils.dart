@@ -1,5 +1,6 @@
 // this file is for useer data locallization meethoods like storring data and deleting data
 
+import 'package:market_hub_application/core/models/user_detail_model.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 
@@ -35,4 +36,9 @@ Future<bool> logOut()async{
     Print.p("Exception while logout method call");
     return false;
   }
+}
+//get user data
+Future<Map<dynamic,dynamic>?> getLocalUserDetail()async{
+  var userData=await WrapOverHive.getUserData("userData");
+  return userData;
 }

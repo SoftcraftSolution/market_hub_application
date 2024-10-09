@@ -25,6 +25,8 @@ class SetPinController
       Print.p("after${userDataCon.user!.pin.toString()}");
         Get.off(nextPage);
       // }
+    }else{
+      customToast(msg: "Pin should be same");
     }
     // Get.to(SuccessPage(title: "Request Submitted",subTitle: "Your request for a free 1-week trial has been submitted and is pending approval.We'll notify you once it's activated!",));
 
