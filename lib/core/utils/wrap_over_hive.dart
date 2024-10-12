@@ -7,15 +7,15 @@ import 'package:market_hub_application/core/utils/utils.dart';
 class WrapOverHive{
   static Future<UserDetail?> getUserData()
   async{
-    var box =await Hive.openBox<UserDetail>("userDetail");
+    var box =await WrapOverHive.initBox();
     // await box.put("detail",UserDetail.fromMap(temp));
-    final data=await box.get("detail");
+    final data= box.get("detail");
     return data;
   }
   static Future<bool> locallizeUserData(dynamic data)
   async{
     try{
-      var box=await initBox();
+      var box=await WrapOverHive.initBox();
       // data=data.toMap();
       await box.put("detail",data);
       return true;
@@ -29,7 +29,15 @@ class WrapOverHive{
   }
 
   static Future<Box> initBox()async{
-    var box =await Hive.openBox("userDetail");
+    Box<UserDetail> box;
+
+    // Check if the box is already open
+    if (Hive.isBoxOpen('userdetail')) {
+      box = Hive.box<UserDetail>('userdetail');
+    } else {
+      // Open the box if it's not open yet
+      box = await Hive.openBox<UserDetail>('userdetail');
+    }
 
     return box;
   }

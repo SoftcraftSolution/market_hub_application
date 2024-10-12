@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/text_style_constant.dart';
 
-import '../../core/constants/color_constant.dart';
+import '../../../core/constants/color_constant.dart';
 
 class PhoneNumberTextField extends StatelessWidget {
   var numberCon;

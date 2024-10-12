@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/shared/components/verify_otp/controller/verify_otp_controller.dart';
-import 'package:market_hub_application/shared/widget/custom_button.dart';
+import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/shared/components/update_pin/ui/set_pin.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';

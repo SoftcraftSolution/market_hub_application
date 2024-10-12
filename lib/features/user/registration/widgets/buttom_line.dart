@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/features/user/login/ui/login_screen.dart';
+import 'package:market_hub_application/shared/components/verify_email/ui/verify_email.dart';
 
 
 
@@ -12,8 +13,8 @@ class ButtomLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(LoginScreen());
-        // Get.to(VerifyNumber(title: "Verification",subTitle: "Enter your Phone number for Verification.",));
+        // Get.to(LoginScreen());
+        Get.to(VerifyEmail(title: "Verification",subTitle: "Enter your Phone number for Verification.",));
       },
       child: RichText(
           text: TextSpan(children: [

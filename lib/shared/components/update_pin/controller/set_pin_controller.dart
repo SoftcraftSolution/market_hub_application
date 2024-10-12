@@ -19,11 +19,14 @@ class SetPinController
   Future<void> onVerify()async {
     var userDataCon=Get.find<RegistrationCon>();
     if(fotp.text==sotp.text){
-
-      Print.p("before${userDataCon.user!.pin.toString()}");
-      userDataCon.user!.setPin(pin: this.fotp.text);
-      Print.p("after${userDataCon.user!.pin.toString()}");
+      if(fotp.text.length==4 ){
+        // Print.p("before${userDataCon.user!.pin.toString()}");
+        userDataCon.user!.setPin(pin: this.fotp.text);
+        // Print.p("after${userDataCon.user!.pin.toString()}");
         Get.off(nextPage);
+      }else{
+        customToast(msg: "Enter PIN");
+      }
       // }
     }else{
       customToast(msg: "Pin should be same");

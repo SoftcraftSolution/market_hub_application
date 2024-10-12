@@ -11,7 +11,7 @@ class SuccessPage extends StatelessWidget {
   String title;
   String subTitle;
   var nextPage;
-  SuccessPage({this.title="", this.nextPage=null, this.subTitle=""}) ;
+  SuccessPage({required this.title, required this.nextPage, required this.subTitle}) ;
 
   @override
   Widget build(BuildContext context) {

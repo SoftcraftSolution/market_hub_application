@@ -11,15 +11,17 @@ import 'package:market_hub_application/features/user/naviagtion/controller/navig
 import 'package:market_hub_application/features/user/admin_approval/ui/admin_approval_screen.dart';
 import 'package:market_hub_application/main.dart';
 
+import 'core/utils/utils.dart';
 import 'features/user/registration/ui/registration.dart';
 
 class SplashScreen extends StatelessWidget {
    SplashScreen({super.key}){
-     Future.delayed(Duration(seconds: 2),directUser);
+
   }
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 2),directUser);
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
       body: Center(child: Image.asset("assets/splash_screeen_img/logo.png",height: 260,),),
@@ -35,5 +37,10 @@ class SplashScreen extends StatelessWidget {
       isApproved=userData.isApproved!;
     }
     isInProcess?isApproved?Get.off(HomePage()):Get.off(AdminApprovalScreen()):Get.off(Registration());
+  }
+  // test only
+  void navigateTo(){
+     Print.p("in navigateTo method");
+     Get.off(AdminApprovalScreen());
   }
 }

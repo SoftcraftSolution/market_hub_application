@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/user/login/widgets/login_buttom_line.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/shared/components/verify_email/ui/verify_email.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../../../../core/utils/utils.dart';
@@ -103,7 +104,7 @@ class LoginScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                   'Change PIN',
+                   'Forget PIN',
                   style: GoogleFonts.poppins(color: Color(0xff1918BC), fontSize: 16)),
             ),
           ),
@@ -116,6 +117,6 @@ class LoginScreen extends StatelessWidget {
   }
 
   void onChangePin(){
-    // Get.to(VerifyNumber(title: "Forget PIN ?",subTitle: "Enter your Phone number to reset your PIN.",));
+    Get.to(VerifyEmail(title: "Forget PIN ?",subTitle: "Enter your Phone number to reset your PIN.",));
   }
 }

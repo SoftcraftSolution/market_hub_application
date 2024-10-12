@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
-import 'package:market_hub_application/shared/widget/custom_button.dart';
+import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/shared/widget/text_fieled/custom_text_field.dart';
 
 import '../controller/verify_email_controller.dart';
 
 class VerifyEmail extends StatelessWidget {
   String title;
   String subTitle;
-  Widget nextPage;
+
   var controller;
-   VerifyEmail({required this.title,required this.subTitle,required this.nextPage});
+   VerifyEmail({required this.title,required this.subTitle,});
 
   @override
   Widget build(BuildContext context) {
-   controller=VerifyEmailController(title: title, nextPage: nextPage, subTitle: subTitle);
+   controller=VerifyEmailController(title: title,  subTitle: subTitle);
     return Scaffold(appBar: AppBar(leading: BackButton(),backgroundColor: Colors.transparent,),
     backgroundColor: ColorConstants.backgroundColor,
     body: Padding(
@@ -44,55 +45,11 @@ class VerifyEmail extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.14),
-                    border: Border.all(
-                        color: Colors.grey.withOpacity(0.8)),
-                    borderRadius: BorderRadius.circular(15)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 6, horizontal: 15),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        width: 60,
-                        child: TextField(
-                          controller: controller.countryCode,
-                          maxLength: 3,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              counterText: '',
-                              hintText: '+91 |',
-                              hintStyle: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400),
-                              border: InputBorder.none),
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.number,
-                          maxLength: 10,
-                          decoration: InputDecoration(
-                              counterText: "",
-                              hintText: 'Enter Phone Number',
-                              hintStyle: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400),
-                              border: InputBorder.none),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            CustomTextFeild(placeholder: "Enter registered email", controller: controller.emailCon,keyType: TextInputType.emailAddress,)
             // StandaredTextFeild(placeholder: "Phone Number", controller: phno,keyType: TextInputType.number,maxLength: ,)
           ],
         )),
-        CustomButton(title: "Continue", onPress: controller.onVerifyNumber
+        CustomButton(title: "Continue", onPress: controller.onVerifyEmail
 
         )],),
     ),

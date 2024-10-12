@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
 
-import '../api/dialog_services.dart';
+import '../../shared/widget/dialogs/error_dialog.dart';
 
 class ErrorInterceptor extends Interceptor {
   @override
@@ -9,7 +9,7 @@ class ErrorInterceptor extends Interceptor {
     if (err.type == DioExceptionType.connectionError) {
       // Handle connection error globally
       // Print.p("in custm interceptior");
-      DialogService.showNoInternetDialog();
+      ErrorDialog.showNoInternetDialog();
 
     }
     // Pass the error to the next handler

@@ -10,16 +10,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/user/registration/widgets/buttom_line.dart';
 import 'package:market_hub_application/features/user/registration/widgets/or_divider_widget.dart';
-import 'package:market_hub_application/shared/widget/custom_button.dart';
+import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 
-import 'package:market_hub_application/shared/widget/custom_phone_number_text_field.dart';
+import 'package:market_hub_application/shared/widget/text_fieled/custom_phone_number_text_field.dart';
 
 import '../../../../core/constants/text_style_constant.dart';
 import '../../../../core/theme/theme.dart';
 import '../../../../core/utils/utils.dart';
 
 import '../../../../shared/components/verify_otp/ui/verify_otp.dart';
-import '../../../../shared/widget/custom_text_field.dart';
+import '../../../../shared/widget/text_fieled/custom_text_field.dart';
 import '../controllers/registration_controller.dart';
 
 class Registration extends StatelessWidget {

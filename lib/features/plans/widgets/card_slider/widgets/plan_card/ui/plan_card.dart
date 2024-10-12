@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/plans/widgets/card_index_traker/controller/card_index_tracker_controller.dart';
 import 'package:market_hub_application/features/plans/widgets/card_slider/widgets/plan_card/controller/plan_card_action_controller.dart';
-import 'package:market_hub_application/shared/widget/custom_button.dart';
+import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 
 class PlanCard extends StatelessWidget {
   final int index;
