@@ -15,3 +15,18 @@ async
   return Fluttertoast.showToast(msg: msg,backgroundColor: Colors.grey,textColor: isErrorMsg?Color(0xFFED6366):Colors.white);
 }
 
+Future<bool> logOut()async{
+  try{
+    var result=await WrapOverHive.clearUserData();
+    if(result)
+    {
+      return true;
+    }
+    return false;
+  }catch(e)
+  {
+    Print.p("Exception while logout method call");
+    return false;
+  }
+}
+

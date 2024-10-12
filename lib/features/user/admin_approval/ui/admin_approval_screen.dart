@@ -10,9 +10,6 @@ import 'package:market_hub_application/features/user/login/ui/login_screen.dart'
 
 class AdminApprovalScreen extends StatelessWidget {
    AdminApprovalScreen({super.key}){
-    // Future.delayed(Duration(seconds: 1), () {
-    //   Get.to(LoginScreen());
-    // });
   }
 
   @override

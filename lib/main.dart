@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:market_hub_application/core/api/api_services.dart';
-import 'package:market_hub_application/core/utils/user_utils.dart';
-import 'package:market_hub_application/shared/components/success_page.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
+import 'package:market_hub_application/core/models/userdetail.dart';
 import 'splash_screen.dart';
-bool isApproved=false;
-bool isInProcess=false;
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  var userData=await getLocalUserDetail();
- if (userData!=null){
-   isInProcess=true;
-   isApproved=userData["registration"]["isApproved"];
- }
+   Hive.registerAdapter(UserDetailAdapter());
+  // Hive.registerAdapter(UserDetailAdapter());
   runApp(const MyApp());
 
 }

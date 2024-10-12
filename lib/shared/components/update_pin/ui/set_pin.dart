@@ -11,7 +11,7 @@ import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../../../widget/custom_button.dart';
 import '../../../../core/utils/utils.dart';
-import '../../../../features/user/registration/ui/admin_approval_screen.dart';
+import '../../../../features/user/admin_approval/ui/admin_approval_screen.dart';
 
 class EnterPinScreen extends StatelessWidget {
 

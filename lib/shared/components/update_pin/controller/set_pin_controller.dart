@@ -6,7 +6,7 @@ import '../../../../core/api/api_services.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/utils/wrap_over_hive.dart';
 import '../../../../features/user/registration/controllers/registration_controller.dart';
-import '../../../../features/user/registration/ui/admin_approval_screen.dart';
+import '../../../../features/user/admin_approval/ui/admin_approval_screen.dart';
 import '../../success_page.dart';
 
 class SetPinController

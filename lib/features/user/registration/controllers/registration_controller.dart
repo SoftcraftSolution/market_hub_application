@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:market_hub_application/core/models/user_detail_model.dart';
+import 'package:market_hub_application/core/models/userdetail.dart';
 import 'package:market_hub_application/features/plans/ui/plans_page.dart';
 import 'package:market_hub_application/features/user/registration/api/registration_api_service.dart';
-import 'package:market_hub_application/features/user/registration/ui/admin_approval_screen.dart';
+import 'package:market_hub_application/features/user/admin_approval/ui/admin_approval_screen.dart';
 import 'package:market_hub_application/shared/components/success_page.dart';
 import 'package:market_hub_application/shared/components/update_pin/ui/set_pin.dart';
 import 'package:market_hub_application/shared/components/verify_email/api/api_service.dart';
@@ -15,7 +15,7 @@ import '../../../../core/api/api_services.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/utils/wrap_over_hive.dart';
 import '../../../../shared/components/verify_otp/ui/verify_otp.dart';
-
+// macosroot3@gmail.com
 class RegistrationCon extends GetxController {
   RxBool isUploaded = false.obs;
   RxBool isAcceptedTerms = false.obs;
@@ -73,25 +73,30 @@ class RegistrationCon extends GetxController {
                     user = UserDetail(
                         phoneNumber: "$countryCode$phno",
                         pincode: pincode,
-                        visitingCard: File(visitingCard),
+                        visitingCard: visitingCard,
                         email: email,
                         name: fullName,
                         whatsappNumber: "$whatsappCountryCode$whatsappPhone");
                     var response = await VerifyEmailApiService()
                         .verifyEmailApiService(email: email, verifyUser: false);
                     Print.p(response.toString());
-                    response == null
-                        ? ""
-                        : Get.to(VerifyOtp(
-                            otp: response["otp"].toString(),
+                    if(response != null){
+                      if(response["isAlreadyRegistered"]==true){
+                        customToast(msg: "Already registred email");
+                      }else{
+                        Get.to(VerifyOtp(
+                            otp: response["user"]["otp"].toString(),
                             nextPage: EnterPinScreen(
                                 nextPage: SuccessPage(
                                   title: "Successful",
                                   subTitle:
-                                      "Your PIN has been successfully set up and is now ready to use",
+                                  "Your PIN has been successfully set up and is now ready to use",
                                   nextPage: PlansPage(isTrial: true),
                                 ),
                                 isResetEnterPinPage: false)));
+                      }
+                    }
+
                   } else {
                     customToast(msg: "Accept Term and Conditions");
                   }

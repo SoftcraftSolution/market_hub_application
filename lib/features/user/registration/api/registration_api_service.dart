@@ -3,7 +3,7 @@ import 'package:market_hub_application/core/api/api_services.dart';
 import 'package:market_hub_application/core/constants/api_constant.dart';
 
 import '../../../../core/models/response_structure.dart';
-import '../../../../core/models/user_detail_model.dart';
+import '../../../../core/models/userdetail.dart';
 import '../../../../core/utils/utils.dart';
 
 class RegistrationApiService{
@@ -19,7 +19,7 @@ class RegistrationApiService{
         "whatsappNumber":user.whatsappNumber,
         "phoneNumber": user.phoneNumber,
         "pincode": user.pincode,
-        "visitingCard":await MultipartFile.fromFile(user.visitingCard.path),
+        "visitingCard":await MultipartFile.fromFile(user.visitingCard),
         "pin":user.pin,
         "planName":user.plan
 

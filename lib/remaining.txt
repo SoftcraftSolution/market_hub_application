@@ -5,3 +5,4 @@ pandding
 verify number
 verify otp
 set pin
+how to addd animation in app logo

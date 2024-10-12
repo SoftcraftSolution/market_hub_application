@@ -1,42 +1,45 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:market_hub_application/core/models/userdetail.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
 
 
 class WrapOverHive{
-  static Future<Map?> getUserData(String key)
+  static Future<UserDetail?> getUserData()
   async{
-
-    var box=await initUser();
-    var data=await box["user"].get(key);
+    var box =await Hive.openBox<UserDetail>("userDetail");
+    // await box.put("detail",UserDetail.fromMap(temp));
+    final data=await box.get("detail");
     return data;
   }
-  static Future<bool> setUserData(String key,Map<dynamic,dynamic> data)
+  static Future<bool> locallizeUserData(dynamic data)
   async{
     try{
-      var box=await initUser();
-      await box["user"].put(key, data);
+      var box=await initBox();
+      // data=data.toMap();
+      await box.put("detail",data);
       return true;
     }
     catch(e)
     {
+      Print.p(e.toString());
       Print.p("Exception while calling setUserData");
       return false;
     }
   }
 
-  static Future<Map<String,dynamic>> initUser()async{
-    await Hive.openBox<Map<dynamic, dynamic>>("User");
-    var box=Hive.box<Map<dynamic, dynamic>>("User");
+  static Future<Box> initBox()async{
+    var box =await Hive.openBox("userDetail");
 
-    return {"user":box,};
+    return box;
   }
 
   static Future<bool> clearUserData()
   async
   {
    try {
-      var box = await initUser();
-      await box["user"].clear();
+      var box = await initBox();
+      await box.clear();
       return true;
     }
     catch(e){

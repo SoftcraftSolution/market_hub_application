@@ -3,5 +3,6 @@ class ApiConstants{
   static const String registrationEndPoint='/user/create-registration';
   static const String verifyEmailEndPoint='/user/verify-email';
   static const String updatePinEndPoint='/user/create-pin';
+  static const String checkApprovalEndPoint='/user/check-user-approve';
 
 }
