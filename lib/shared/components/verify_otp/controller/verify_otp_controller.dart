@@ -7,11 +7,13 @@ class VerifyOTPController{
   String otp;
   TextEditingController enteredOtp=TextEditingController();
   Widget nextPage;
-  VerifyOTPController({required this.otp,required this.nextPage});
+  VoidCallback  afterVerify;
+  VerifyOTPController({required this.otp,required this.nextPage,required this.afterVerify});
 
   Future<void> onVerify() async{
 
     if(otp==enteredOtp.text){
+      afterVerify;
       Get.to(nextPage);
     }else{
       customToast(msg: "Wrong pin",isErrorMsg: true);

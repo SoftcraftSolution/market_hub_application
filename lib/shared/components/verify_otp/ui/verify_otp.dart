@@ -14,13 +14,14 @@ import '../../../../core/utils/utils.dart';
 class VerifyOtp extends StatelessWidget {
   String otp;
   Widget nextPage;
+  VoidCallback afterVerify;
   var controller;
-  // bool isRegistration;
-   VerifyOtp({required this.otp,required this.nextPage});
 
+   VerifyOtp({required this.otp,required this.nextPage,this.afterVerify=_defultCallAfterVerify});
+static void _defultCallAfterVerify(){}
   @override
   Widget build(BuildContext context) {
-    controller=VerifyOTPController(otp: otp,nextPage: nextPage);
+    controller=VerifyOTPController(otp: otp,nextPage: nextPage,afterVerify: afterVerify);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

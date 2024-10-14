@@ -27,8 +27,12 @@ class VerifyEmailController {
 
       if (response != null) {
         if (response["isAlreadyRegistered"] == true) {
-          bool approverd = await isApproved(response["user"]);
+          bool approverd = response["user"]["isApproved"];
           Get.off(() => VerifyOtp(
+            afterVerify: ()async{
+              UserDetail userData=UserDetail.fromMap(response["user"]);
+              await WrapOverHive.locallizeUserData(userData);
+            },
               otp: response["user"]["otp"].toString(),
               nextPage: title == "Verification"
                   ? (approverd ? LoginScreen() : AdminApprovalScreen())
@@ -49,12 +53,5 @@ class VerifyEmailController {
     }
   }
 
-  Future<bool> isApproved(Map<String, dynamic> data) async {
 
-      UserDetail userData=UserDetail.fromMap(data);
-      await WrapOverHive.locallizeUserData(userData);
-
-
-    return userData.isApproved!;
-  }
 }
