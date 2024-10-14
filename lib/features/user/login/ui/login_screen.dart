@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/core/models/userdetail.dart';
+import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 import 'package:market_hub_application/features/user/login/widgets/login_buttom_line.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/shared/components/verify_email/ui/verify_email.dart';
+import 'package:market_hub_application/shared/widget/dialogs/error_dialog.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
 import '../../../../core/utils/utils.dart';
@@ -60,14 +63,13 @@ class LoginScreen extends StatelessWidget {
 
               autoFillEnable: false,
               textInputAction: TextInputAction.done,
-              onSubmit: (text) {
-                print('Entered pin is $text');
-                Get.offAll(Home());
+              onSubmit: (text)async {
+                await checkPin(text);
               },
               onChange: (x) {
-                Print.p(x.toString());
+                // Print.p(x.toString());
               },
-              otpPinFieldInputType: OtpPinFieldInputType.none,
+              otpPinFieldInputType: OtpPinFieldInputType.password,
 
               otpPinFieldStyle: OtpPinFieldStyle(
                 defaultFieldBorderColor:
@@ -117,6 +119,18 @@ class LoginScreen extends StatelessWidget {
   }
 
   void onChangePin(){
-    Get.to(VerifyEmail(title: "Forget PIN ?",subTitle: "Enter your Phone number to reset your PIN.",));
+    Get.to(VerifyEmail(title: "Forget PIN ?",subTitle: "Enter your Email to reset your PIN.",));
+  }
+
+  Future<void> checkPin(String enteredPin)async{
+    UserDetail? user= await WrapOverHive.getUserData();
+    Print.p(user.toString());
+    if(user!.pin==enteredPin){
+      Get.offAll(()=>Home());
+    }
+    else{
+      ErrorDialog.showErrorDialog(title: "Wrong PIN Entered", subTitle: "Please re-enter your PIN to proceed.");
+    }
+
   }
 }

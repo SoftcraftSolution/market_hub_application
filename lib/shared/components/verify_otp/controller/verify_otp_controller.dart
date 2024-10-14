@@ -13,8 +13,8 @@ class VerifyOTPController{
   Future<void> onVerify() async{
 
     if(otp==enteredOtp.text){
-      afterVerify;
-      Get.to(nextPage);
+      afterVerify();
+      Get.off(nextPage);
     }else{
       customToast(msg: "Wrong pin",isErrorMsg: true);
     }

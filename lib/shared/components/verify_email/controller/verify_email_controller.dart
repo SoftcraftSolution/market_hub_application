@@ -29,14 +29,17 @@ class VerifyEmailController {
         if (response["isAlreadyRegistered"] == true) {
           bool approverd = response["user"]["isApproved"];
           Get.off(() => VerifyOtp(
-            afterVerify: ()async{
+            // becuse this is for the do  something wheen login prrocess like storing data after otp verification
+            afterVerify: title == "Verification"?()async{
+              // Print.p("in after verify method");
               UserDetail userData=UserDetail.fromMap(response["user"]);
               await WrapOverHive.locallizeUserData(userData);
-            },
+            }:(){},
               otp: response["user"]["otp"].toString(),
               nextPage: title == "Verification"
                   ? (approverd ? LoginScreen() : AdminApprovalScreen())
                   : EnterPinScreen(
+                email: emailCon.text,
                       nextPage: SuccessPage(
                         title: "Successful",
                         subTitle:
@@ -47,9 +50,9 @@ class VerifyEmailController {
         } else {
           customToast(msg: "Not registered Email");
         }
-      } else {
-        customToast(msg: "Invailid Email");
       }
+    } else {
+      customToast(msg: "Invailid Email");
     }
   }
 

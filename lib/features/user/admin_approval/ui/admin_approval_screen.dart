@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/constants/text_style_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/features/user/admin_approval/controller/admin_approval_controller.dart';
 import 'package:market_hub_application/features/user/login/ui/login_screen.dart';
 import 'package:market_hub_application/shared/components/verify_email/ui/verify_email.dart';
 import 'package:market_hub_application/shared/components/verify_otp/ui/verify_otp.dart';
@@ -13,6 +14,7 @@ import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 
 class AdminApprovalScreen extends StatelessWidget {
    AdminApprovalScreen({super.key}){
+     AdminApprovalController().checkApproval();
   }
 
   @override
@@ -59,6 +61,6 @@ class AdminApprovalScreen extends StatelessWidget {
   }
 
   Future<void> onLoginWithAnother()async{
-    Get.offAll(VerifyEmail(title: "Verification", subTitle: "Enter your Phone number for Verification."));
+    Get.offAll(VerifyEmail(title: "Verification", subTitle: "Enter your Email for Verification."));
   }
 }

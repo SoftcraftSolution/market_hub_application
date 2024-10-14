@@ -7,10 +7,12 @@ import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 import 'package:market_hub_application/features/home/ui/home_page.dart';
 import 'package:market_hub_application/features/plans/ui/plans_page.dart';
+import 'package:market_hub_application/features/user/login/ui/login_screen.dart';
 import 'package:market_hub_application/features/user/naviagtion/controller/navigation_controller.dart';
 import 'package:market_hub_application/features/user/admin_approval/ui/admin_approval_screen.dart';
 import 'package:market_hub_application/main.dart';
 
+import 'core/utils/userDataCon.dart';
 import 'core/utils/utils.dart';
 import 'features/user/registration/ui/registration.dart';
 
@@ -31,16 +33,16 @@ class SplashScreen extends StatelessWidget {
   void directUser()async{
     bool isApproved=false;
     bool isInProcess=false;
-    var userData=await WrapOverHive.getUserData();
-    if (userData!=null){
+    UserDataController.userDetail=await WrapOverHive.getUserData();
+    if (UserDataController.userDetail!=null){
       isInProcess=true;
-      isApproved=userData.isApproved!;
+      isApproved=UserDataController.userDetail!.isApproved!;
     }
-    isInProcess?isApproved?Get.off(HomePage()):Get.off(AdminApprovalScreen()):Get.off(Registration());
+    isInProcess?isApproved?Get.off(LoginScreen()):Get.off(AdminApprovalScreen()):Get.off(Registration());
   }
   // test only
   void navigateTo(){
      Print.p("in navigateTo method");
-     Get.off(AdminApprovalScreen());
+     Get.off(PlansPage(isTrial: true));
   }
 }

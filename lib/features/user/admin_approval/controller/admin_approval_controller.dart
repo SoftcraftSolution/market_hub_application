@@ -5,6 +5,7 @@ import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:market_hub_application/core/utils/wrap_over_hive.dart';
 import 'package:market_hub_application/features/home/ui/home_page.dart';
 import 'package:market_hub_application/features/user/admin_approval/api/api_service.dart';
+import 'package:market_hub_application/features/user/login/ui/login_screen.dart';
 
 class AdminApprovalController{
   void checkApproval()async{
@@ -15,7 +16,7 @@ class AdminApprovalController{
         UserDetail? userData=await WrapOverHive.getUserData();
         userData!.isApproved=true;
         await WrapOverHive.locallizeUserData(userData);
-        Get.offAll(HomePage());
+        Get.offAll(LoginScreen());
       }else{
         customToast(msg: "Not Approved Yet");
       }

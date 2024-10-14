@@ -6,6 +6,7 @@ import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/shared/widget/text_fieled/custom_text_field.dart';
 
+import '../../../../core/utils/utils.dart';
 import '../controller/verify_email_controller.dart';
 
 class VerifyEmail extends StatelessWidget {
@@ -13,11 +14,14 @@ class VerifyEmail extends StatelessWidget {
   String subTitle;
 
   var controller;
-   VerifyEmail({required this.title,required this.subTitle,});
+   VerifyEmail({required this.title,required this.subTitle,}){
+     controller=VerifyEmailController(title: title,  subTitle: subTitle);
+   }
 
   @override
   Widget build(BuildContext context) {
-   controller=VerifyEmailController(title: title,  subTitle: subTitle);
+    // Print.p("build of verify email");
+
     return Scaffold(appBar: AppBar(leading: BackButton(),backgroundColor: Colors.transparent,),
     backgroundColor: ColorConstants.backgroundColor,
     body: Padding(

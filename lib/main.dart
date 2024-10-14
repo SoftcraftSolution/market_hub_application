@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:market_hub_application/core/models/userdetail.dart';
 import 'splash_screen.dart';
 
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();

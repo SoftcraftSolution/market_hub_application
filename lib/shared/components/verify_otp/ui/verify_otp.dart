@@ -17,11 +17,17 @@ class VerifyOtp extends StatelessWidget {
   VoidCallback afterVerify;
   var controller;
 
-   VerifyOtp({required this.otp,required this.nextPage,this.afterVerify=_defultCallAfterVerify});
-static void _defultCallAfterVerify(){}
+  VerifyOtp(
+      {required this.otp,
+      required this.nextPage,
+      this.afterVerify = _defultCallAfterVerify}) {
+    controller = VerifyOTPController(
+        otp: otp, nextPage: nextPage, afterVerify: afterVerify);
+  }
+
+  static void _defultCallAfterVerify() {}
   @override
   Widget build(BuildContext context) {
-    controller=VerifyOTPController(otp: otp,nextPage: nextPage,afterVerify: afterVerify);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -34,79 +40,78 @@ static void _defultCallAfterVerify(){}
           children: [
             Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: Text(
-                          "Verify Number",
-                          style: GoogleFonts.poppins(
-                              fontSize: 26, fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          "Enter the code on your phone we just sent you",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              fontSize: 18, color: Color(0xff646464)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 80),
-                        child: OtpPinField(
-
-                          fieldHeight: 60,
-                          fieldWidth: 50,
-
-                          autoFillEnable: false,
-                          textInputAction: TextInputAction.done,
-                          onSubmit: (text) {
-                            print('Entered pin is $text');
-                            controller.enteredOtp.text=text;
-                          },
-                          onChange: (x) {
-                            // Print.p(x.toString());
-                          },
-                          otpPinFieldInputType: OtpPinFieldInputType.none,
-
-                          otpPinFieldStyle: OtpPinFieldStyle(
-                            defaultFieldBorderColor:
-                                Colors.grey, // No border when inactive
-                            activeFieldBorderColor:
-                                Colors.black, // Border color when focused
-
-                            // Set background color for active field
-                            activeFieldBackgroundColor: Colors.transparent,
-                            filledFieldBackgroundColor: Colors
-                                .transparent, // No background color for filled
-
-                            // Only show border on the bottom
-                            filledFieldBorderColor:
-                                Colors.transparent, // No border for filled field
-                            // If needed, specify individual side borders for fine control
-                          ),
-
-                          maxLength: 4,
-                          showCursor: true,
-                          cursorColor: Colors.black,
-                          cursorWidth: 1,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          autoFocus: false,
-
-                          // Set to a custom decoration if necessary
-                          otpPinFieldDecoration:
-                              OtpPinFieldDecoration.defaultPinBoxDecoration,
-                        ),
-                      )
-                    ],
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
                   ),
-                )),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      "Verify Number",
+                      style: GoogleFonts.poppins(
+                          fontSize: 26, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    child: Text(
+                      "Enter the code on your Email we just sent you",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          fontSize: 18, color: Color(0xff646464)),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 80),
+                    child: OtpPinField(
+                      fieldHeight: 60,
+                      fieldWidth: 50,
+
+                      autoFillEnable: false,
+                      textInputAction: TextInputAction.done,
+                      onSubmit: (text) {
+                        print('Entered pin is $text');
+                        controller.enteredOtp.text = text;
+                      },
+                      onChange: (x) {
+                        // Print.p(x.toString());
+                      },
+                      otpPinFieldInputType: OtpPinFieldInputType.none,
+
+                      otpPinFieldStyle: OtpPinFieldStyle(
+                        defaultFieldBorderColor:
+                            Colors.grey, // No border when inactive
+                        activeFieldBorderColor:
+                            Colors.black, // Border color when focused
+
+                        // Set background color for active field
+                        activeFieldBackgroundColor: Colors.transparent,
+                        filledFieldBackgroundColor: Colors
+                            .transparent, // No background color for filled
+
+                        // Only show border on the bottom
+                        filledFieldBorderColor:
+                            Colors.transparent, // No border for filled field
+                        // If needed, specify individual side borders for fine control
+                      ),
+
+                      maxLength: 4,
+                      showCursor: true,
+                      cursorColor: Colors.black,
+                      cursorWidth: 1,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      autoFocus: false,
+
+                      // Set to a custom decoration if necessary
+                      otpPinFieldDecoration:
+                          OtpPinFieldDecoration.defaultPinBoxDecoration,
+                    ),
+                  )
+                ],
+              ),
+            )),
             SizedBox(
               height: 100,
               child: Center(
@@ -121,6 +126,4 @@ static void _defultCallAfterVerify(){}
       ),
     );
   }
-
-
 }

@@ -8,9 +8,10 @@ class CustomButton extends StatefulWidget {
   final String title;
   Future<void> Function() onPress;
   double fontSize;
+  double height;
   bool isLessPrioterise;
 
-  CustomButton({required this.title, required this.onPress,this.fontSize=18,this.isLessPrioterise=false});
+  CustomButton({required this.title, required this.onPress,this.fontSize=18,this.isLessPrioterise=false,this.height=60});
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -35,7 +36,7 @@ class _CustomButtonState extends State<CustomButton> {
           borderRadius: BorderRadius.circular(15),
           border: widget.isLessPrioterise?Border.all(color: ColorConstants.primeryColor):null
         ),
-        height: 60,
+        height: widget.height,
         child: Center(
           child: _isLoading
               ? SizedBox(

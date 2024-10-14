@@ -18,14 +18,17 @@ class EnterPinScreen extends StatelessWidget {
 
   bool isResetEnterPinPage;
   Widget nextPage;
+  String email;
   var controller;
-   EnterPinScreen({super.key,required this.nextPage,required this.isResetEnterPinPage,});
+   EnterPinScreen({super.key,required this.nextPage,required this.isResetEnterPinPage,this.email=""}){
+     controller=SetPinController(nextPage: nextPage,isResetPage: isResetEnterPinPage,email: email);
+   }
 
   @override
   Widget build(BuildContext context) {
 
 
-controller=SetPinController(nextPage: nextPage);
+
     return Scaffold(backgroundColor: ColorConstants.backgroundColor,
     appBar: AppBar(
       backgroundColor: Colors.transparent,
@@ -70,9 +73,10 @@ controller=SetPinController(nextPage: nextPage);
                           autoFillEnable: false,
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
-                           controller.fotp.text=text;
+
                           },
-                          onChange: (x) {
+                          onChange: (text) {
+                            controller.fotp.text=text;
                             // Print.p(x.toString());
                           },
                           otpPinFieldInputType: OtpPinFieldInputType.none,
@@ -123,9 +127,10 @@ controller=SetPinController(nextPage: nextPage);
                           autoFillEnable: false,
                           textInputAction: TextInputAction.done,
                           onSubmit: (text) {
-                            controller.sotp.text=text;
+
                           },
-                          onChange: (x) {
+                          onChange: (text) {
+                            controller.sotp.text=text;
                             // Print.p(x.toString());
                           },
                           otpPinFieldInputType: OtpPinFieldInputType.none,

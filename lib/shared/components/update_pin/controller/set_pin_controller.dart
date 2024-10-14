@@ -14,24 +14,65 @@ class SetPinController
   TextEditingController fotp=TextEditingController();
   TextEditingController sotp=TextEditingController();
   Widget nextPage;
-  SetPinController({required this.nextPage});
+  bool isResetPage;
+  String email;
+  SetPinController({required this.nextPage,required this.isResetPage,required this.email});
 
   Future<void> onVerify()async {
-    var userDataCon=Get.find<RegistrationCon>();
-    if(fotp.text==sotp.text){
+  if(validateInput()){
+    Print.p(email);
+    if(isResetPage){
+      var result=await updatePin();
+      result?Get.offAll(()=>nextPage):"";
+    }else{
+      saveInRegistCon();
+      Get.offAll(()=>nextPage);
+    }
+  }
+  }
+
+  bool validateInput(){
+    Print.p(fotp.text);
+    Print.p(sotp.text);
+    if((fotp.text)==(sotp.text)){
       if(fotp.text.length==4 ){
-        // Print.p("before${userDataCon.user!.pin.toString()}");
-        userDataCon.user!.setPin(pin: this.fotp.text);
-        // Print.p("after${userDataCon.user!.pin.toString()}");
-        Get.off(nextPage);
-      }else{
-        customToast(msg: "Enter PIN");
+       return true;
       }
-      // }
+      else{
+        customToast(msg: "Enter PIN");
+        return false;
+      }
+
     }else{
       customToast(msg: "Pin should be same");
+      return false;
     }
-    // Get.to(SuccessPage(title: "Request Submitted",subTitle: "Your request for a free 1-week trial has been submitted and is pending approval.We'll notify you once it's activated!",));
+  }
+
+  void saveInRegistCon(){
+    var userDataCon=Get.find<RegistrationCon>();
+
+      userDataCon.user!.setPin(pin: this.fotp.text);
 
   }
+
+  Future<bool> updatePin()async{
+  //  update pin
+  //   call api
+      if(email!=""){
+    var response = await SetPinApiService().setPinApiService(
+        pin: sotp.text.toString(), email: email);
+    if(response!=null){
+      var result=await updatePinLDB(sotp.text.toString());
+      return result;
+    }
+    return false;
+  }else{
+return false;
+      }
+  //   update in locally
+
+
+  }
+
 }

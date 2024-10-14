@@ -14,7 +14,7 @@ class ButtomLine extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Get.to(LoginScreen());
-        Get.to(VerifyEmail(title: "Verification",subTitle: "Enter your Phone number for Verification.",));
+        Get.to(VerifyEmail(title: "Verification",subTitle: "Enter your Email for Verification.",));
       },
       child: RichText(
           text: TextSpan(children: [

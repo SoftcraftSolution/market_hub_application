@@ -9,7 +9,7 @@ class ErrorInterceptor extends Interceptor {
     if (err.type == DioExceptionType.connectionError) {
       // Handle connection error globally
       // Print.p("in custm interceptior");
-      ErrorDialog.showNoInternetDialog();
+      ErrorDialog.showErrorDialog(title: 'No Internet Connection',subTitle: 'Please check your internet settings and try again.');
 
     }
     // Pass the error to the next handler
