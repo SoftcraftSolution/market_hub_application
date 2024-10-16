@@ -18,7 +18,6 @@ class ProfileTopContainer extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 25,horizontal: 20),
           child: Column(
-
             children: [
               Text(UserDataController.userDetail!.name,style: GoogleFonts.poppins(fontSize: 18,fontWeight: FontWeight.w600),),
               // Text("rahulkanoujiya@gmail.com",style: GoogleFonts.poppins(fontSize: 18,fontWeight: FontWeight.w600),),

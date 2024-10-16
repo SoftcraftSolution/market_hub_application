@@ -14,6 +14,7 @@ import 'package:market_hub_application/main.dart';
 
 import 'core/utils/userDataCon.dart';
 import 'core/utils/utils.dart';
+import 'features/user/naviagtion/ui/navigation.dart';
 import 'features/user/registration/ui/registration.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -43,6 +44,6 @@ class SplashScreen extends StatelessWidget {
   // test only
   void navigateTo(){
      Print.p("in navigateTo method");
-     Get.off(PlansPage(isTrial: true));
+     Get.off(Home());
   }
 }

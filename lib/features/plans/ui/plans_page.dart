@@ -12,10 +12,10 @@ class PlansPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: ColorConstants.backgroundColor,
-        body: Padding(
+    return Scaffold(
+      backgroundColor: ColorConstants.backgroundColor,
+      body: SafeArea(
+        child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

@@ -3,14 +3,17 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/shared/widget/optionBar/list_option_without_border.dart';
+
+import '../controller/spot_price_con.dart';
 
 class SpotPricePage extends StatelessWidget {
   SpotPricePage({super.key});
   var con = Get.put(SpotPriceCon());
-  final List<String> items = List.generate(4, (index) => 'Item $index');
+
   @override
   Widget build(BuildContext context) {
-    var elements = ["Base Metal", 'BME (Bombay Metal Exchange)'];
+    var elements = ["Base Metal",'Steel Minor Metal', 'BME (Bombay Metal Exchange)',];
     var metals = [
       "Copper",
       "Brass",
@@ -41,49 +44,7 @@ class SpotPricePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: SizedBox(
-                      height: 40,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              con.setPageIndex(index);
-                            },
-                            child: Obx(
-                              () => Padding(
-                                padding: index == 0
-                                    ? EdgeInsets.only(right: 20)
-                                    : EdgeInsets.zero,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      border: con.index.value == index
-                                          ? Border(
-                                              bottom: BorderSide(
-                                                  width: 4,
-                                                  color: ColorConstants.primeryColor))
-                                          : null),
-                                  child: Text(
-                                    overflow: TextOverflow.ellipsis,
-                                    elements[index],
-                                    style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 17,
-                                        color: con.index.value == index
-                                            ? ColorConstants.primeryColor
-                                            : Colors.grey),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                        scrollDirection: Axis.horizontal,
-                        itemCount: elements.length,
-                      ),
-                    ),
-                  ),
+                 ListOptionWithoutBorder(elements: elements, onIndexChanged: SpotOptionIndexChange().onIndexChange),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
@@ -138,9 +99,4 @@ class SpotPricePage extends StatelessWidget {
   }
 }
 
-class SpotPriceCon extends GetxController {
-  RxInt index = 0.obs;
-  void setPageIndex(int newValue) {
-    index.value = newValue;
-  }
-}
+

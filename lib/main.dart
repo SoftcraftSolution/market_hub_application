@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/models/userdetail.dart';
 import 'splash_screen.dart';
 
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: ColorConstants.backgroundColor, // Set the status bar color
+    statusBarIconBrightness: Brightness.dark, // Brightness for icons (light or dark)
+    statusBarBrightness: Brightness.dark, // For iOS (optional)
+  ));
   await Hive.initFlutter();
    Hive.registerAdapter(UserDetailAdapter());
   // Hive.registerAdapter(UserDetailAdapter());
