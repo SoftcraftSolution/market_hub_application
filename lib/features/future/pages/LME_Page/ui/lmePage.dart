@@ -10,7 +10,7 @@ import '../../../controller/futureController.dart';
 
 class LMEPage extends StatelessWidget {
    LMEPage({super.key});
-var _apiController=Get.put(LMEPageCon());
+var lmeCon=Get.put(LMEPageCon());
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor:ColorConstants.backgroundColor,
@@ -33,8 +33,8 @@ var _apiController=Get.put(LMEPageCon());
             ],
           ),
         ),
-        Expanded(flex:12,child: Obx(()=>ListView.builder(itemCount: _apiController.data.value.length,itemBuilder: (context,index){
-          return MarketItemWidget(marketData:_apiController.data.value[index] ,);
+        Expanded(flex:12,child: Obx(()=>ListView.builder(itemCount: lmeCon.data.value.length,itemBuilder: (context,index){
+          return MarketItemWidget(marketData:lmeCon.data.value[index] ,);
         },)),),
       ],)),);
   }

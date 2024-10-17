@@ -14,9 +14,11 @@ class LMEPageCon extends GetxController{
     super.onInit();
     startFetchingData();
   }
+
   void seIndex(int newIndex) {
     index.value = newIndex;
   }
+
   void startFetchingData() async{
     await fetchData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds

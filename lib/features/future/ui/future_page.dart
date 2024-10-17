@@ -11,7 +11,7 @@ import '../../../shared/components/test_screen.dart';
 import '../controller/futureController.dart';
 
 class FuturePage extends StatelessWidget {
-  final FutureController _apiController = Get.put(FutureController()); // Replace with your API URL
+  final FutureController futureCon = Get.put(FutureController()); // Replace with your API URL
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class FuturePage extends StatelessWidget {
         child: Obx(
             ()=> Column(children: [
             OptionBarWithBorder(options: ["LME","MCX","SHFE","US","FX","Refrence Rate"], onIndexChanged: FutureIndexChange().onIndexChange),
-           Expanded(child: _apiController.pageIndex.value==0?LMEPage():TestScreen("comming soon..."))
+           Expanded(child: futureCon.pageIndex.value==0?LMEPage():TestScreen("Comming Soon..."))
             // Expanded(child: Placeholder()),
           ],),
         ),
