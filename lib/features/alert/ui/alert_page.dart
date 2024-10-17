@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/features/alert/pages/live_feed/ui/live_feed_page.dart';
+import 'package:market_hub_application/features/alert/pages/technical_analysis/ui/technical_analysis_page.dart';
 import 'package:market_hub_application/shared/widget/optionBar/option_bar_with_border.dart';
 
 import '../../../shared/components/test_screen.dart';
-import '../component/news_item.dart';
 import '../controller/alert_controller.dart';
+import '../widget/news_item.dart';
 
 class AlertPage extends StatelessWidget {
   AlertPage({super.key});
@@ -34,7 +36,7 @@ class AlertPage extends StatelessWidget {
                 child: Obx(
                   ()=> Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                      child: controller.index.value==0?techAnalysis():controller.index.value==1?TestScreen("self News"):controller.index.value==2?TestScreen("liveFeed"):controller.index.value==3?TestScreen("Twitter Feed"):TestScreen("Circular")
+                      child: controller.index.value==0?TechnicalAnalysisPage():controller.index.value==1?TestScreen("self News"):controller.index.value==2?LiveFeedPage():controller.index.value==3?TestScreen("Twitter Feed"):TestScreen("Circular")
                   ),
                 )),
         
@@ -46,17 +48,7 @@ class AlertPage extends StatelessWidget {
   }
 
 
-  Widget techAnalysis(){
-    return ListView.builder(itemCount:10,padding:EdgeInsets.zero,itemBuilder: (context,index){
-      return NewsItem(
-          img: "img",
-          title:
-          "Global Copper Cathode Stocks: Increasing or Decreasing Post-Price Swings?",
-          subTitle:
-          "We’re pleased to introduce the latest enhancements in our templating experienceWe’re pleased to introduce the latest enhancements in our templating experience...",
-          time: "14h ago");
-    });
-  }
+
 
 }
 

@@ -24,6 +24,7 @@ class Home extends StatelessWidget {
 
       bottomNavigationBar: Obx(
             () => Container(
+              height: 70,
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(

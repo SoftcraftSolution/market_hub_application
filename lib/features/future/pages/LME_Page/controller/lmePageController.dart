@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:market_hub_application/features/future/pages/LME_Page/api/lme_api_service.dart';
 
 import '../../../../../core/api/api_services.dart';
 
 class LMEPageCon extends GetxController{
   RxInt index=0.obs;
-  RxList<dynamic> data = <dynamic>[].obs; // Observable list
+  RxList<dynamic> lme_data = <dynamic>[].obs; // Observable list
   late Timer _timer;
   @override
   void onInit() {
@@ -20,25 +21,14 @@ class LMEPageCon extends GetxController{
   }
 
   void startFetchingData() async{
-    await fetchData(); // Fetch data immediately on start
+    lme_data.value=await LMEAPiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
-    _timer = Timer.periodic(Duration(seconds: 3), (_) {
-      fetchData();
+    _timer = Timer.periodic(Duration(seconds: 3), (_) async{
+      lme_data.value=await LMEAPiService().fetchLMEData();
     });
   }
 
-  Future<void> fetchData() async {
-    try {
-      final response = await BaseApiServices.dio.get('https://lme-scrap.vercel.app/api/lme-metal-data');
-      if (response.statusCode == 200) {
-        data.value = response.data; // Update the observable list
-      } else {
-        print('Failed to load data: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+
 
   @override
   void onClose() {

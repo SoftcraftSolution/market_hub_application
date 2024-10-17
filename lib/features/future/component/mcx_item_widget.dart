@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MarketItemWidget extends StatelessWidget {
+class MCXItemWidget extends StatelessWidget {
   final Map<String, dynamic> marketData;
 
-
-  MarketItemWidget({required this.marketData,});
+  MCXItemWidget({required this.marketData});
 
   @override
   Widget build(BuildContext context) {
@@ -21,35 +20,22 @@ class MarketItemWidget extends StatelessWidget {
   }
 
 
-
-  Text _headerText(String text) {
-    return Text(
-      text,
-      style: GoogleFonts.poppins(
-        fontWeight: FontWeight.w600,
-        color: Colors.white, // White color for the header text
-        fontSize: 16,
-      ),
-    );
-  }
-
   Widget _buildMarketDataSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 14),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildSymbolSection(context),
           _buildPriceSection(context),
-
         ],
       ),
     );
   }
 
   Widget _buildSymbolSection(BuildContext context) {
-    bool isPriceNegative = marketData['risefall'] != null && marketData['risefall'].startsWith('-');
+    bool isPriceNegative = marketData['Change'] != null && marketData['Change'].startsWith('-');
     return Expanded(
       flex: 2,
       child: Column(
@@ -57,15 +43,20 @@ class MarketItemWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                ( marketData['name'] ?? '').toString().split(" ")[1],
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Expanded(
+                child: Text(
+                  (marketData['Symbol'] ?? '').toString().replaceAll("MCX", "").trim(), // Assuming you want the second word
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               SizedBox(width: 4),
-              isPriceNegative?Icon(Icons.arrow_drop_down, color: Colors.red,size: 30,):Icon(Icons.arrow_drop_up, color: Colors.green,size: 30),
+              isPriceNegative
+                  ? Icon(Icons.arrow_drop_down, color: Colors.red, size: 30)
+                  : Icon(Icons.arrow_drop_up, color: Colors.green, size: 30),
             ],
           ),
           SizedBox(height: 8),
@@ -74,7 +65,7 @@ class MarketItemWidget extends StatelessWidget {
               Icon(Icons.access_time, size: 14, color: Colors.grey),
               SizedBox(width: 4),
               Text(
-                marketData['updateTime'] ?? '',
+                marketData['LastTrade'] ?? '',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: Colors.grey,
@@ -89,7 +80,7 @@ class MarketItemWidget extends StatelessWidget {
 
   Widget _buildPriceSection(BuildContext context) {
     // Check if the percentage change is positive or negative
-    bool isPriceNegative = marketData['risefall'] != null && marketData['risefall'].startsWith('-');
+    bool isPriceNegative = marketData['Change'] != null && marketData['Change'].startsWith('-');
 
     return Expanded(
       flex: 3,
@@ -98,36 +89,38 @@ class MarketItemWidget extends StatelessWidget {
         children: [
           // Latest price, with conditional color
           Text(
-            marketData['latestPrice'] ?? '',
+            marketData['Last'] ?? '',
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
               fontSize: 24,
-              color: isPriceNegative ?  Colors.red:Colors.green , // Color based on change
+              color: isPriceNegative ? Colors.red : Colors.green, // Color based on change
             ),
           ),
           SizedBox(height: 6),
-          // Spread and other details
+          // Highest price
           Text(
-            "(${marketData['highest'] ?? ''}) High",
+            "(${marketData['High'] ?? ''}) High",
             style: GoogleFonts.poppins(
               fontSize: 14,
               color: Colors.green,
             ),
           ),
           SizedBox(height: 4),
+          // Net change
           Text(
-            "(${marketData['riseFall'] ?? ''}) Net Chg",
+            "(${marketData['Change'] ?? ''}) Net Chg",
             style: GoogleFonts.poppins(
               fontSize: 14,
-              color: Colors.grey,
+              color: isPriceNegative ? Colors.red : Colors.green,
             ),
           ),
           SizedBox(height: 4),
+          // Percentage change
           Text(
-            "(${marketData['risefall'] ?? ''}) Chg",
+            "(${marketData['ChangePercent'] ?? ''}) Chg %",
             style: GoogleFonts.poppins(
               fontSize: 14,
-              color: isPriceNegative ? Colors.red: Colors.green , // Match percentage color
+              color: isPriceNegative ? Colors.red : Colors.green, // Match percentage color
             ),
           ),
         ],
