@@ -5,7 +5,7 @@ import 'package:market_hub_application/features/future/pages/LME_Page/controller
 import '../../../../../../../core/api/api_services.dart';
 
 class LMEFutureApiService{
-  Future<List> fetchLMEData() async {
+  Future<List> fetchLMEFutureData() async {
     try {
 
       final response = await BaseApiServices.dio.get('https://lme-scrap.vercel.app/api/lme-metal-data');
