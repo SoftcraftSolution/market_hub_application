@@ -1,28 +1,54 @@
 import 'dart:async';
 import 'package:get/get.dart';
+import 'package:market_hub_application/features/alert/controller/alert_controller.dart';
+import 'package:market_hub_application/features/user/naviagtion/controller/navigation_controller.dart';
 
+import '../../../../../core/utils/utils.dart';
 import '../api/live_feed_api_service.dart';
 import '../model/news_model.dart';
 
 
 class NewsController extends GetxController {
   var newsList = <NewsModel>[].obs;
-  late Timer _timer;
+  var _timer;
+  var homeCon=Get.find<HomeCon>();
+  var alertCon=Get.find<AlertCon>();
+
   final LiveFeedApiService apiService = LiveFeedApiService();
 
   @override
   void onInit() {
     super.onInit();
-    fetchNewsData();
-    _timer = Timer.periodic(Duration(seconds: 30), (_) {
-      fetchNewsData(); // Fetch data every 10 seconds
+    everAll([homeCon.pageIndex,alertCon.pageIndex],
+            (_)async{
+          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==2){
+            await startFetchingData();
+          }else{
+            stopFetchingData();
+          }
+        });
+    startFetchingData();
+  }
+  Future<void> startFetchingData() async{
+    Print.p("Stared fetching Live Feed data");
+    _timer?.cancel();
+    // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
+    // Schedule to fetch data every 10 seconds
+    _timer = Timer.periodic(Duration(seconds: 3), (_) async{
+      await fetchNewsData();
     });
   }
-
   Future<void> fetchNewsData() async {
     final newsData = await apiService.fetchNews();
     if (newsData.isNotEmpty) {
       newsList.value = newsData.map((item) => NewsModel.fromJson(item)).toList();
+    }
+  }
+  void stopFetchingData()async{
+    if(_timer!=null){
+      _timer!.cancel();
+      _timer=null;
+      Print.p("stopped===>Live Feed data fetching");
     }
   }
 

@@ -18,6 +18,7 @@ class LMEFuturePageCon extends GetxController{
 
   @override
   void onInit() {
+    super.onInit();
     // TODO: implement onInit
     everAll([homeCon.pageIndex,futureCon.pageIndex,lmeCon.pageIndex],
             (_)async{
@@ -27,8 +28,8 @@ class LMEFuturePageCon extends GetxController{
         stopFetchingData();
       }
     });
-    super.onInit();
     startFetchingData();
+
   }
 
   void seIndex(int newIndex) {
