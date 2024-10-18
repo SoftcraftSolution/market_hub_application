@@ -44,12 +44,12 @@ class SpotPricePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 ListOptionWithoutBorder(elements: elements, onIndexChanged: SpotOptionIndexChange().onIndexChange),
+                 ListOptionWithoutBorder(elements: elements, onIndexChanged: SpotOptionIndexChange().onIndexChange,controller: con,),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Obx(
-                        () => con.index.value == 0
+                        () => con.pageIndex.value == 0
                             ? Wrap(
                                 clipBehavior: Clip.hardEdge,
                                 spacing: 14.0, // horizontal space between items

@@ -22,9 +22,9 @@ class MCXPageCon extends GetxController{
   void startFetchingData() async{
     await fetchMCXData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
-    _timer = Timer.periodic(Duration(seconds: 3), (_) {
-      fetchMCXData();
-    });
+    // _timer = Timer.periodic(Duration(seconds: 3), (_) {
+    //   fetchMCXData();
+    // });
   }
 
   Future<void> fetchMCXData() async {

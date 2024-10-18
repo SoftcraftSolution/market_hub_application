@@ -8,8 +8,8 @@ class AlertIndexChange{
 }
 
 class AlertCon extends GetxController {
-  RxInt index = 0.obs;
+  RxInt pageIndex = 0.obs;
   void setIndex(int newIndex) {
-    index.value = newIndex;
+    pageIndex.value = newIndex;
   }
 }

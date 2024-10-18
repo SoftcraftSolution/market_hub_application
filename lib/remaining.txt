@@ -1,8 +1,2 @@
-for rahul bhay-
-   change /user/create-pin to updatepin
-pandding
-
-verify number
-verify otp
-set pin
-how to addd animation in app logo
+option and page index in consistant --done
+and direct scraping  in mcx and lme

@@ -29,14 +29,14 @@ class AlertPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            OptionBarWithBorder(options: options,onIndexChanged: AlertIndexChange().onIndexChange,),
+            OptionBarWithBorder(options: options,onIndexChanged: AlertIndexChange().onIndexChange,controller: controller,),
             // SizedBox(height: 16,),
             Expanded(
                 flex: 12,
                 child: Obx(
                   ()=> Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                      child: controller.index.value==0?TechnicalAnalysisPage():controller.index.value==1?TestScreen("self News"):controller.index.value==2?LiveFeedPage():controller.index.value==3?TestScreen("Twitter Feed"):TestScreen("Circular")
+                      child: controller.pageIndex.value==0?TechnicalAnalysisPage():controller.pageIndex.value==1?TestScreen("self News"):controller.pageIndex.value==2?LiveFeedPage():controller.pageIndex.value==3?TestScreen("Twitter Feed"):TestScreen("Circular")
                   ),
                 )),
         

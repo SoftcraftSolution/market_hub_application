@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
 class SpotPriceCon extends GetxController {
-  RxInt index = 0.obs;
+  RxInt pageIndex = 0.obs;
   void setPageIndex(int newValue) {
-    index.value = newValue;
+    pageIndex.value = newValue;
   }
 }
 

@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/future/pages/LME_Page/controller/lmePageController.dart';
+import 'package:market_hub_application/features/future/pages/LME_Page/pages/LME_Future/ui/lme_future_page.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
+import 'package:market_hub_application/shared/components/test_screen.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../shared/widget/optionBar/list_option_without_border.dart';
-import '../../../component/lme_item_widget.dart';
+import '../pages/LME_Future/component/lme_item_widget.dart';
 import '../../../controller/futureController.dart';
 
 class LMEPage extends StatelessWidget {
   LMEPage({super.key});
-  var lmeCon = Get.put(LMEPageCon());
+var con=Get.put(LMEPageCon());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,25 +45,14 @@ class LMEPage extends StatelessWidget {
                   "LME Future",
                   "Warehouse Stock(official)",
                   "Settelment"
-                ], onIndexChanged: indexChange().onIndexChange)),
+                ], onIndexChanged: LMEPageIndexChange().onIndexChange,controller: con,)),
               ],
             ),
           ),
           Expanded(
             flex: 12,
             child:
-            Obx(() =>lmeCon.lme_data.value.isEmpty?Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: LoadingPage(),
-            ):
-            ListView.builder(
-                  itemCount: lmeCon.lme_data.value.length,
-                  itemBuilder: (context, index) {
-                    return LMEItemWidget(
-                      marketData: lmeCon.lme_data.value[index],
-                    );
-                  },
-                )
+            Obx(() =>con.pageIndex.value==0?LmeFuturePage():con.pageIndex.value==1?TestScreen("Warehouse Stock"):TestScreen("Settelmeent")
             ),
           ),
         ],
