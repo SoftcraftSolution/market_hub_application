@@ -9,7 +9,7 @@ import '../../../controller/lmePageController.dart';
 import '../api/lme_futur_api_service.dart';
 
 class LMEFuturePageCon extends GetxController{
-  RxInt pageIndex=0.obs;
+
   RxList<dynamic> lme_data = <dynamic>[].obs; // Observable list
   var _timer;
   var homeCon=Get.find<HomeCon>();
@@ -20,6 +20,7 @@ class LMEFuturePageCon extends GetxController{
   void onInit() {
     super.onInit();
     // TODO: implement onInit
+    startFetchingData();
     everAll([homeCon.pageIndex,futureCon.pageIndex,lmeCon.pageIndex],
             (_)async{
       if(homeCon.pageIndex.value==1 && futureCon.pageIndex.value==0 && lmeCon.pageIndex.value==0){
@@ -28,13 +29,11 @@ class LMEFuturePageCon extends GetxController{
         stopFetchingData();
       }
     });
-    startFetchingData();
+
 
   }
 
-  void seIndex(int newIndex) {
-    pageIndex.value = newIndex;
-  }
+
 
   Future<void> startFetchingData() async{
     Print.p("Stared fetching LME future data");
@@ -62,9 +61,3 @@ class LMEFuturePageCon extends GetxController{
   }
 }
 
-class LMEFuturePageIndexChange{
-  var con=Get.find<LMEFuturePageCon>();
-  void onIndexChange(int index){
-    con.seIndex(index);
-  }
-}

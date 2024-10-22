@@ -5,6 +5,7 @@ import 'package:market_hub_application/features/future/pages/LME_Page/controller
 import 'package:market_hub_application/features/future/pages/LME_Page/pages/LME_Future/ui/lme_future_page.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
 import 'package:market_hub_application/shared/components/test_screen.dart';
+import 'package:market_hub_application/shared/widget/bottom_sheet/categ_bottom_sheet/ui/categ_bottom_sheet.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../shared/widget/optionBar/list_option_without_border.dart';
@@ -30,7 +31,12 @@ var con=Get.put(LMEPageCon());
               children: [
                 GestureDetector(
                   onTap: () {
-                    Print.p("Categuries");
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CategBottomSheet(elements: ["LME Future","Warehouse Stock(official)","Settelment"],controller: con,);
+                      },
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 20),
@@ -60,3 +66,6 @@ var con=Get.put(LMEPageCon());
     );
   }
 }
+
+
+

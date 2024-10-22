@@ -17,7 +17,7 @@ class AlertPage extends StatelessWidget {
     "Technical Analysis",
     "Self News",
     "Live Feed",
-    "Twitter Feed",
+    "Economic calendar",
     "Circular"
   ];
 
@@ -36,7 +36,7 @@ class AlertPage extends StatelessWidget {
                 child: Obx(
                   ()=> Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                      child: controller.pageIndex.value==0?TechnicalAnalysisPage():controller.pageIndex.value==1?TestScreen("self News"):controller.pageIndex.value==2?LiveFeedPage():controller.pageIndex.value==3?TestScreen("Twitter Feed"):TestScreen("Circular")
+                      child: controller.pageIndex.value==0?TechnicalAnalysisPage():controller.pageIndex.value==1?TestScreen("self News"):controller.pageIndex.value==2?LiveFeedPage():controller.pageIndex.value==3?TestScreen("Economic calendar"):TestScreen("Circular")
                   ),
                 )),
         

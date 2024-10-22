@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
 import 'package:market_hub_application/features/user/profile/component/profile_top_container.dart';
 import 'package:market_hub_application/features/user/profile/controller/profileController.dart';
+import 'package:market_hub_application/features/user/profile/pages/contact_us/ui/contact_us_page.dart';
+import 'package:market_hub_application/features/user/profile/pages/feed_back_page/ui/feed_back_page.dart';
 import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 
 import '../component/profile_tiles.dart';
@@ -28,9 +31,9 @@ class ProfileScreen extends StatelessWidget {
             Expanded(child:Column(
               children: [
                 ProfileElements(leading: Center(child: Image.asset("assets/splash_screeen_img/logo.png")),title: "About Us",onTap: (){},),
-                ProfileElements(leading: Icon(Icons.call_outlined,size: 30,color: ColorConstants.primeryColor,),title: "Contact Us",onTap: (){}),
+                ProfileElements(leading: Icon(Icons.call_outlined,size: 30,color: ColorConstants.primeryColor,),title: "Contact Us",onTap: (){Get.to(ContactUsScreen());}),
                 ProfileElements(leading: Icon(Icons.account_balance_outlined,size: 30,color: ColorConstants.primeryColor,),title: "Terms & Conditions",onTap: (){}),
-                ProfileElements(leading: Icon(Icons.feedback_outlined,size: 30,color: ColorConstants.primeryColor,),title: "Feedback",onTap: (){}),
+                ProfileElements(leading: Icon(Icons.feedback_outlined,size: 30,color: ColorConstants.primeryColor,),title: "Feedback",onTap: (){Get.to(FeedbackFormPage());}),
                 ProfileElements(leading: Icon(Icons.exit_to_app_rounded,size: 30,color: ColorConstants.primeryColor,),title: "Log Out",isLast: true,onTap: ProfilController().onLogOut,),
               ],
             ))
