@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NewsItem extends StatelessWidget {
   String title;
@@ -63,9 +64,31 @@ class NewsItem extends StatelessWidget {
                                   fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                           ),
-                          Icon(
-                            Icons.share,
-                            size: 28,
+                          GestureDetector(
+                            onTap: () {
+                              // final String message = "${title}\n\nDownload our app: https://google.com";
+                              // Share.share(message);
+
+                              // Get the position of the button to define the share position origin
+                              RenderBox renderBox = context.findRenderObject() as RenderBox;
+                              Offset position = renderBox.localToGlobal(Offset.zero);
+                              Rect sharePositionOrigin = Rect.fromLTWH(
+                                position.dx,
+                                position.dy,
+                                renderBox.size.width,
+                                renderBox.size.height,
+                              );
+
+                              // Share the content with position
+                              Share.share(
+                                "Check out this news!",
+                                sharePositionOrigin: sharePositionOrigin,
+                              );
+                            },
+                            child: Icon(
+                              Icons.share,
+                              size: 28,
+                            ),
                           )
                         ],
                       ))

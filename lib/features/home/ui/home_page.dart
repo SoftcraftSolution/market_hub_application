@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/features/home/widgets/home_update_list.dart';
 
 import '../../user/profile/ui/profile_screen.dart';
 
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(backgroundColor: ColorConstants.backgroundColor,body: Padding(
-        padding: const EdgeInsets.all(28.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             SizedBox(child: Row(
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Divider(color: Colors.grey,),
             ),
-            Expanded(child: Placeholder())
+            Expanded(child: HomeUpdatePage())
           ],
         ),
       ),),
