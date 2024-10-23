@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market_hub_application/core/constants/color_constant.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../model/news_model.dart';
@@ -12,7 +13,9 @@ class NewsBriefScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstants.backgroundColor,
       appBar: AppBar(
+        backgroundColor: ColorConstants.backgroundColor,
         title: Text("News Detail",style: GoogleFonts.poppins(fontWeight: FontWeight.w700),),
         centerTitle: true,
       ),
@@ -22,6 +25,7 @@ class NewsBriefScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
+
               news.title,
               style: GoogleFonts.poppins(
                   fontSize: 24, fontWeight: FontWeight.bold),
