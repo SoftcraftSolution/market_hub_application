@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 class FeedbackController extends GetxController
 {
   RxInt rating=0.obs;
-  RxString feedBackValue="Punctual".obs;
-  RxString otherFeedBack="Punctual".obs;
+  RxString feedBackValue="Intuitive".obs;
+  RxString otherFeedBack="Intuitive".obs;
 
   void setRating(int newValue)
   {

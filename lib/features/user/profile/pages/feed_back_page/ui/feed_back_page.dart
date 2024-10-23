@@ -74,7 +74,7 @@ class FeedbackFormPage extends StatelessWidget {
                                       GestureDetector(
                                         onTap: () {
                                           controller
-                                              .setFeedBackValue("Punctual");
+                                              .setFeedBackValue("Seamless");
                                         },
                                         child: Container(
                                           height: 70,
@@ -86,17 +86,17 @@ class FeedbackFormPage extends StatelessWidget {
                                                   color: controller
                                                       .feedBackValue
                                                       .value ==
-                                                      "Punctual"
+                                                      "Seamless"
                                                       ? ColorConstants.primeryColor
                                                       : Color(0xFFD9D9D9))),
                                           child: Center(
                                             child: Text(
-                                              "Punctual",
+                                              "Seamless",
                                               style: TextStyle(
                                                   color: controller
                                                       .feedBackValue
                                                       .value ==
-                                                      "Punctual"
+                                                      "Seamless"
                                                       ? ColorConstants.primeryColor
                                                       : Color(0xFF777B80)),
                                             ),
@@ -106,7 +106,7 @@ class FeedbackFormPage extends StatelessWidget {
                                       GestureDetector(
                                         onTap: () {
                                           controller.setFeedBackValue(
-                                              "Professional");
+                                              "Effortless");
                                         },
                                         child: Container(
                                           height: 70,
@@ -118,17 +118,17 @@ class FeedbackFormPage extends StatelessWidget {
                                                   color: controller
                                                       .feedBackValue
                                                       .value ==
-                                                      "Professional"?
+                                                      "Effortless"?
                                                   ColorConstants.primeryColor
                                                       : Color(0xFFD9D9D9))),
                                           child: Center(
                                             child: Text(
-                                              "Professional",
+                                              "Effortless",
                                               style: TextStyle(
                                                   color: controller
                                                       .feedBackValue
                                                       .value ==
-                                                      "Professional"
+                                                      "Effortless"
                                                       ?ColorConstants.primeryColor
                                                       : Color(0xFF777B80)),
                                             ),
@@ -147,7 +147,7 @@ class FeedbackFormPage extends StatelessWidget {
                                       GestureDetector(
                                         onTap: () {
                                           controller
-                                              .setFeedBackValue("Efficient");
+                                              .setFeedBackValue("Intuitive");
                                         },
                                         child: Container(
                                           height: 70,
@@ -159,17 +159,17 @@ class FeedbackFormPage extends StatelessWidget {
                                                   color: controller
                                                       .feedBackValue
                                                       .value ==
-                                                      "Efficient"
+                                                      "Intuitive"
                                                       ? ColorConstants.primeryColor
                                                       : Color(0xFFD9D9D9))),
                                           child: Center(
                                             child: Text(
-                                              "Efficient",
+                                              "Intuitive",
                                               style: TextStyle(
                                                   color: controller
                                                       .feedBackValue
                                                       .value ==
-                                                      "Efficient"
+                                                      "Intuitive"
                                                       ? ColorConstants.primeryColor
                                                       : Color(0xFF777B80)),
                                             ),
