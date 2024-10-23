@@ -13,7 +13,8 @@ class NewsBriefScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("News Detail"),
+        title: Text("News Detail",style: GoogleFonts.poppins(fontWeight: FontWeight.w700),),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
