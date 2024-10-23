@@ -20,7 +20,7 @@ class HomeUpdateController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchHomeUpdates();
+    // fetchHomeUpdates();
     startFetchingData();
     ever(homeCon.pageIndex,
             (_)async{
@@ -35,6 +35,7 @@ class HomeUpdateController extends GetxController {
   Future<void> startFetchingData() async{
     Print.p("Stared fetching home updates data");
     _timer?.cancel();
+    await fetchHomeUpdates();
     // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
     _timer = Timer.periodic(Duration(seconds: 15), (_) async{

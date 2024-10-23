@@ -38,6 +38,7 @@ class LMEFuturePageCon extends GetxController{
   Future<void> startFetchingData() async{
     Print.p("Stared fetching LME future data");
     _timer?.cancel();
+    lme_data.value=await LMEFutureApiService().fetchLMEFutureData();
     // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
     _timer = Timer.periodic(Duration(seconds: 3), (_) async{

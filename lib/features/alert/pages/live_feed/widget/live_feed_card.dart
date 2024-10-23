@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../model/news_model.dart';
 
 class LiveFeedNewsCard extends StatelessWidget {
-  final NewsModel newsItem;
+  final LiveNewsModel newsItem;
 
   const LiveFeedNewsCard({required this.newsItem});
   Future<void> _launchUrl(String url) async {

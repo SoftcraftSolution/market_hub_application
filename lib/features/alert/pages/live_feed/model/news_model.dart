@@ -1,4 +1,4 @@
-class NewsModel {
+class LiveNewsModel {
   String title;
   String link;
   String image;
@@ -6,7 +6,7 @@ class NewsModel {
   String author;
   String date;
 
-  NewsModel({
+  LiveNewsModel({
     required this.title,
     required this.link,
     required this.image,
@@ -15,8 +15,8 @@ class NewsModel {
     required this.date,
   });
 
-  factory NewsModel.fromJson(Map<String, dynamic> json) {
-    return NewsModel(
+  factory LiveNewsModel.fromJson(Map<String, dynamic> json) {
+    return LiveNewsModel(
       title: json['title'] ?? '',
       link: json['link'] ?? '',
       image: json['image'] ?? '',

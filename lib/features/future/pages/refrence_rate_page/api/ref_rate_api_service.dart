@@ -7,7 +7,7 @@ class RefRateApiService {
   Future<Map<String, List<ExchangeRate>>> fetchRefRateData() async {
     try {
       final response = await BaseApiServices.dio.get(
-          'https://markethub-app-backend.vercel.app/user/get-reference-rate');
+          'https://markethub-app-backend.onrender.com/user/get-reference-rate');
 
       if (response.statusCode == 200) {
         Print.p(response.data.toString());

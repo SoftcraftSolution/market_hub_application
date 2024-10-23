@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/features/alert/pages/circular_page/ui/circuler_page.dart';
 import 'package:market_hub_application/features/alert/pages/live_feed/ui/live_feed_page.dart';
 import 'package:market_hub_application/features/alert/pages/self_news/ui/self_news_page.dart';
 import 'package:market_hub_application/features/alert/pages/technical_analysis/ui/technical_analysis_page.dart';
@@ -37,7 +38,7 @@ class AlertPage extends StatelessWidget {
                 child: Obx(
                   ()=> Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                      child: controller.pageIndex.value==0?TechnicalAnalysisPage():controller.pageIndex.value==1?SelfNewsPage():controller.pageIndex.value==2?LiveFeedPage():controller.pageIndex.value==3?TestScreen("Economic calendar"):TestScreen("Circular")
+                      child: controller.pageIndex.value==0?TechnicalAnalysisPage():controller.pageIndex.value==1?SelfNewsPage():controller.pageIndex.value==2?LiveFeedPage():controller.pageIndex.value==3?TestScreen("Economic calendar"):CirculerPage()
                   ),
                 )),
         

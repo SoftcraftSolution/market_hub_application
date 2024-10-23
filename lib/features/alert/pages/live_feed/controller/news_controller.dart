@@ -9,7 +9,7 @@ import '../model/news_model.dart';
 
 
 class NewsController extends GetxController {
-  var newsList = <NewsModel>[].obs;
+  var newsList = <LiveNewsModel>[].obs;
   var _timer;
   var homeCon=Get.find<HomeCon>();
   var alertCon=Get.find<AlertCon>();
@@ -32,6 +32,7 @@ class NewsController extends GetxController {
   Future<void> startFetchingData() async{
     Print.p("Stared fetching Live Feed data");
     _timer?.cancel();
+    await fetchNewsData();
     // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
     _timer = Timer.periodic(Duration(seconds: 3), (_) async{
@@ -41,7 +42,7 @@ class NewsController extends GetxController {
   Future<void> fetchNewsData() async {
     final newsData = await apiService.fetchNews();
     if (newsData.isNotEmpty) {
-      newsList.value = newsData.map((item) => NewsModel.fromJson(item)).toList();
+      newsList.value = newsData.map((item) => LiveNewsModel.fromJson(item)).toList();
     }
   }
   void stopFetchingData()async{

@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import 'package:market_hub_application/features/alert/pages/circular_page/api/circuler_api_service.dart';
 import 'package:market_hub_application/features/alert/pages/self_news/api/self_news_api_services.dart';
+import 'package:market_hub_application/features/alert/pages/technical_analysis/api/technical_news_api_service.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../user/naviagtion/controller/navigation_controller.dart';
 import '../../../controller/alert_controller.dart';
 import '../../../model/news_feed_model.dart';
 
 
-class SelfNewsController extends GetxController {
-  RxList<NewsFeedModel> newsList = <NewsFeedModel>[].obs; // Observable list for news articles
+class CirculerCon extends GetxController {
+  RxList<NewsFeedModel> circulerList = <NewsFeedModel>[].obs; // Observable list for news articles
   var _timer;
   var homeCon=Get.find<HomeCon>();
   var alertCon=Get.find<AlertCon>();
@@ -22,7 +24,7 @@ class SelfNewsController extends GetxController {
     startFetchingData(); // Start periodic fetching of news data
     everAll([homeCon.pageIndex,alertCon.pageIndex],
             (_)async{
-          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==1){
+          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==4){
             await startFetchingData();
           }else{
             stopFetchingData();
@@ -31,10 +33,11 @@ class SelfNewsController extends GetxController {
   }
 
   // Fetch news from the API
-  Future<void> fetchNews() async {
+  Future<void> fetchCirculer() async {
     try {
-      List<NewsFeedModel> news = await SelfNewsApiService().fetchNews();
-      newsList.assignAll(news); // Assign fetched news to observable list
+      List<NewsFeedModel> news = await CirculerApiService().fetchNews();
+      // Print.p("middel");
+      circulerList.assignAll(news); // Assign fetched news to observable list
     } catch (e) {
       print('Error fetching news: $e'); // Handle error
     }
@@ -42,18 +45,18 @@ class SelfNewsController extends GetxController {
 
   // Start periodic data fetching every 10 seconds
   Future<void> startFetchingData()async {
-    Print.p("Stared fetching self neews data");
+    Print.p("Stared fetching Circuler data");
     _timer?.cancel();
-    await fetchNews();
+    await fetchCirculer();
     _timer = Timer.periodic(Duration(seconds: 10), (_) async{
-       await fetchNews(); // Re-fetch news periodically
+      await fetchCirculer(); // Re-fetch news periodically
     });
   }
   void stopFetchingData()async{
     if(_timer!=null){
       _timer!.cancel();
       _timer=null;
-      Print.p("stopped===>Seelf neew data fetching");
+      Print.p("stopped===>Circuler data fetching");
     }
   }
 

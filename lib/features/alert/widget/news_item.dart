@@ -3,13 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../pages/self_news/model/news_model.dart';
-import '../pages/self_news/pages/news_brife_page.dart'; // Adjusted import to match the SelfNewsModel
+import '../model/news_feed_model.dart';
+import 'news_brife_page.dart'; // Adjusted import to match the SelfNewsModel
 
 class NewsItem extends StatelessWidget {
-  final SelfNewsModel news; // Accepting the SelfNewsModel as a parameter
+  final NewsFeedModel news;
+  bool isCirculer =false;
+  // Accepting the SelfNewsModel as a parameter
 
-  NewsItem({required this.news});
+  NewsItem({required this.news,this.isCirculer=false});
 
 
 

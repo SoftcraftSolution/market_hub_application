@@ -35,6 +35,7 @@ class SHFE_Page_Con extends GetxController
   Future<void> startFetchingData() async{
     Print.p("Stared fetching SHFE data");
     _timer?.cancel();
+    data.value=await SHFEPageApiService().fetchShfeData();
     // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
     _timer = Timer.periodic(Duration(seconds: 3), (_) async{

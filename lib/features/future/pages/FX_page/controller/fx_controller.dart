@@ -37,10 +37,11 @@ class FXPageCon extends GetxController{
   Future<void> startFetchingData() async{
     Print.p("Stared fetching FX data");
     _timer?.cancel();
+    fx_data.value=await FXApiServices().fetchForwardRates();
     // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
     _timer = Timer.periodic(Duration(seconds: 8), (_) async{
-      fx_data.value=await FXApiServices().fetchFXData();
+      fx_data.value=await FXApiServices().fetchForwardRates();
     });
   }
   void stopFetchingData()async{

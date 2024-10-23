@@ -37,6 +37,7 @@ var _timer;
   Future<void> startFetchingData() async{
     Print.p("Stared fetching MCX data");
     _timer?.cancel();
+    data.value=await MCXPageApiServices().fetchMCXData();
      // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
     _timer = Timer.periodic(Duration(seconds: 3), (_) async{
