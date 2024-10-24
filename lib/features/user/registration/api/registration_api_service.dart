@@ -12,7 +12,7 @@ class RegistrationApiService{
     // Print.p("in Login api ");
     try {
 
-      var finalPath = "${ApiConstants.baseUrl}${ApiConstants.registrationEndPoint}";
+      var finalPath = "https://markethub-app-backend.onrender.com${ApiConstants.registrationEndPoint}";
       FormData data =FormData.fromMap({
         "fullName": user.name,
         "email":user.email,
