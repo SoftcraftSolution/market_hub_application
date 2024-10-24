@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/features/spot_price/pages/base_matel_detail_page/ui/base_metal_page.dart';
 import 'package:market_hub_application/shared/widget/optionBar/list_option_without_border.dart';
 
 import '../controller/spot_price_con.dart';
@@ -15,24 +16,21 @@ class SpotPricePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var elements = ["Base Metal",'Steel','Minor Metal', 'BME (Bombay Metal Exchange)',];
     var metals = [
-      "Copper",
-      "Brass",
-      "Gun Metal",
-      "Lead",
-      "Nickel",
-      "Tin",
-      "Zinc",
-      "Alminum"
+      "COPPER", "BRASS", "ALUMINIUM", "GUNMETAL", "ZINC",
+      "LEAD", "NICKEL CATHODE", "TIN",
     ];
+
     var imgS = [
       "assets/metals/copper.png",
       "assets/metals/brass.png",
+      "assets/metals/alminum.png",
       "assets/metals/gunmetal.png",
+      "assets/metals/zinc.png",
       "assets/metals/lead.png",
       "assets/metals/nickel.png",
       "assets/metals/tin.png",
-      "assets/metals/zinc.png",
-      "assets/metals/alminum.png"
+
+
     ];
 
     return SafeArea(
@@ -56,29 +54,34 @@ class SpotPricePage extends StatelessWidget {
                                 runSpacing:
                                     12.0, // vertical space between items
                                 children: List.generate(metals.length, (index) {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        width: 125,
-                                        height: 125,
-                                        child: Image.asset(imgS[index],fit: BoxFit.cover,),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 6),
-                                        child: Text(
-                                          metals[index],
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                                  return GestureDetector(
+                                    onTap: (){
+                                      Get.to(()=>BaseMetalPage(category: metals[index]));
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          width: 125,
+                                          height: 125,
+                                          child: Image.asset(imgS[index],fit: BoxFit.cover,),
                                         ),
-                                      )
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 6),
+                                          child: Text(
+                                            metals[index],
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   );
                                 }),
                               )
