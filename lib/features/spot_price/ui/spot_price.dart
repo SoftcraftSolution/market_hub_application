@@ -13,7 +13,7 @@ class SpotPricePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var elements = ["Base Metal",'Steel Minor Metal', 'BME (Bombay Metal Exchange)',];
+    var elements = ["Base Metal",'Steel','Minor Metal', 'BME (Bombay Metal Exchange)',];
     var metals = [
       "Copper",
       "Brass",
