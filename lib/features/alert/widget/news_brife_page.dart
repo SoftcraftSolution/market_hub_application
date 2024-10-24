@@ -17,8 +17,8 @@ class NewsBriefScreen extends StatelessWidget {
 
   Future<void> downloadAndOpenPDF(String url) async {
     // Request storage permission
-bool? x=await Permission.storage.request().isGranted;
-    if (x) {
+;
+    if (await Permission.storage.request().isGranted) {
       Directory appDocDir = await getApplicationDocumentsDirectory();
       String filePath = '${appDocDir.path}/${url.split('/').last}';
 
@@ -106,5 +106,17 @@ bool? x=await Permission.storage.request().isGranted;
         ),
       ),
     );
+  }
+  void requestStoragePermission() async {
+    var status = await Permission.storage.request();
+
+    if (status.isGranted) {
+      // Permission granted, proceed with the operation
+    } else if (status.isDenied) {
+      // Permission denied by the user, handle it
+    } else if (status.isPermanentlyDenied) {
+      // User has permanently denied the permission
+      openAppSettings();  // This will take the user to the app settings
+    }
   }
 }
