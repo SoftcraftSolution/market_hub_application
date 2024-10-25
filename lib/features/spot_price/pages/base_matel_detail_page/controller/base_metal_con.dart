@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
+import '../../../../../core/utils/utils.dart';
 import '../../../model/item_model.dart';
 import '../../../model/spot_response_model.dart';
 // import '../../../services/spot_api_services.dart';
@@ -11,16 +14,35 @@ class BaseMetalCon extends GetxController {
 
   var topOptionIndex = 0.obs;
   var secOptionIndex = 0.obs;
-
+  var _timer;
   // Constructor accepting category
   BaseMetalCon({required this.category});
 
   @override
   void onInit() {
     super.onInit();
-    fetchSpotList(); // Fetch the spot list when the controller is initialized
+    fetchSpotList();
+    startFetchingData();// Fetch the spot list when the controller is initialized
+  }
+  @override
+  void onClose() {
+    // Clean up resources here
+    // e.g., close any streams, controllers, or listeners
+    _timer?.cancel();
+    super.onClose();
   }
 
+
+  Future<void> startFetchingData() async{
+    Print.p("Stared fetching $category");
+    _timer?.cancel();
+   fetchSpotList();
+    // Fetch data immediately on start
+    // Schedule to fetch data every 10 seconds
+    _timer = Timer.periodic(Duration(seconds: 6), (_) async{
+      fetchSpotList();
+    });
+  }
   // Method to fetch the spot list from the API
   Future<void> fetchSpotList() async {
     // SpotListService apiService = BaseMetalApiServices().SpotListService(); // Create an instance of your API service

@@ -6,7 +6,7 @@ import '../../../model/spot_response_model.dart';
 
 class BaseMetalApiServices{
   Future<SpotListResponse?> fetchSpotList(String category) async {
-    final url = '${ApiConstants.spotbaseUrl}/user/spot-list?category=$category';
+    final url = '${ApiConstants.baseUrl}/user/spot-list?category=$category';
 
     try {
       final response = await BaseApiServices.dio.get(url);

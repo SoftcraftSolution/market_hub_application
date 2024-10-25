@@ -49,7 +49,7 @@ class VerifyOtp extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Text(
-                      "Verify Number",
+                      "Verify Email",
                       style: GoogleFonts.poppins(
                           fontSize: 26, fontWeight: FontWeight.w700),
                     ),

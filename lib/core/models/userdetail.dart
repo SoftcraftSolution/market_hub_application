@@ -108,7 +108,7 @@ class UserDetail {
         whatsappNumber: data['whatsappNumber'],
         phoneNumber: data['phoneNumber'],
         pincode: data['pincode'],
-        visitingCard: data['visitingCard'],
+        visitingCard: data['visitingCard']??"",
         pin: data['pin']?.toString(), // Optional, converted to String if present
         plan: data['planName'],        // Optional field for plan
         city: data['city'],            // Optional field for city

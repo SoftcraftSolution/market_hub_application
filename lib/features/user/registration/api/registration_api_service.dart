@@ -12,14 +12,14 @@ class RegistrationApiService{
     // Print.p("in Login api ");
     try {
 
-      var finalPath = "https://markethub-app-backend.onrender.com${ApiConstants.registrationEndPoint}";
+      var finalPath = "${ApiConstants.baseUrl}${ApiConstants.registrationEndPoint}";
       FormData data =FormData.fromMap({
         "fullName": user.name,
         "email":user.email,
         "whatsappNumber":user.whatsappNumber,
         "phoneNumber": user.phoneNumber,
         "pincode": user.pincode,
-        "visitingCard":await MultipartFile.fromFile(user.visitingCard),
+        // "visitingCard":await MultipartFile.fromFile(user.visitingCard.toString()),
         "pin":user.pin,
         "planName":user.plan
 

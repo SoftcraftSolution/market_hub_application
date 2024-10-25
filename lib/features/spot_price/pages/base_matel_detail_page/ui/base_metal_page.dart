@@ -55,48 +55,45 @@ class _BaseMetalPageState extends State<BaseMetalPage> {
         SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(18),
-              ),
-              clipBehavior: Clip.hardEdge,
-              child: Obx(
-                    ()=> Row(
-                  children: List.generate(con.spotListResponse.value!.types.length, (index) {
-                    return GestureDetector(
-                      onTap: () {
-                       con.setTopOptionIndex(index); // Call the method to update the index
-                      },
-                      child: Container(
-                        constraints: BoxConstraints(minWidth: 100),
-                        padding: EdgeInsets.symmetric(vertical: 14,horizontal: 18),
-                        decoration: BoxDecoration(
-                          color: con.topOptionIndex.value == index
-                              ? ColorConstants.primeryColor
-                              : Colors.transparent,
-                          border: Border(
-                            left: BorderSide(color: Colors.grey),
-                          ),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: Obx(
+                  ()=> Row(
+                children: List.generate(con.spotListResponse.value!.types.length, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                     con.setTopOptionIndex(index); // Call the method to update the index
+                    },
+                    child: Container(
+                      constraints: BoxConstraints(minWidth: 100),
+                      padding: EdgeInsets.symmetric(vertical: 14,horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: con.topOptionIndex.value == index
+                            ? ColorConstants.primeryColor
+                            : Colors.transparent,
+                        border: Border(
+                          left: BorderSide(color: Colors.grey),
                         ),
-                        child: Center(
-                          child: Text(
-                            con.spotListResponse.value!.types[index],
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color:  con.topOptionIndex.value == index
-                                  ? Colors.white
-                                  : Colors.black.withOpacity(0.5),
-                            ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          con.spotListResponse.value!.types[index],
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color:  con.topOptionIndex.value == index
+                                ? Colors.white
+                                : Colors.black.withOpacity(0.5),
                           ),
                         ),
                       ),
-                    );
-                  }),
-                ),
+                    ),
+                  );
+                }),
               ),
             ),
           ),

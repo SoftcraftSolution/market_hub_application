@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/future/pages/LME_Page/controller/lmePageController.dart';
 import 'package:market_hub_application/features/future/pages/LME_Page/pages/LME_Future/ui/lme_future_page.dart';
+import 'package:market_hub_application/features/future/pages/LME_Page/pages/Warehouse_Stock/ui/warehouse_page.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
 import 'package:market_hub_application/shared/components/test_screen.dart';
 import 'package:market_hub_application/shared/widget/bottom_sheet/categ_bottom_sheet/ui/categ_bottom_sheet.dart';
@@ -58,7 +59,7 @@ var con=Get.put(LMEPageCon());
           Expanded(
             flex: 12,
             child:
-            Obx(() =>con.pageIndex.value==0?LmeFuturePage():con.pageIndex.value==1?TestScreen("Warehouse Stock"):TestScreen("Settelmeent")
+            Obx(() =>con.pageIndex.value==0?LmeFuturePage():con.pageIndex.value==1?WarehousePage():TestScreen("Settelmeent")
             ),
           ),
         ],
