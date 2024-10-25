@@ -44,6 +44,6 @@ class SplashScreen extends StatelessWidget {
   // test only
   void navigateTo(){
      Print.p("in navigateTo method");
-     Get.off(Home());
+     Get.off(AdminApprovalScreen());
   }
 }

@@ -32,7 +32,7 @@ class RefRatePage extends StatelessWidget {
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
-                            return CategBottomSheet(elements: ["SBI TT","FBILL"],controller: con,);
+                            return CategBottomSheet(elements: ["SBI TT","FBILL"],onApplyChanges: con.seIndex,initialIndex: con.pageIndex.value,);
                           },
                         );
                       },

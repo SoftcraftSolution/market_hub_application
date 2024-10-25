@@ -8,6 +8,7 @@ import 'package:market_hub_application/shared/components/success_page.dart';
 import 'package:market_hub_application/shared/components/update_pin/ui/set_pin.dart';
 import 'package:market_hub_application/shared/components/verify_email/api/api_service.dart';
 import 'package:market_hub_application/shared/components/verify_otp/ui/verify_otp.dart';
+import 'package:market_hub_application/splash_screen.dart';
 
 import '../../../../core/models/userdetail.dart';
 import '../../../../core/utils/wrap_over_hive.dart';
@@ -37,7 +38,7 @@ class VerifyEmailController {
             }:(){},
               otp: response["user"]["otp"].toString(),
               nextPage: title == "Verification"
-                  ? (approverd ? LoginScreen() : AdminApprovalScreen())
+                  ? (approverd ? SplashScreen() : AdminApprovalScreen())
                   : EnterPinScreen(
                 email: emailCon.text,
                       nextPage: SuccessPage(

@@ -54,13 +54,13 @@ class AdminApprovalScreen extends StatelessWidget {
               ],
             ),
           ),
-          CustomButton(title: "Login with another Email", onPress: onLoginWithAnother,isLessPrioterise: true,)
+          // CustomButton(title: "Login with another Email", onPress: onLoginWithAnother,isLessPrioterise: true,)
         ],
       ),
     ),);
   }
 
-  Future<void> onLoginWithAnother()async{
-    Get.offAll(VerifyEmail(title: "Verification", subTitle: "Enter your Email for Verification."));
-  }
+  // Future<void> onLoginWithAnother()async{
+  //   Get.offAll(VerifyEmail(title: "Verification", subTitle: "Enter your Email for Verification."));
+  // }
 }

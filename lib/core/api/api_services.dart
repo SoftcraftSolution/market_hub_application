@@ -22,7 +22,7 @@ class BaseApiServices {
     error: true,
     compact: true,
     maxWidth: 90,
-  ))..interceptors.add(ErrorInterceptor());
+  ));
 
 
 

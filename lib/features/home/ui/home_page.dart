@@ -4,13 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 
 import 'package:market_hub_application/core/theme/theme.dart';
+import 'package:market_hub_application/core/utils/userDataCon.dart';
 import 'package:market_hub_application/features/home/widgets/home_update_list.dart';
 
 import '../../user/profile/ui/profile_screen.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+   HomePage({super.key});
+   var userDetailCon=UserDataController.userDetail;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,7 +22,7 @@ class HomePage extends StatelessWidget {
             SizedBox(child: Row(
               children: [
                 Image.asset("assets/splash_screeen_img/logo.png",height: 70,width: 70,),
-                Expanded(child: Text(" Hello Abhishek! 👋",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700,),)),
+                Expanded(child: Text(" Hello ${userDetailCon!.name} 👋",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700,),)),
                 GestureDetector(
                     onTap: (){
                       Get.to(ProfileScreen());

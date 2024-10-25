@@ -1,26 +1,66 @@
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
 import 'package:market_hub_application/features/future/pages/LME_Page/controller/lmePageController.dart';
-
 import '../../../../../../../core/api/api_services.dart';
 
-class LMEFutureApiService{
+class LMEFutureApiService {
   Future<List> fetchLMEFutureData() async {
     try {
-
       final response = await BaseApiServices.dio.get('https://lme-scrap.vercel.app/api/lme-metal-data');
       if (response.statusCode == 200) {
-        return response.data; // Update the observable list
+        // Filter the fetched data
+        List metalData = response.data;
+
+        // Define the abbreviations and mapping
+        List<String> abbreviations = ['CU', 'AL', 'ZN', 'NI', 'PB', 'SN'];
+        Map<String, String> metalAbbr = {
+          "LME Copper": "CU",
+          "LME Aluminum": "AL",
+          "LME Zinc": "ZN",
+          "LME Nickel": "NI",
+          "LME Lead": "PB",
+          "LME Tin": "SN",
+        };
+
+        // Filtered data based on abbreviations
+        List filteredData = metalData.where((metal) {
+          return metalAbbr.containsKey(metal['name']);
+        }).map((metal) {
+          return {
+            'name': metalAbbr[metal['name']],
+            'latestPrice': metal['latestPrice'],
+            'riseFall': metal['riseFall'],
+            'risefall': metal['risefall'],
+            'highest': metal['highest'],
+            'lowest': metal['lowest'],
+            'yesterdayHarvest': metal['yesterdayHarvest'],
+            'updateTime': metal['updateTime'],
+          };
+        }).toList();
+
+        // Sort the filtered data according to the abbreviations
+        List finalFilter = [];
+        for (var abbr in abbreviations) {
+          finalFilter.add(filteredData.firstWhere((metal) => metal['name'] == abbr));
+        }
+
+        // Remove any null values if no match was found for an abbreviation
+        finalFilter.removeWhere((metal) => metal == null);
+
+        return finalFilter; // Return the sorted filtered data
       } else {
         print('Failed to load data: ${response.statusCode}');
         return [];
       }
     } catch (e) {
       print('Error: $e');
-      return  [];
+      return [];
     }
   }
-  //  Map<String, String> metalNameTranslation = {
+}
+
+
+//  Map<String, String> metalNameTranslation = {
   //   "LME锡": "LME Tin",
   //   "LME铜": "LME Copper",
   //   "LME铝": "LME Aluminum",
@@ -76,4 +116,4 @@ class LMEFutureApiService{
   //     return [];
   //   }
   // }
-}
+// }

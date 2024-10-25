@@ -31,3 +31,25 @@ class FXPage extends StatelessWidget {
     });
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
+//
+// class FXPage extends StatefulWidget {
+//   const FXPage({super.key});
+//
+//   @override
+//   State<FXPage> createState() => _FXPageState();
+// }
+//
+// class _FXPageState extends State<FXPage> {
+//   final controller = WebViewController()
+//     ..setJavaScriptMode(JavaScriptMode.disabled)
+//     ..loadRequest(Uri.parse("https://www.moneycontrol.com/markets/currencies/"));
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return WebViewWidget(controller: controller);
+//   }
+// }

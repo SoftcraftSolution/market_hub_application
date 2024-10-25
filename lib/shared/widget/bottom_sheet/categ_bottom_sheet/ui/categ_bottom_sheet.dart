@@ -6,9 +6,10 @@ import 'package:market_hub_application/shared/widget/button/custom_button.dart';
 
 class CategBottomSheet extends StatefulWidget {
   final List<String> elements;
-  final controller;
+  final Function(int) onApplyChanges;
+  int initialIndex;
 
-  CategBottomSheet({required this.elements,required this.controller});
+  CategBottomSheet({required this.elements,required this.onApplyChanges,required this.initialIndex});
 
   @override
   State<CategBottomSheet> createState() => _CategBottomSheetState();
@@ -17,7 +18,7 @@ class CategBottomSheet extends StatefulWidget {
 class _CategBottomSheetState extends State<CategBottomSheet> {
   @override
   void initState() {
-    _selectedValue=widget.controller.pageIndex.value;
+    _selectedValue=widget.initialIndex;
   }
    int? _selectedValue;// Variable to hold the selected radio value
 
@@ -91,7 +92,7 @@ class _CategBottomSheetState extends State<CategBottomSheet> {
   }
 
   Future<void> onApplyChanges()async{
-    widget.controller.seIndex(_selectedValue);
+    widget.onApplyChanges(_selectedValue!);
     Navigator.pop(context);
   }
 }

@@ -60,8 +60,9 @@ class NewsBriefScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          // mainAxisSize: MainAxisSize.min,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               news.title,
@@ -73,7 +74,7 @@ class NewsBriefScreen extends StatelessWidget {
               style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
             ),
             SizedBox(height: 16),
-            Center(
+            Container(
               child: Image.network(
                 news.image,
                 errorBuilder: (context, error, stackTrace) {

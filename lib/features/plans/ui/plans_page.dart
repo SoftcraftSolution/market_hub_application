@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/plans/widgets/card_slider/ui/card_slider.dart';
@@ -12,10 +13,15 @@ class PlansPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor: ColorConstants.backgroundColor,
-      body: SafeArea(
-        child: Padding(
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: ColorConstants.backgroundColor, // Set the status bar color
+      statusBarIconBrightness: Brightness.dark, // Brightness for icons (light or dark)
+      statusBarBrightness: Brightness.dark, // For iOS (optional)
+    ));
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: ColorConstants.backgroundColor,
+        body: Padding(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
