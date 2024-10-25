@@ -23,28 +23,61 @@ class SpotItemCard extends StatelessWidget {
                 child: Text(
                   item.city,
                   style: GoogleFonts.poppins(
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Text(
                 '\u20B9${item.price}', // Format price to 2 decimal places
-                style: GoogleFonts.poppins(fontSize:22,fontWeight:FontWeight.w700,color: Colors.grey[700]),
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey[700],
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 8), // Add space between rows
-          Text(
-            'Closing Time: ${formatDate(DateTime.now())}', // Use 'N/A' as default if closingTime is null
-            style: GoogleFonts.poppins(color: Colors.grey[700]),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child:Text(
+                  '', // Format the updatedAt date
+                  style: GoogleFonts.poppins(color: Colors.grey[700]),
+                ),
+              ),
+              Text(
+                item.incrementPrice, // Format price to 2 decimal places
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: item.incrementPrice.contains("-")?Colors.red:Colors.green,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
-          Text(
-            'Closing Price: \u20B910', // Format closing price or use 'N/A'
-            style: GoogleFonts.poppins(color: Colors.grey[700]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child:Text(
+                  'Last Updated: ${formatDate(item.updatedAt)}', // Format the updatedAt date
+                  style: GoogleFonts.poppins(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.w500,),
+                ),
+              ),
+              Text(
+                'Closing: \u20B9${item.lastPrice}', // Format price to 2 decimal places
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
+
           Divider(color: Colors.grey[400]), // Add a divider for separation
         ],
       ),
