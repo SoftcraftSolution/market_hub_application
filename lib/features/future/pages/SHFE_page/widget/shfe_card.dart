@@ -10,40 +10,31 @@ class SHFECard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isPriceNegative = price.change.startsWith('-');
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.white,
+            Colors.grey.shade100,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.white,
-                Colors.grey.shade100,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildSymbolSection(isPriceNegative), // Updated to include price
-                const SizedBox(height: 10),
-                Divider(color: Colors.grey.shade300),
-                const SizedBox(height: 10),
-                _buildPriceSection(isPriceNegative),
-                const SizedBox(height: 10),
-                _buildLastUpdatedSection(),
-              ],
-            ),
-          ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSymbolSection(isPriceNegative),
+            const SizedBox(height: 10),
+            _buildPriceSection(isPriceNegative),
+            const SizedBox(height: 10),
+            _buildLastUpdatedSection(),
+            Divider(color: Colors.grey.shade300),
+          ],
         ),
       ),
     );
@@ -61,25 +52,24 @@ class SHFECard extends StatelessWidget {
                 price.description,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 18,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(width: 20,),
+              const SizedBox(width: 5),
               Icon(
-                price.change.startsWith('-') ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                color: price.change.startsWith('-') ? Colors.red : Colors.green,
+                isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                color: isPriceNegative ? Colors.red : Colors.green,
                 size: 30,
               ),
             ],
           ),
         ),
-
         Text(
           price.price,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.bold,
-            fontSize: 28,
+            fontSize: 20,
             color: isPriceNegative ? Colors.red : Colors.green,
           ),
         ),
@@ -91,24 +81,29 @@ class SHFECard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 6),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildDetailWithIcon(Icons.trending_up, "Open: ${price.open}", Colors.grey),
             _buildDetailWithIcon(Icons.arrow_upward, "High: ${price.high}", Colors.green),
+            _buildDetailWithIcon(Icons.arrow_downward, "Low: ${price.low}", const Color(0xFFEF5B4F)),
           ],
         ),
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildDetailWithIcon(Icons.arrow_downward, "Low: ${price.low}", Color(0xFFEF5B4F)),
-            _buildDetailWithIcon(Icons.show_chart, "Volume: ${price.volume}", Colors.grey),
+            _buildDetailWithIcon(Icons.show_chart, "Change: ${price.change} (${price.change})", isPriceNegative ? Colors.red : Colors.green),
+            Text(
+              "Vol: ${price.volume}",
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            // _buildDetailWithIcon(Icons.v, "Vol: ${price.volume}",Colors.grey),
           ],
         ),
-        const SizedBox(height: 8),
-        _buildDetailWithIcon(Icons.trending_up, "Change: ${price.change}", isPriceNegative ? Colors.red : Colors.green),
+        // _buildDetailWithIcon(Icons.show_chart, "Change: ${price.change} (${price.change})", isPriceNegative ? Colors.red : Colors.green),
       ],
     );
   }
@@ -131,7 +126,7 @@ class SHFECard extends StatelessWidget {
 
   Widget _buildLastUpdatedSection() {
     return Text(
-      "Last Updated: ${DateTime.now().toLocal().toString().split('.')[0]}",
+      "Last Updated: ${DateTime.now().toLocal().toString().split(' ')[1].split(".")[0]}",
       style: GoogleFonts.poppins(
         fontSize: 12,
         color: Colors.grey,
