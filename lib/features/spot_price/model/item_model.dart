@@ -9,7 +9,9 @@ class SpotItem {
   final String lastPrice;         // New field
   final String percentageChange;   // New field
   final DateTime createdAt;       // New field
-  final DateTime updatedAt;       // New field
+  final DateTime updatedAt;
+  final bool isInWatchList;
+  // New field
 
   SpotItem({
     required this.id,
@@ -22,12 +24,14 @@ class SpotItem {
     required this.lastPrice,       // New parameter
     required this.percentageChange, // New parameter
     required this.createdAt,       // New parameter
-    required this.updatedAt,       // New parameter
+    required this.updatedAt,
+     this.isInWatchList=false// New parameter
   });
 
   // Factory method to create an instance from a JSON map
   factory SpotItem.fromJson(Map<String, dynamic> json) {
     return SpotItem(
+      isInWatchList: false,
       id: json['_id'] as String,
       city: json['city'] as String,
       category: json['category'] as String,
@@ -45,6 +49,7 @@ class SpotItem {
   // Method to convert the instance back to JSON
   Map<String, dynamic> toJson() {
     return {
+      "isInWatchList":isInWatchList,
       '_id': id,
       'city': city,
       'category': category,

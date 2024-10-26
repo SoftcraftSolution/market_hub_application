@@ -36,7 +36,7 @@ var con=Get.put(LMEPageCon());
                     showModalBottomSheet(
                       context: context,
                       builder: (BuildContext context) {
-                        return CategBottomSheet(elements: ["Future","Warehouse Stock(official)","Settelment"],onApplyChanges: con.seIndex,initialIndex: con.pageIndex.value,);
+                        return CategBottomSheet(elements: ["Future","Stock","Settelment"],onApplyChanges: con.seIndex,initialIndex: con.pageIndex.value,);
                       },
                     );
                   },
@@ -51,7 +51,7 @@ var con=Get.put(LMEPageCon());
                 Expanded(
                     child: ListOptionWithoutBorder(elements: [
                   "Future",
-                  "Warehouse Stock(official)",
+                  "Stock",
                   "Settelment"
                 ], onIndexChanged: LMEPageIndexChange().onIndexChange,controller: con,)),
               ],

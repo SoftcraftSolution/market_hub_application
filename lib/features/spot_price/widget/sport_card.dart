@@ -19,21 +19,30 @@ class SpotItemCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Row(
+                children: [
+                  Text(
+                    item.city,
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(Icons.bookmark_border_rounded),
+                  )
+                ],
+              ),
               Expanded(
                 child: Text(
-                  item.city,
+                  textAlign: TextAlign.end,
+                  '\u20B9${item.price}', // Format price to 2 decimal places
                   style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey[700],
                   ),
-                ),
-              ),
-              Text(
-                '\u20B9${item.price}', // Format price to 2 decimal places
-                style: GoogleFonts.poppins(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.grey[700],
                 ),
               ),
             ],
@@ -49,7 +58,7 @@ class SpotItemCard extends StatelessWidget {
                 ),
               ),
               Text(
-                item.incrementPrice, // Format price to 2 decimal places
+                item.incrementPrice.contains("-")?item.incrementPrice:"+${item.incrementPrice}", // Format price to 2 decimal places
                 style: GoogleFonts.poppins(
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
