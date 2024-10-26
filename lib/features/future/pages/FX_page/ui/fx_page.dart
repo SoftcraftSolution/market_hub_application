@@ -21,12 +21,15 @@ class FXPage extends StatelessWidget {
         )); // Loading page widget
       }
 
-      return ListView.builder(
-        itemCount: fxCon.fx_data.length,
-        itemBuilder: (context, index) {
-          return FXCard(price: fxCon.fx_data[index],
-          );
-        },
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: ListView.builder(
+          itemCount: fxCon.fx_data.length,
+          itemBuilder: (context, index) {
+            return FXCard(price: fxCon.fx_data[index],
+            );
+          },
+        ),
       );
     });
   }
