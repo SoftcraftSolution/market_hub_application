@@ -10,40 +10,31 @@ class MCXItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isPriceNegative = marketData['Change'].startsWith('-');
 
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.white,
+            Colors.grey.shade100,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.white,
-                Colors.grey.shade100,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildSymbolSection(isPriceNegative),
-                const SizedBox(height: 10),
-                Divider(color: Colors.grey.shade300),
-                const SizedBox(height: 10),
-                _buildPriceSection(isPriceNegative),
-                const SizedBox(height: 10),
-                _buildLastUpdatedSection(),
-              ],
-            ),
-          ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSymbolSection(isPriceNegative),
+            const SizedBox(height: 10),
+
+            _buildPriceSection(isPriceNegative),
+            const SizedBox(height: 10),
+            _buildLastUpdatedSection(),
+            Divider()
+          ],
         ),
       ),
     );
@@ -58,14 +49,14 @@ class MCXItemWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                (marketData['Symbol'] ?? '').toString().replaceAll("MCX", "").trim(),
+                (marketData['Symbol'] ?? 'N/A').toString().replaceAll("MCX", "").trim(),
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 18,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 5),
               Icon(
                 isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                 color: isPriceNegative ? Colors.red : Colors.green,
@@ -75,10 +66,10 @@ class MCXItemWidget extends StatelessWidget {
           ),
         ),
         Text(
-          marketData['Last'] ?? '',
+          marketData['Last'] ?? 'N/A',
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.bold,
-            fontSize: 28,
+            fontSize: 20,
             color: isPriceNegative ? Colors.red : Colors.green,
           ),
         ),
@@ -95,14 +86,16 @@ class MCXItemWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildDetailWithIcon(Icons.arrow_upward, "High: ${marketData['High'] ?? ''}", Colors.green),
-            _buildDetailWithIcon(Icons.arrow_downward, "Low: ${marketData['Low'] ?? ''}", const Color(0xFFEF5B4F)),
+            _buildDetailWithIcon(Icons.arrow_upward, "${marketData['High']==""?'N/A':marketData['High']} (High)", Colors.green),
+            _buildDetailWithIcon(Icons.arrow_downward, "${marketData['Low']==""?'N/A':marketData['Low']} (Low)", const Color(0xFFEF5B4F)),
           ],
         ),
         const SizedBox(height: 8),
-        _buildDetailWithIcon(Icons.show_chart, "Change: ${marketData['Change'] ?? ''}", isPriceNegative ? Colors.red : Colors.green),
-        const SizedBox(height: 4),
-        _buildDetailWithIcon(Icons.percent, "Percent Change: ${marketData['ChangePercent'] ?? ''}", isPriceNegative ? Colors.red : Colors.green),
+        _buildDetailWithIcon(Icons.show_chart, "${marketData['Change']==""?'N/A':marketData['Change'] } (${marketData['ChangePercent'] ?? 'N/A'})"
+            "", isPriceNegative ? Colors.red : Colors.green),
+
+        // const SizedBox(height: 4),
+        // _buildDetailWithIcon(Icons.percent, "Percent Change: ${marketData['ChangePercent'] ?? ''}", isPriceNegative ? Colors.red : Colors.green),
       ],
     );
   }
@@ -125,7 +118,7 @@ class MCXItemWidget extends StatelessWidget {
 
   Widget _buildLastUpdatedSection() {
     return Text(
-      "Last Updated: ${marketData['LastTrade'] ?? ''}",
+      "Last Updated: ${marketData['LastTrade']==""?'N/A':marketData['LastTrade']}",
       style: GoogleFonts.poppins(
         fontSize: 12,
         color: Colors.grey,
