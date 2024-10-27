@@ -18,11 +18,11 @@ class LiveNewsModel {
   factory LiveNewsModel.fromJson(Map<String, dynamic> json) {
     return LiveNewsModel(
       title: json['title'] ?? '',
-      link: json['link'] ?? '',
+      link: json['url'] ?? '',
       image: json['image'] ?? '',
-      description: json['description'] ?? '',
-      author: json['author'] ?? '',
-      date: json['date'] ?? '',
+      description: json['content_text'] ?? '',
+      author: json['authors'].isNotEmpty ? json['authors'][0]['name'] : 'Unknown',
+      date: json['date_published'] ?? '',
     );
   }
 }

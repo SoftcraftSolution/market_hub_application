@@ -1,80 +1,21 @@
-// // pages/settlement_page.dart
-//
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:market_hub_application/core/constants/color_constant.dart';
-// import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
-// import '../controller/settelment_con.dart';
-//
-// class SettlementPage extends StatelessWidget {
-//   final SettlementController controller = Get.put(SettlementController());
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: ColorConstants.backgroundColor,
-//       body: Obx(() {
-//         if (controller.settlements.value.isEmpty) {
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 20),
-//             child: LoadingPage(),
-//           );
-//         }
-//
-//         return ListView.builder(
-//           itemCount: controller.settlements.length,
-//           itemBuilder: (context, index) {
-//             var settlement = controller.settlements[index];
-//             return Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(
-//                     settlement.symbol,
-//                     style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 20),
-//                   ),
-//                   SizedBox(height: 8),
-//                   Text('Date: ${settlement.date}',style: GoogleFonts.poppins(),),
-//                   SizedBox(height: 8),
-//                   _buildBidAskRow('3M Bid', settlement.threeM.bid),
-//                   _buildBidAskRow('3M Ask', settlement.threeM.ask),
-//                   _buildBidAskRow('Cash Bid', settlement.cash.bid),
-//                   _buildBidAskRow('Cash Ask', settlement.cash.ask),
-//                 ],
-//               ),
-//             );
-//           },
-//         );
-//       }),
-//     );
-//   }
-//
-//   Widget _buildBidAskRow(String label, double value) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Text(label, style: GoogleFonts.poppins(fontSize: 16)),
-//         Text(value.toString(), style: GoogleFonts.poppins(fontSize: 16)),
-//       ],
-//     );
-//   }
-// }
-
-
-
-// pages/settlement_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
 import '../controller/settelment_con.dart';
+import '../model/settelment_model.dart';
 
-class SettlementPage extends StatelessWidget {
+class SettlementPage extends StatefulWidget {
+  @override
+  _SettlementPageState createState() => _SettlementPageState();
+}
+
+class _SettlementPageState extends State<SettlementPage> {
   final SettlementController controller = Get.put(SettlementController());
+
+  String selectedFilter = "3M"; // Default filter option
+
   final Map<String, String> symbolMap = {
     'Copper': 'CU',
     'Aluminium': 'Al',
@@ -86,122 +27,150 @@ class SettlementPage extends StatelessWidget {
     'Nasaac': 'Na',
     'Cobalt': 'Co',
   };
+
   @override
   Widget build(BuildContext context) {
-    var elementStyle=GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14,color: Colors.black54);
     return Scaffold(
-      appBar: AppBar(
-        title: _appBar(),
-        backgroundColor: ColorConstants.primeryColor.withOpacity(0.1),
-      ),
+
       backgroundColor: ColorConstants.backgroundColor,
       body: Obx(() {
-        if (controller.settlements.value.isEmpty) {
+        if (controller.settlements.isEmpty) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: LoadingPage(),
+            child: LoadingPage(cardSize: 70,),
           );
         }
-
-        return ListView.builder(
-          itemCount: controller.settlements.length,
-          itemBuilder: (context, index) {
-            var settlement = controller.settlements[index];
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(symbolMap[settlement.symbol].toString(), style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600)),
-                          Text(settlement.date.toString(), style: GoogleFonts.poppins(fontSize: 14)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  // _buildBidAskRow(settlement.symbol, settlement.date),
-                  // VerticalDivider(color: Colors.grey,),
-                  _buildBidAskRow(settlement.threeM.bid.toString(), settlement.threeM.ask.toString()),
-                  // VerticalDivider(color: Colors.grey,),
-                  _buildBidAskRow(settlement.cash.bid.toString(), settlement.cash.ask.toString()),
-
-                ],
-              ),
-            );
-          },
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildFilterButton(),
+            const SizedBox(height: 16),
+            Expanded(child: _buildSettlementTable()),
+          ],
         );
       }),
     );
   }
 
-  Widget _buildBidAskRow(String bid, String ask) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(bid.toString(), style: GoogleFonts.poppins(fontSize: 14)),
-            Text(ask.toString(), style: GoogleFonts.poppins(fontSize: 14)),
-          ],
+  Widget _buildFilterButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade400, width: 1), // Grey border
+          borderRadius: BorderRadius.circular(20), // Rounded border
+          color: Colors.transparent, // Transparent background
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+        child: DropdownButton<String>(
+          value: selectedFilter,
+          icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+          underline: const SizedBox(), // Remove underline
+          dropdownColor: Colors.white, // Dropdown background
+          items: ["3M", "Cash"].map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+              ),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            setState(() {
+              selectedFilter = newValue!;
+            });
+          },
         ),
       ),
     );
   }
-  Widget _appBar(){
-    var elementStyle=GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14,color: Colors.black54);
-    return Row(children: [
-      Expanded(child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        child: Column(
-          children: [
-            Text(textAlign: TextAlign.center,"", style: elementStyle),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(textAlign: TextAlign.center,"Syb", style: elementStyle),
-                Text(textAlign: TextAlign.center,"Date", style: elementStyle)
-              ],
-            ),
-          ],
-        ),
-      )),
-      Expanded(child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        child: Column(
-          children: [
-            Text(textAlign: TextAlign.center,"3M", style: elementStyle),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(textAlign: TextAlign.center,"bid", style: elementStyle),
-                Text(textAlign: TextAlign.center,"ask", style: elementStyle)
-              ],
-            ),
-          ],
-        ),
-      )),
-      Expanded(child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        child: Column(
-          children: [
-            Text(textAlign: TextAlign.center,"Cash", style: elementStyle),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(textAlign: TextAlign.center,"bid", style: elementStyle),
-                Text(textAlign: TextAlign.center,"ask", style: elementStyle)
-              ],
-            ),
-          ],
-        ),
-      )),
 
 
-    ],);
+
+
+  Widget _buildSettlementTable() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        width: MediaQuery.of(context).size.width ,
+        child: DataTable(
+          dataRowHeight: 56,
+          headingRowHeight: 48,
+          horizontalMargin: 16,
+          columnSpacing: 32,
+          headingRowColor: MaterialStateProperty.resolveWith(
+                  (states) => ColorConstants.primeryColor.withOpacity(0.1)),
+          dividerThickness: 0.5,
+          border: TableBorder(
+            horizontalInside: BorderSide(
+              width: 0.8,
+              color: Colors.grey.shade400,
+              style: BorderStyle.solid,
+            ),
+          ),
+          columns: _buildColumns(),
+          rows: controller.settlements.map((settlement) {
+            final bid = selectedFilter == "3M"
+                ? settlement.threeM.bid.toStringAsFixed(2)
+                : settlement.cash.bid.toStringAsFixed(2);
+            final ask = selectedFilter == "3M"
+                ? settlement.threeM.ask.toStringAsFixed(2)
+                : settlement.cash.ask.toStringAsFixed(2);
+            return _buildDataRow(settlement, bid, ask);
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  List<DataColumn> _buildColumns() {
+    return const [
+      DataColumn(
+        label: Text('Symbol', style: TextStyle(fontWeight: FontWeight.bold)),
+      ),
+      DataColumn(
+        label: Text('Date', style: TextStyle(fontWeight: FontWeight.bold)),
+      ),
+      DataColumn(
+        label: Text('Bid', style: TextStyle(fontWeight: FontWeight.bold)),
+      ),
+      DataColumn(
+        label: Text('Ask', style: TextStyle(fontWeight: FontWeight.bold)),
+      ),
+    ];
+  }
+
+  DataRow _buildDataRow(Settlement settlement, String bid, String ask) {
+    return DataRow(
+      cells: [
+        DataCell(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(symbolMap[settlement.symbol] ?? settlement.symbol,
+                style: GoogleFonts.poppins(fontSize: 14)),
+          ),
+        ),
+        DataCell(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(settlement.date,
+                style: GoogleFonts.poppins(fontSize: 14)),
+          ),
+        ),
+        DataCell(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(bid, style: GoogleFonts.poppins(fontSize: 14)),
+          ),
+        ),
+        DataCell(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(ask, style: GoogleFonts.poppins(fontSize: 14)),
+          ),
+        ),
+      ],
+    );
   }
 }

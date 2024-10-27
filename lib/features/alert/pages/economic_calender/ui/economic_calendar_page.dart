@@ -11,8 +11,8 @@ class EconomicCalendarPage extends StatefulWidget {
 class _EconomicCalendarPageState extends State<EconomicCalendarPage> {
 
   final controller=WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.disabled)
-  ..loadRequest(Uri.parse("https://www.mql5.com/en/economic-calendar"));
+  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+  ..loadRequest(Uri.parse("https://www.tradays.com/en/economic-calendar/widget?mode=2&amp;utm_source=www.tradays.com"));
   @override
   Widget build(BuildContext context) {
     return WebViewWidget(controller: controller);

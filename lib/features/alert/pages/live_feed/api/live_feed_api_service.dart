@@ -49,11 +49,11 @@ class LiveFeedApiService {
   //   }
   // }
   Future<List<dynamic>> fetchNews() async {
-    final String url = 'https://news-scrap.vercel.app/api/scrape';
+    const String url = 'https://rss.app/feeds/v1.1/2Cwgc09Wh8yPDuiw.json';
     try {
       final response = await BaseApiServices.dio.get(url);
       if (response.statusCode == 200) {
-        return response.data;
+        return response.data['items'];
       } else {
         throw Exception('Failed to load news');
       }
