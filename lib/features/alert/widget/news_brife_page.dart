@@ -17,7 +17,7 @@ class NewsBriefScreen extends StatelessWidget {
 
   Future<void> downloadAndOpenPDF(String url) async {
     // Request storage permission
-;
+
     if (await Permission.storage.request().isGranted) {
       Directory appDocDir = await getApplicationDocumentsDirectory();
       String filePath = '${appDocDir.path}/${url.split('/').last}';
@@ -90,11 +90,9 @@ class NewsBriefScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            Expanded(
-              child: Text(
-                news.content,
-                style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
-              ),
+            Text(
+              news.content,
+              style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400),
             ),
             if (news.pdfUrl != null && news.pdfUrl!.isNotEmpty) ...[
               SizedBox(height: 16),

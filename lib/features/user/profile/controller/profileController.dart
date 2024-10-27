@@ -34,6 +34,7 @@ class ProfilController{
 
   Future<void> onUpgradePlan()async{
     Print.p("onUpgrade Plan");
+    Get.snackbar("Comming Soon...", "");
   }
 
 

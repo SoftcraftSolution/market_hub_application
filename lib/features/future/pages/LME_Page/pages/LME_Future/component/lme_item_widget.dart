@@ -62,7 +62,7 @@ class LMEItemWidget extends StatelessWidget {
               isPriceNegative?Icon(Icons.arrow_drop_down, color: Colors.red,size: 30,):Icon(Icons.arrow_drop_up, color: Colors.green,size: 30),
             ],
           ),
-          SizedBox(height: 8),
+          // SizedBox(height: 8),
           Row(
             children: [
               Icon(Icons.access_time, size: 14, color: Colors.grey),

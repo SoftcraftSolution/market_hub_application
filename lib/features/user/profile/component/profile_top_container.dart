@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/utils/userDataCon.dart';
 
@@ -76,7 +77,7 @@ class ProfileTopContainer extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Benefits",style: GoogleFonts.poppins(fontSize: 18,fontWeight: FontWeight.w500,color: Colors.black.withOpacity(0.6)),),
+                        GestureDetector(onTap:(){customToast(msg: "Comming Soon..");}, child: Text("Benefits",style: GoogleFonts.poppins(fontSize: 18,fontWeight: FontWeight.w500,color: Colors.black.withOpacity(0.6)),)),
                         Icon(Icons.arrow_forward_ios_sharp)
                       ],
                     ),
