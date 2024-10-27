@@ -38,7 +38,7 @@ class AdminApprovalScreen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),
-                        child: Text(
+                        child: Text(textAlign: TextAlign.center,
                           "Your profile is under review",
                           style: TextStyleConstant.headerTextStyle,
                         ),
