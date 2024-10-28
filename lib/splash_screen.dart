@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 5),directUser);
+    Future.delayed(Duration(seconds: 3),directUser);
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
       body: Center(child: Image.asset("assets/splash_screeen_img/logoAnimated.gif",height: 260,),),

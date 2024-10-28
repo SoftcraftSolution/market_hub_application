@@ -18,7 +18,7 @@ class AlertPage extends StatelessWidget {
   AlertPage({super.key});
   var options = [
     "Technical Analysis",
-    "Self News",
+    "News",
     "Live Feed",
     "Economic calendar",
     "Circular"

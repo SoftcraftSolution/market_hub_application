@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
+import 'package:market_hub_application/features/watchlst/controller/watchlist_con.dart';
 import '../model/item_model.dart'; // Import your model
 
 class SpotItemCard extends StatelessWidget {
   final SpotItem item;
 
-  const SpotItemCard({Key? key, required this.item}) : super(key: key);
-
+   SpotItemCard({Key? key, required this.item}) : super(key: key);
+  var con=Get.find<WatchlistController>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,9 +30,16 @@ class SpotItemCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Icon(Icons.bookmark_border_rounded),
+                  Obx(
+                    ()=> GestureDetector(
+                      onTap: (){
+                        con.watchlistIds.value.contains(item.id)?con.removeItem(item.id):con.addItem(item.id);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: con.watchlistIds.value.contains(item.id)?Icon(Icons.bookmark):Icon(Icons.bookmark_border_rounded),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -51,45 +60,32 @@ class SpotItemCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child:Text(
-                  '', // Format the updatedAt date
-                  style: GoogleFonts.poppins(color: Colors.grey[700]),
-                ),
+              Row(
+                children: [
+                  Icon(Icons.access_time, size: 18, color: Colors.grey),
+                  SizedBox(width: 4),
+                  Text(
+                    " ${formatDate(item.updatedAt)}",
+                    style: GoogleFonts.poppins(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.w500,),
+                  ),
+                ],
               ),
               Text(
                 item.incrementPrice.contains("-")?item.incrementPrice:"+${item.incrementPrice}", // Format price to 2 decimal places
                 style: GoogleFonts.poppins(
-                  fontSize: 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: item.incrementPrice.contains("-")?Colors.red:Colors.green,
                 ),
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child:Text(
-                  'Last Updated: ${formatDate(item.updatedAt)}', // Format the updatedAt date
-                  style: GoogleFonts.poppins(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.w500,),
-                ),
-              ),
-              Text(
-                'Closing: \u20B9${item.lastPrice}', // Format price to 2 decimal places
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
-                ),
-              ),
-            ],
-          ),
+
 
           Divider(color: Colors.grey[400]), // Add a divider for separation
         ],
       ),
     );
   }
+
 }

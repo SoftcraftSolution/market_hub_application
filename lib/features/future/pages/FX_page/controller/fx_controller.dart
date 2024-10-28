@@ -40,7 +40,7 @@ class FXPageCon extends GetxController{
     fx_data.value=await FXApiServices().fetchFXData();
     // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
-    _timer = Timer.periodic(Duration(seconds: 1000), (_) async{
+    _timer = Timer.periodic(Duration(seconds: 10), (_) async{
       fx_data.value=await FXApiServices().fetchFXData();
     });
   }

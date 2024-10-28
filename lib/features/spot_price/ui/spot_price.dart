@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/spot_price/pages/base_matel_detail_page/ui/base_metal_page.dart';
+import 'package:market_hub_application/features/watchlst/controller/watchlist_con.dart';
 import 'package:market_hub_application/shared/widget/optionBar/list_option_without_border.dart';
 
 import '../controller/spot_price_con.dart';
@@ -10,9 +11,9 @@ import '../controller/spot_price_con.dart';
 class SpotPricePage extends StatelessWidget {
   SpotPricePage({super.key});
   var con = Get.put(SpotPriceCon());
-
   @override
   Widget build(BuildContext context) {
+    Get.put(WatchlistController());
     var elements = ["Base Metal", 'Steel', 'Minor Metal', 'BME (Bombay Metal Exchange)',];
     var metals = [
       "COPPER", "BRASS", "ALUMINIUM", "GUNMETAL", "ZINC",
