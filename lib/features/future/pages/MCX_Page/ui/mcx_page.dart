@@ -26,13 +26,13 @@ class McxPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: ListView.builder(
             padding: EdgeInsets.zero,
-            itemCount: mcxCon.data.value.length,
+            itemCount: mcxCon.mcxdata.value.length,
             itemBuilder: (context, index) {
-              if(mcxCon.data.value[index]['Symbol']=="googletag.cmd.push(function() { googletag.display('ad_content_middle_bottom_responsive'); });"){
+              if(mcxCon.mcxdata.value[index]['Symbol']=="googletag.cmd.push(function() { googletag.display('ad_content_middle_bottom_responsive'); });"){
                 return SizedBox();
               }
               return MCXItemWidget(
-                marketData: mcxCon.data.value[index],
+                marketData: mcxCon.mcxdata.value[index],
               );
             },
           ),
