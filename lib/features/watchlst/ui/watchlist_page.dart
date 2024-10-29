@@ -1,63 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
-import 'package:market_hub_application/features/spot_price/widget/sport_card.dart';
 import 'package:market_hub_application/features/watchlst/controller/watchlist_con.dart';
-import 'package:market_hub_application/features/watchlst/ui/empty_watchlist.dart';
-import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
+import 'package:market_hub_application/features/watchlst/page/spot_watchlist/ui/spot_watchlist_page.dart';
+import 'package:market_hub_application/shared/components/test_screen.dart';
 
-import '../../spot_price/model/item_model.dart';
+import '../../../shared/widget/optionBar/list_option_without_border.dart';
 
-class WatchlistPage extends StatefulWidget {
-  @override
-  _WatchlistPageState createState() => _WatchlistPageState();
-}
-
-class _WatchlistPageState extends State<WatchlistPage> {
-  // Initialize WatchlistController
-  final WatchlistController con = Get.put(WatchlistController());
-
+class WatchlistPage extends StatelessWidget {
+   WatchlistPage({super.key});
+var con=Get.put(WatchlistCon());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: ColorConstants.backgroundColor,
-        title: Text(
-          'WatchList',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w700),
+      body:
+      SafeArea(
+        child: Obx(
+          ()=> Column(children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ListOptionWithoutBorder(elements: ["Future","Spot Price"],onIndexChanged: WatchlistPageIndexChange().onIndexChange,controller: con,),
+            ),
+            Expanded(child: con.pageIndex.value==0?TestScreen("Future Watchlist"):SpotWatchlistPage()),
+          ],),
         ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Obx(() {
-          // Display loading state if the watchlist is empty
-          // if (con.watchlist.isEmpty && con.isLoading.value) {
-          //   return LoadingPage();
-          // }
-          if (con.watchlist.isEmpty) {
-            return EmptyWatchlist();
-          }
-
-          return ReorderableListView(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            children: [
-              for (final item in con.watchlist)
-              // Use ValueKey for unique identification in ReorderableListView
-                SpotItemCard(key: ValueKey(item.id), item: item),
-            ],
-            onReorder: (int oldIndex, int newIndex) {
-              setState(() {
-                if (newIndex > oldIndex) newIndex -= 1;
-                final SpotItem item = con.watchlist.removeAt(oldIndex);
-                con.watchlist.insert(newIndex, item);
-              });
-            },
-          );
-        }),
-      ),
-    );
+      )
+      ,);
   }
 }

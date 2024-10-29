@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import '../../../core/api/api_services.dart';
-import '../../../core/constants/api_constant.dart';
-import '../../../core/utils/userDataCon.dart';
-import '../../../core/utils/utils.dart';
-import '../../spot_price/model/item_model.dart';
+import '../../../../../core/api/api_services.dart';
+import '../../../../../core/constants/api_constant.dart';
+import '../../../../../core/utils/userDataCon.dart';
+import '../../../../../core/utils/utils.dart';
+import '../../../../spot_price/model/item_model.dart';
 
-class WatchListApiService {
+class SpotWatchListApiService {
   final String _baseUrl = ApiConstants.baseUrl;
 
   Future<List<SpotItem>> fetchWatchlist() async {

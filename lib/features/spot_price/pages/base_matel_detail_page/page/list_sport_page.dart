@@ -19,12 +19,15 @@ class SpotListPage extends StatelessWidget {
         }
 
         // If the data is loaded, show the filtered items
-        return ListView.builder(
-          itemCount: controller.filteredItems.length,
-          itemBuilder: (context, index) {
-            final item = controller.filteredItems[index];
-            return SpotItemCard(item: item); // Use the SpotItemCard widget
-          },
+        return Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: ListView.builder(
+            itemCount: controller.filteredItems.length,
+            itemBuilder: (context, index) {
+              final item = controller.filteredItems[index];
+              return SpotItemCard(item: item); // Use the SpotItemCard widget
+            },
+          ),
         );
       });
 

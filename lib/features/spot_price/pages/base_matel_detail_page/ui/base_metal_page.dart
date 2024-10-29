@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/spot_price/pages/base_matel_detail_page/controller/base_metal_con.dart';
 import 'package:market_hub_application/features/spot_price/pages/base_matel_detail_page/page/list_sport_page.dart';
@@ -39,6 +40,28 @@ class _BaseMetalPageState extends State<BaseMetalPage> {
           children: [
             Obx(()=> topOptionBar()),
             Obx(()=> secOptionBar()),
+            GestureDetector(
+              onTap: (){
+                con.showCityFilterBottomSheet();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10,horizontal: 16),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(color: Colors.grey)),
+                child: Row(
+                  children: [
+
+
+                    Text("Filter",style: GoogleFonts.poppins(),),
+                    SizedBox(width: 10,),
+                    Icon(Icons.filter_list,color: Colors.grey,),
+                  ],
+                ),
+                )
+              ],),
+            ),
             Expanded(child: SpotListPage())
         ],),
       ),

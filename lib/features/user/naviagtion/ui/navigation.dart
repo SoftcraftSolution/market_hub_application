@@ -9,9 +9,10 @@ import 'package:market_hub_application/features/alert/ui/alert_page.dart';
 import 'package:market_hub_application/features/future/ui/future_page.dart';
 import 'package:market_hub_application/features/home/ui/home_page.dart';
 import 'package:market_hub_application/features/spot_price/ui/spot_price.dart';
-import 'package:market_hub_application/features/watchlst/ui/watchlist_page.dart';
+import 'package:market_hub_application/features/watchlst/page/spot_watchlist/ui/spot_watchlist_page.dart';
 
 
+import '../../../watchlst/ui/watchlist_page.dart';
 import '../controller/navigation_controller.dart';
 
 class Home extends StatelessWidget {
