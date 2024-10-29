@@ -14,7 +14,7 @@ class SpotPricePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SpotWatchlistController());
-    var elements = ["Base Metal", 'Steel', 'Minor Metal', 'BME (Bombay Metal Exchange)',];
+    var elements = ["Base Metal", 'Steel', 'Minor Metal', 'BME',];
     var metals = [
       "COPPER", "BRASS", "ALUMINIUM", "GUNMETAL", "ZINC",
       "LEAD", "NICKEL CATHODE", "TIN",

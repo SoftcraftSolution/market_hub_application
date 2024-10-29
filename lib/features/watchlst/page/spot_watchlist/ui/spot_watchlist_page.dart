@@ -6,7 +6,6 @@ import 'package:market_hub_application/features/spot_price/widget/sport_card.dar
 import 'package:market_hub_application/features/watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
 import 'package:market_hub_application/features/watchlst/page/empty_watchlist/empty_watchlist.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
-
 import '../../../../spot_price/model/item_model.dart';
 
 class SpotWatchlistPage extends StatefulWidget {
@@ -15,42 +14,60 @@ class SpotWatchlistPage extends StatefulWidget {
 }
 
 class _SpotWatchlistPageState extends State<SpotWatchlistPage> {
-  // Initialize WatchlistController
   final SpotWatchlistController con = Get.put(SpotWatchlistController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
+      body: Obx(() {
+        if (con.watchlist.isEmpty) {
+          return EmptyWatchlist(); // Show empty state if watchlist is empty
+        }
 
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Obx(() {
-          // Display loading state if the watchlist is empty
-          // if (con.watchlist.isEmpty && con.isLoading.value) {
-          //   return LoadingPage();
-          // }
-          if (con.watchlist.isEmpty) {
-            return EmptyWatchlist();
-          }
+        final groupedData = con.groupWatchlistByCategory();
 
-          return ReorderableListView(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            children: [
-              for (final item in con.watchlist)
-              // Use ValueKey for unique identification in ReorderableListView
-                SpotItemCard(key: ValueKey(item.id), item: item),
-            ],
-            onReorder: (int oldIndex, int newIndex) {
-              setState(() {
-                if (newIndex > oldIndex) newIndex -= 1;
-                final SpotItem item = con.watchlist.removeAt(oldIndex);
-                con.watchlist.insert(newIndex, item);
-              });
-            },
-          );
-        }),
-      ),
+        return ListView.builder(
+          itemCount: groupedData.length,
+          itemBuilder: (context, index) {
+            final key = groupedData.keys.elementAt(index); // Group key
+            final items = groupedData[key]!; // List of items for this group
+
+            return ExpansionTile(
+              key: ValueKey(key),
+              title:
+                  Row(children: [
+                    Text("${key['category']} ${key['type']}",
+                        style: GoogleFonts.poppins(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                    ),
+                    Text("(${key['subcategory']})",
+                        style: GoogleFonts.poppins(
+                          color: ColorConstants.primeryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                    )
+                  ],),
+              // Text(
+              //   '${key['category']} - ${key['type']} - ${key['subcategory']}',
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 18,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              children: items.map((item) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SpotItemCard(key: ValueKey(item.id), item: item),
+                );
+              }).toList(),
+            );
+          },
+        );
+      }),
     );
   }
 }

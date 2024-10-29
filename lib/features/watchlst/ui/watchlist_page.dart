@@ -20,7 +20,7 @@ var con=Get.put(WatchlistCon());
           ()=> Column(children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ListOptionWithoutBorder(elements: ["Future","Spot Price"],onIndexChanged: WatchlistPageIndexChange().onIndexChange,controller: con,),
+              child: ListOptionWithoutBorder(elements: ["Future Price","Spot Price"],onIndexChanged: WatchlistPageIndexChange().onIndexChange,controller: con,),
             ),
             Expanded(child: con.pageIndex.value==0?TestScreen("Future Watchlist"):SpotWatchlistPage()),
           ],),

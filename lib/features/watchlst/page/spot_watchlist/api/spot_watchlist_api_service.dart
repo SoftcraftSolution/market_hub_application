@@ -16,7 +16,7 @@ class SpotWatchListApiService {
       final response = await BaseApiServices.dio.get(url);
 
       if (response.statusCode == 200) {
-        List<dynamic> data = response.data['baseMetals'];
+        List<dynamic> data = response.data["watchlist"]['baseMetals'];
         return data.map((item) => SpotItem.fromJson(item)).toList();
       } else {
         Get.snackbar('Error', 'Failed to fetch watchlist: ${response.statusCode}');
@@ -34,7 +34,7 @@ class SpotWatchListApiService {
     final url = '$_baseUrl/user/add-watchlist';
     final data = {
       'email': email,
-      'baseMetalId': [baseMetalId],
+      'baseMetalIds': [baseMetalId],
     };
 
     try {
