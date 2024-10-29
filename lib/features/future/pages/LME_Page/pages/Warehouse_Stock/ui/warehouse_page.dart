@@ -17,11 +17,12 @@ class WarehousePage extends StatelessWidget {
         title: Row(children: [
           Expanded(child: Text(textAlign: TextAlign.center,"Syb", style: elementStyle)),
           Expanded(child: Text(textAlign: TextAlign.center,"Open", style: elementStyle)),
-          Expanded(child: Text(textAlign: TextAlign.center,"Close", style: elementStyle)),
-          Expanded(child: Text(textAlign: TextAlign.center,"Live", style: elementStyle)),
-          Expanded(child: Text(textAlign: TextAlign.center,"Can", style: elementStyle)),
+          // Expanded(child: Text(textAlign: TextAlign.center,"Close", style: elementStyle)),
+          // Expanded(child: Text(textAlign: TextAlign.center,"Live", style: elementStyle)),
+          // Expanded(child: Text(textAlign: TextAlign.center,"Can", style: elementStyle)),
           Expanded(child: Text(textAlign: TextAlign.center,"Chn", style: elementStyle)),
           Expanded(child: Text(textAlign: TextAlign.center,"Chn%", style:elementStyle)),
+          Expanded(child: Text(textAlign: TextAlign.center," ", style:elementStyle)),
 
         ],),
         backgroundColor: ColorConstants.primeryColor.withOpacity(0.1),
@@ -40,26 +41,37 @@ class WarehousePage extends StatelessWidget {
             return Column(
               children: [
                 // SizedBox(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 16),
-                  child: Row(
+                ExpansionTile(
+                  title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
                       Expanded(child: Text(stock.symbol, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14,),overflow: TextOverflow.ellipsis,)),
                       SizedBox(width: 5,),
                       Expanded(child: Text(textAlign: TextAlign.center,stock.open.toString(), style: elementStyle)),
-                      Expanded(child: Text(textAlign: TextAlign.center,stock.close.toString(), style: elementStyle)),
-                      Expanded(child: Text(textAlign: TextAlign.center,stock.live.toString(), style: elementStyle)),
-                      Expanded(child: Text(textAlign: TextAlign.center,stock.cancel.toString(), style:elementStyle)),
+                      // Expanded(child: Text(textAlign: TextAlign.center,stock.close.toString(), style: elementStyle)),
+                      // Expanded(child: Text(textAlign: TextAlign.center,stock.live.toString(), style: elementStyle)),
+                      // Expanded(child: Text(textAlign: TextAlign.center,stock.cancel.toString(), style:elementStyle)),
                       Expanded(child: Text(textAlign: TextAlign.center,(stock.change).toString(), style: elementStyle)),
                       Expanded(child: Text(textAlign: TextAlign.center,"${((stock.percentageChange*100).round()/100).toString()}%", style: elementStyle)),
 
                     ],
                   ),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: [
+                          Expanded(child: Text(textAlign: TextAlign.center,stock.close.toString()+" (Close)", style: elementStyle)),
+                          Expanded(child: Text(textAlign: TextAlign.center,stock.live.toString()+" (Live)", style: elementStyle)),
+                          Expanded(child: Text(textAlign: TextAlign.center,stock.cancel.toString()+" (Cancel)", style:elementStyle)),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
                 // SizedBox(height: 16,),
-                Divider()
+                // Divider()
               ],
             );
           },

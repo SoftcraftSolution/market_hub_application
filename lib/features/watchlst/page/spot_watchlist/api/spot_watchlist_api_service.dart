@@ -34,7 +34,7 @@ class SpotWatchListApiService {
     final url = '$_baseUrl/user/add-watchlist';
     final data = {
       'email': email,
-      'baseMetalId': baseMetalId,
+      'baseMetalId': [baseMetalId],
     };
 
     try {

@@ -62,10 +62,7 @@ class _EconomicCalendarPageState extends State<EconomicCalendarPage> {
         children: [
           WebViewWidget(controller: controller), // The WebView content
           if (isLoading) // Display loader only while loading
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: LoadingPage(),
-            )
+            LoadingPage()
         ],
       ),
     );

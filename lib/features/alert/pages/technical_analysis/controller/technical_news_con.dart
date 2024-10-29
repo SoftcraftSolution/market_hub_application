@@ -23,7 +23,7 @@ class TechnicalNewsCon extends GetxController {
     startFetchingData(); // Start periodic fetching of news data
     everAll([homeCon.pageIndex,alertCon.pageIndex],
             (_)async{
-          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==0){
+          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==2){
             await startFetchingData();
           }else{
             stopFetchingData();

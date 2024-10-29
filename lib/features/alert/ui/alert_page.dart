@@ -17,9 +17,9 @@ import '../widget/news_item.dart';
 class AlertPage extends StatelessWidget {
   AlertPage({super.key});
   var options = [
-    "Technical Analysis",
-    "News",
     "Live Feed",
+    "News",
+    "Technical Analysis",
     "Economic calendar",
     "Circular"
   ];
@@ -39,7 +39,7 @@ class AlertPage extends StatelessWidget {
                 child: Obx(
                   ()=> Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                      child: controller.pageIndex.value==0?TechnicalAnalysisPage():controller.pageIndex.value==1?SelfNewsPage():controller.pageIndex.value==2?LiveFeedPage():controller.pageIndex.value==3?EconomicCalendarPage():CirculerPage()
+                      child: controller.pageIndex.value==0?LiveFeedPage():controller.pageIndex.value==1?SelfNewsPage():controller.pageIndex.value==2?TechnicalAnalysisPage():controller.pageIndex.value==3?EconomicCalendarPage():CirculerPage()
                   ),
                 )),
         
