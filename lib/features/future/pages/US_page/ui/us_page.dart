@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/future/pages/MCX_Page/controller/mcx_controller.dart';
+import 'package:market_hub_application/features/future/pages/US_page/widget/usItemWidget.dart';
 import '../../../../../shared/components/loading_page/ui/loading_page.dart';
 import '../../MCX_Page/component/mcx_item_widget.dart';
 
@@ -42,7 +43,7 @@ class UsPage extends StatelessWidget {
                       return const SizedBox();
                     }
 
-                    return MCXItemWidget(
+                    return USItemWidget(
                       marketData: marketData,
                     );
                   },

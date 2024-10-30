@@ -5,8 +5,6 @@ import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/spot_price/widget/sport_card.dart';
 import 'package:market_hub_application/features/watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
 import 'package:market_hub_application/features/watchlst/page/empty_watchlist/empty_watchlist.dart';
-import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
-import '../../../../spot_price/model/item_model.dart';
 
 class SpotWatchlistPage extends StatefulWidget {
   @override
@@ -33,35 +31,41 @@ class _SpotWatchlistPageState extends State<SpotWatchlistPage> {
             final key = groupedData.keys.elementAt(index); // Group key
             final items = groupedData[key]!; // List of items for this group
 
+            // Split the key to display it properly in the UI
+            final keyParts = key.toString().split('-');
+            final category = keyParts[0];
+            final type = keyParts[1];
+            final subcategory = keyParts[2];
+
             return ExpansionTile(
               key: ValueKey(key),
-              title:
-                  Row(children: [
-                    Text("${key['category']} ${key['type']}",
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+              title: Row(
+                children: [
+                  Text(
+                    "$category $type",
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text("(${key['subcategory']})",
-                        style: GoogleFonts.poppins(
-                          color: ColorConstants.primeryColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                    )
-                  ],),
-              // Text(
-              //   '${key['category']} - ${key['type']} - ${key['subcategory']}',
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    "($subcategory)",
+                    style: GoogleFonts.poppins(
+                      color: ColorConstants.primeryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               children: items.map((item) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SpotItemCard(key: ValueKey(item.id), item: item),
+                  child: SpotItemCard(
+                    key: ValueKey(item.id),
+                    item: item,
+                  ),
                 );
               }).toList(),
             );

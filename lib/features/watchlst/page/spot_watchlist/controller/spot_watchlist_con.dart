@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
-
 import '../../../../../core/utils/utils.dart';
 import '../../../../spot_price/model/item_model.dart';
 import '../../../../user/naviagtion/controller/navigation_controller.dart';
@@ -30,31 +28,7 @@ class SpotWatchlistController extends GetxController {
       }
     });
   }
-  Future<void> addItem(String baseMetalId) async {
-    customToast(msg: "Loading...");
-    try {
-      final success = await _apiService.addItemToWatchlist(baseMetalId);
-      if (success) {
 
-        await fetchWatchlistItems(); // Refresh the lists on success
-      }
-    } catch (e) {
-      Print.p("Error adding item to watchlist: $e"); // Log errors if any
-    }
-  }
-
-  // Remove an item from the watchlist and refresh lists
-  Future<void> removeItem(String id) async {
-    customToast(msg: "Loading...");
-    try {
-      final success = await _apiService.deleteItemFromWatchlist(id);
-      if (success) {
-        await fetchWatchlistItems(); // Refresh the lists on success
-      }
-    } catch (e) {
-      Print.p("Error removing item from watchlist: $e"); // Log errors if any
-    }
-  }
   Future<void> startFetchingData() async {
     Print.p("Started fetching watchlist data");
     _timer?.cancel();
@@ -83,16 +57,37 @@ class SpotWatchlistController extends GetxController {
     }
   }
 
-  // Method to group the watchlist items by category, type, and subcategory
-  Map<Map<String, String>, List<SpotItem>> groupWatchlistByCategory() {
-    Map<Map<String, String>, List<SpotItem>> groupedData = {};
+  Future<void> addItem(String baseMetalId) async {
+    customToast(msg: "Loading...");
+    try {
+      final success = await _apiService.addItemToWatchlist(baseMetalId);
+      if (success) {
+        await fetchWatchlistItems(); // Refresh the lists on success
+      }
+    } catch (e) {
+      Print.p("Error adding item to watchlist: $e");
+    }
+  }
+
+  Future<void> removeItem(String id) async {
+    customToast(msg: "Loading...");
+    try {
+      final success = await _apiService.deleteItemFromWatchlist(id);
+      if (success) {
+        await fetchWatchlistItems(); // Refresh the lists on success
+      }
+    } catch (e) {
+      Print.p("Error removing item from watchlist: $e");
+    }
+  }
+
+  // Group the watchlist items by category, type, and subcategory
+  Map<String, List<SpotItem>> groupWatchlistByCategory() {
+    Map<String, List<SpotItem>> groupedData = {};
 
     for (var item in watchlist) {
-      final key = {
-        'category': item.category,
-        'type': item.type,
-        'subcategory': item.subcategory,
-      };
+      // Create a unique key for grouping (category-type-subcategory)
+      String key = "${item.category}-${item.type}-${item.subcategory}";
 
       if (!groupedData.containsKey(key)) {
         groupedData[key] = [];
@@ -102,4 +97,5 @@ class SpotWatchlistController extends GetxController {
 
     return groupedData;
   }
+
 }

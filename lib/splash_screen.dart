@@ -18,13 +18,11 @@ import 'features/user/naviagtion/ui/navigation.dart';
 import 'features/user/registration/ui/registration.dart';
 
 class SplashScreen extends StatelessWidget {
-   SplashScreen({super.key}){
-
-  }
+   SplashScreen({super.key}){}
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 3),directUser);
+    Future.delayed(Duration(seconds: 2),directUser);
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
       body: Center(child: Image.asset("assets/splash_screeen_img/logoAnimated.gif",height: 260,),),
@@ -32,6 +30,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   void directUser()async{
+
     bool isApproved=false;
     bool isInProcess=false;
     UserDataController.userDetail=await WrapOverHive.getUserData();
@@ -46,4 +45,6 @@ class SplashScreen extends StatelessWidget {
      Print.p("in navigateTo method");
      Get.off(AdminApprovalScreen());
   }
+
+
 }

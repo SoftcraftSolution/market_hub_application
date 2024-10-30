@@ -24,13 +24,16 @@ class ShfePage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: LoadingPage(),
         ):
-        ListView.builder(
-          itemCount: shfeCon.data.value.length,
-          itemBuilder: (context, index) {
-            return SHFECard(
-              price: shfeCon.data.value[index],
-            );
-          },
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: ListView.builder(
+            itemCount: shfeCon.data.value.length,
+            itemBuilder: (context, index) {
+              return SHFECard(
+                price: shfeCon.data.value[index],
+              );
+            },
+          ),
         )
         ),
       ),

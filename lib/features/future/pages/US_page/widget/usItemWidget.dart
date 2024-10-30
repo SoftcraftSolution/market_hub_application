@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:market_hub_application/features/future/pages/SHFE_page/model/shfe_model.dart';
 
-class SHFECard extends StatelessWidget {
-  final SHFE_model price;
+class USItemWidget extends StatelessWidget {
+  final Map<String, dynamic> marketData;
 
-  const SHFECard({Key? key, required this.price}) : super(key: key);
+  USItemWidget({required this.marketData});
 
   @override
   Widget build(BuildContext context) {
-    bool isPriceNegative = price.change.startsWith('-');
-
-
-
+    bool isPriceNegative = marketData['Change'].startsWith('-');
 
     return Container(
       decoration: BoxDecoration(
@@ -35,7 +31,7 @@ class SHFECard extends StatelessWidget {
             const SizedBox(height: 10),
             _buildPriceSection(isPriceNegative),
             const SizedBox(height: 10),
-            Divider(color: Colors.grey.shade300),
+            Divider(),
           ],
         ),
       ),
@@ -53,10 +49,10 @@ class SHFECard extends StatelessWidget {
               SizedBox(
                 width: 100,
                 child: Text(
-                  price.description,
+                  (marketData['Symbol'] ?? 'N/A').toString().replaceAll("US", "").trim(),
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 17,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -65,15 +61,16 @@ class SHFECard extends StatelessWidget {
               Icon(
                 isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                 color: isPriceNegative ? Colors.red : Colors.green,
-                size: 30,
+                size: 26,
               ),
             ],
           ),
         ),
+
         Expanded(
           child: Text(
-            textAlign: TextAlign.center,
-            price.price,
+            textAlign: TextAlign.end,
+            marketData['Last'] ?? 'N/A',
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -81,7 +78,7 @@ class SHFECard extends StatelessWidget {
             ),
           ),
         ),
-        _buildDetail("${price.high} (High)", Colors.green),
+
       ],
     );
   }
@@ -96,7 +93,7 @@ class SHFECard extends StatelessWidget {
               Icon(Icons.access_time, size: 14, color: Colors.grey),
               const SizedBox(width: 4),
               Text(
-                "${DateTime.now().toLocal().toString().split(' ')[1].split('.')[0]}",
+                "${DateTime.now().toString().split(' ')[1].split('.')[0]}",
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: Colors.grey,
@@ -106,10 +103,10 @@ class SHFECard extends StatelessWidget {
           ),
         ),
         _buildDetail(
-          "${price.change} (chg)",
+          "${marketData['Change'] == "" ? 'N/A' : marketData['Change']} (${marketData['ChangePercent'] ?? 'N/A'})",
           isPriceNegative ? Colors.red : Colors.green,
         ),
-        _buildDetail("${price.low} (Low)", const Color(0xFFEF5B4F)),
+
       ],
     );
   }
@@ -117,7 +114,7 @@ class SHFECard extends StatelessWidget {
   Widget _buildDetail(String text, Color color) {
     return Expanded(
       child: Text(
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.end,
         text,
         style: GoogleFonts.poppins(
           fontSize: 14,

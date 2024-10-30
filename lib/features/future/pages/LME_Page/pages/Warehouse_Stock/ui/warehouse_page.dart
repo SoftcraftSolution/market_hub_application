@@ -17,12 +17,7 @@ class WarehousePage extends StatelessWidget {
         title: Row(children: [
           Expanded(child: Text(textAlign: TextAlign.center,"Syb", style: elementStyle)),
           Expanded(child: Text(textAlign: TextAlign.center,"Open", style: elementStyle)),
-          // Expanded(child: Text(textAlign: TextAlign.center,"Close", style: elementStyle)),
-          // Expanded(child: Text(textAlign: TextAlign.center,"Live", style: elementStyle)),
-          // Expanded(child: Text(textAlign: TextAlign.center,"Can", style: elementStyle)),
-          Expanded(child: Text(textAlign: TextAlign.center,"Chn", style: elementStyle)),
-          Expanded(child: Text(textAlign: TextAlign.center,"Chn%", style:elementStyle)),
-          Expanded(child: Text(textAlign: TextAlign.center," ", style:elementStyle)),
+          Expanded(child: Text(textAlign: TextAlign.center,"Chn(Chn%)", style: elementStyle)),
 
         ],),
         backgroundColor: ColorConstants.primeryColor.withOpacity(0.1),
@@ -52,19 +47,19 @@ class WarehousePage extends StatelessWidget {
                       // Expanded(child: Text(textAlign: TextAlign.center,stock.close.toString(), style: elementStyle)),
                       // Expanded(child: Text(textAlign: TextAlign.center,stock.live.toString(), style: elementStyle)),
                       // Expanded(child: Text(textAlign: TextAlign.center,stock.cancel.toString(), style:elementStyle)),
-                      Expanded(child: Text(textAlign: TextAlign.center,(stock.change).toString(), style: elementStyle)),
-                      Expanded(child: Text(textAlign: TextAlign.center,"${((stock.percentageChange*100).round()/100).toString()}%", style: elementStyle)),
+                      Expanded(child: Text(textAlign: TextAlign.center,"${(stock.change).toString()} (${((stock.percentageChange*100).round()/100).toString()}%)", style: elementStyle)),
+                      // Expanded(child: Text(textAlign: TextAlign.center,"${((stock.percentageChange*100).round()/100).toString()}%", style: elementStyle)),
 
                     ],
                   ),
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                       child: Row(
                         children: [
-                          Expanded(child: Text(textAlign: TextAlign.center,stock.close.toString()+" (Close)", style: elementStyle)),
-                          Expanded(child: Text(textAlign: TextAlign.center,stock.live.toString()+" (Live)", style: elementStyle)),
-                          Expanded(child: Text(textAlign: TextAlign.center,stock.cancel.toString()+" (Cancel)", style:elementStyle)),
+                          Expanded(child: Text(stock.close.toString()+" (Close)", style: elementStyle)),
+                          Expanded(child: Text(stock.live.toString()+" (Live)", style: elementStyle)),
+                          Expanded(child: Text(stock.cancel.toString()+" (Cancel)", style:elementStyle)),
                         ],
                       ),
                     )

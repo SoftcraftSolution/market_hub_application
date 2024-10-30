@@ -68,7 +68,7 @@ class LMEItemWidget extends StatelessWidget {
               Icon(Icons.access_time, size: 14, color: Colors.grey),
               SizedBox(width: 4),
               Text(
-                "${DateTime.now().toLocal().toString().split(' ')[1].split(".")[0]}",
+                "${DateTime.now().toString().split(' ')[1].split(".")[0]}",
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: Colors.grey,
@@ -80,7 +80,6 @@ class LMEItemWidget extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildPriceSection(BuildContext context) {
     // Check if the percentage change is positive or negative
 
