@@ -5,7 +5,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/models/userdetail.dart';
 import 'splash_screen.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,9 @@ void main() async{
     statusBarIconBrightness: Brightness.dark, // Brightness for icons (light or dark)
     statusBarBrightness: Brightness.dark, // For iOS (optional)
   ));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await Hive.initFlutter();
    Hive.registerAdapter(UserDetailAdapter());
   // Hive.registerAdapter(UserDetailAdapter());
