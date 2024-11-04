@@ -156,82 +156,84 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: ColorConstants.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                Image.asset(
-                  "assets/splash_screeen_img/logo.png",
-                  height: 120,
-                  width: 120,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 26),
-                  child: Text(
-                    "Welcome Back",
-                    style: GoogleFonts.poppins(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                    ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Image.asset(
+                    "assets/splash_screeen_img/logo.png",
+                    height: 120,
+                    width: 120,
                   ),
-                ),
-                Icon(Icons.lock, size: 46, color: Color(0xff1918BC)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 26),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 26),
                     child: Text(
-                      textAlign: TextAlign.center,
-                      "Please enter your 4 Digit PIN to Login",
+                      "Welcome Back",
                       style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        color: Color(0xff646464),
+                        fontSize: 26,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 60),
-              child: OtpPinField(
-                onChange: (x){},
-                fieldHeight: 60,
-                fieldWidth: 50,
-                autoFillEnable: false,
-                textInputAction: TextInputAction.done,
-                onSubmit: (text) async {
-                  await checkPin(text);
-                },
-                otpPinFieldInputType: OtpPinFieldInputType.password,
-                otpPinFieldStyle: OtpPinFieldStyle(
-                  defaultFieldBorderColor: Colors.grey,
-                  activeFieldBorderColor: Colors.black,
-                ),
-                maxLength: 4,
-                showCursor: true,
-                cursorColor: Colors.black,
-                cursorWidth: 1,
-                mainAxisAlignment: MainAxisAlignment.center,
+                  Icon(Icons.lock, size: 46, color: Color(0xff1918BC)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 26),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "Please enter your 4 Digit PIN to Login",
+                        style: GoogleFonts.poppins(
+                          fontSize: 18,
+                          color: Color(0xff646464),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            LoginButtomLine(),
-            GestureDetector(
-              onTap: onChangePin,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  'Forget PIN',
-                  style: GoogleFonts.poppins(
-                    color: Color(0xff1918BC),
-                    fontSize: 16,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 60),
+                child: OtpPinField(
+                  onChange: (x){},
+                  fieldHeight: 60,
+                  fieldWidth: 50,
+                  autoFillEnable: false,
+                  textInputAction: TextInputAction.done,
+                  onSubmit: (text) async {
+                    await checkPin(text);
+                  },
+                  otpPinFieldInputType: OtpPinFieldInputType.password,
+                  otpPinFieldStyle: OtpPinFieldStyle(
+                    defaultFieldBorderColor: Colors.grey,
+                    activeFieldBorderColor: Colors.black,
+                  ),
+                  maxLength: 4,
+                  showCursor: true,
+                  cursorColor: Colors.black,
+                  cursorWidth: 1,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+              ),
+              LoginButtomLine(),
+              GestureDetector(
+                onTap: onChangePin,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Forget PIN',
+                    style: GoogleFonts.poppins(
+                      color: Color(0xff1918BC),
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

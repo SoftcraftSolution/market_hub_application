@@ -71,10 +71,10 @@ class FXPageCon extends GetxController {
   // Filter and sort the fetched data based on the desired symbols
   List<FXModel> _filterAndSortData(List<FXModel> data) {
     return data
-        .where((item) => desiredSymbols.contains(item.symbol.split('  ')[1]))  // Filter
+        .where((item) => desiredSymbols.contains(item.symbol))  // Filter
         .toList()
       ..sort((a, b) => desiredSymbols
-          .indexOf(a.symbol.split('  ')[1])
-          .compareTo(desiredSymbols.indexOf(b.symbol.split('  ')[1])));  // Sort
+          .indexOf(a.symbol)
+          .compareTo(desiredSymbols.indexOf(b.symbol)));  // Sort
   }
 }
