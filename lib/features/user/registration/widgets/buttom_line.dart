@@ -25,6 +25,6 @@ class ButtomLine extends StatelessWidget {
                 text: 'Login',
                 style: GoogleFonts.poppins(color: Colors.blue, fontSize: 16)),
           ])),
-    );;
+    );
   }
 }

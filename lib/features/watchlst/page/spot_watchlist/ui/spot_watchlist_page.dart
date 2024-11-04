@@ -12,14 +12,14 @@ class SpotWatchlistPage extends StatefulWidget {
 }
 
 class _SpotWatchlistPageState extends State<SpotWatchlistPage> {
-  final SpotWatchlistController con = Get.put(SpotWatchlistController());
+  final SpotWatchlistController con = Get.find<SpotWatchlistController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstants.backgroundColor,
       body: Obx(() {
-        if (con.watchlist.isEmpty) {
+        if (con.spotWatchList.isEmpty) {
           return EmptyWatchlist(); // Show empty state if watchlist is empty
         }
 
@@ -39,25 +39,28 @@ class _SpotWatchlistPageState extends State<SpotWatchlistPage> {
 
             return ExpansionTile(
               key: ValueKey(key),
-              title: Row(
-                children: [
-                  Text(
-                    "$category $type",
-                    style: GoogleFonts.poppins(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              title: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Text(
+                      "$category $type",
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "($subcategory)",
-                    style: GoogleFonts.poppins(
-                      color: ColorConstants.primeryColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(width: 8),
+                    Text(
+                      "($subcategory)",
+                      style: GoogleFonts.poppins(
+                        color: ColorConstants.primeryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               children: items.map((item) {
                 return Padding(

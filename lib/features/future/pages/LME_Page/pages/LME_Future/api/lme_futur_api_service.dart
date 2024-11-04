@@ -27,6 +27,7 @@ class LMEFutureApiService {
           return metalAbbr.containsKey(metal['name']);
         }).map((metal) {
           return {
+            "_id":metal['_id'],
             'name': metalAbbr[metal['name']],
             'latestPrice': metal['latestPrice'],
             'riseFall': metal['riseFall'],

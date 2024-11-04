@@ -58,7 +58,7 @@ class FXPage extends StatelessWidget {
         child: ListView.builder(
           itemCount: fxCon.fxData.length,
           itemBuilder: (context, index) {
-            return FXCard(price: fxCon.fxData[index]);
+            return FXCard(fxData: fxCon.fxData[index]);
           },
         ),
       );

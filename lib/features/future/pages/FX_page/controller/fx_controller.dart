@@ -13,7 +13,7 @@ class FXPageCon extends GetxController {
   var futureCon = Get.find<FutureController>();
 
   // List of desired symbols in the desired order
-  final List<String> desiredSymbols = [
+  final List<String> desiredName = [
     "USD/INR",
     "DOLLAR INDEX",
     "EUR/USD",
@@ -71,10 +71,10 @@ class FXPageCon extends GetxController {
   // Filter and sort the fetched data based on the desired symbols
   List<FXModel> _filterAndSortData(List<FXModel> data) {
     return data
-        .where((item) => desiredSymbols.contains(item.symbol))  // Filter
+        .where((item) => desiredName.contains(item.name))  // Filter
         .toList()
-      ..sort((a, b) => desiredSymbols
-          .indexOf(a.symbol)
-          .compareTo(desiredSymbols.indexOf(b.symbol)));  // Sort
+      ..sort((a, b) => desiredName
+          .indexOf(a.name)
+          .compareTo(desiredName.indexOf(b.name )));  // Sort
   }
 }

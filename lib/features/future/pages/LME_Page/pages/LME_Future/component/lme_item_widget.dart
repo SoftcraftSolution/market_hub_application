@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market_hub_application/core/constants/color_constant.dart';
+
+import '../../../../../../../core/utils/utils.dart';
+import '../../../../../../watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
 
 class LMEItemWidget extends StatelessWidget {
   final Map<String, dynamic> marketData;
   bool isPriceNegative=false;
+  Map<String, String> metalAbbr = {
+    "LME Copper": "CU",
+    "LME Aluminum": "AL",
+    "LME Zinc": "ZN",
+    "LME Nickel": "NI",
+    "LME Lead": "PB",
+    "LME Tin": "SN",
+  };
+  var con=Get.find<SpotWatchlistController>();
 
   LMEItemWidget({required this.marketData,});
 
@@ -36,6 +50,7 @@ class LMEItemWidget extends StatelessWidget {
           _buildPriceSection(context),
           _buildhighlow(context),
 
+
         ],
       ),
     );
@@ -51,15 +66,42 @@ class LMEItemWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                ( marketData['name'] ?? '').toString(),
+      marketData['name'].toString().length==2? marketData['name']:
+      metalAbbr[marketData['name']].toString(),
+                // ( marketData['name'] ?? '').toString(),
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(width: 4),
+              // SizedBox(width: 4),
               isPriceNegative?Icon(Icons.arrow_drop_down, color: Colors.red,size: 30,):Icon(Icons.arrow_drop_up, color: Colors.green,size: 30),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 5),
+              //   child: Icon(Icons.bookmark_border_rounded,),
+              // ),
+              Obx(
+                    () {
+                      Print.p("lme item"+marketData.toString());
+                     return  GestureDetector(
+                        onTap: () {
+                          con.lmeWatchlistIds.value.contains(
+                              marketData["_id"].toString()) ? con.removeItem(
+                              marketData["_id"].toString()) : con.addItem(
+                              lmeIds: [marketData["_id"].toString()]);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: con.lmeWatchlistIds.value.contains(
+                              marketData["_id"].toString())
+                              ? Icon(
+                            Icons.bookmark, color: ColorConstants.primeryColor,)
+                              : Icon(Icons.bookmark_border_rounded),
+                        ),
+                      );
+                    },
+              )
             ],
           ),
           // SizedBox(height: 8),

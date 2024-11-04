@@ -1,7 +1,9 @@
 // lib/price_model.dart
 
 class SHFE_model {
+
   final String description;
+  final String id;
   final String price;
   final String open;
   final String high;
@@ -11,6 +13,7 @@ class SHFE_model {
 
   SHFE_model({
     required this.description,
+    required this.id,
     required this.price,
     required this.open,
     required this.high,
@@ -21,6 +24,7 @@ class SHFE_model {
 
   factory SHFE_model.fromJson(Map<String, dynamic> json) {
     return SHFE_model(
+      id:json["_id"],
       description: json['description'],
       price: json['price'],
       open: json['open'],

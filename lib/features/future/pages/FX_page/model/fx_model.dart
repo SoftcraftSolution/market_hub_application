@@ -6,6 +6,7 @@ class FXModel {
   final String price;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String name; // New field added
 
   FXModel({
     required this.id,
@@ -15,6 +16,7 @@ class FXModel {
     required this.price,
     required this.createdAt,
     required this.updatedAt,
+    required this.name, // Required for the constructor
   });
 
   factory FXModel.fromMap(Map<String, dynamic> map) {
@@ -26,6 +28,7 @@ class FXModel {
       price: map['price'],
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
+      name: map['name'], // Mapping new field
     );
   }
 }

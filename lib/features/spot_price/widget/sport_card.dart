@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:market_hub_application/features/watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
 import '../model/item_model.dart'; // Import your model
@@ -33,11 +34,11 @@ class SpotItemCard extends StatelessWidget {
                   Obx(
                     ()=> GestureDetector(
                       onTap: (){
-                        con.watchlistIds.value.contains(item.id)?con.removeItem(item.id):con.addItem(item.id);
+                        con.spotWatchlistIds.value.contains(item.id)?con.removeItem(item.id):con.addItem(baseMetalIds: [item.id]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: con.watchlistIds.value.contains(item.id)?Icon(Icons.bookmark):Icon(Icons.bookmark_border_rounded),
+                        child: con.spotWatchlistIds.value.contains(item.id)?Icon(Icons.bookmark,color: ColorConstants.primeryColor,):Icon(Icons.bookmark_border_rounded),
                       ),
                     ),
                   )

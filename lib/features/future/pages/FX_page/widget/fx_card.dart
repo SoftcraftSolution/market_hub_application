@@ -3,25 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../model/fx_model.dart';
 
 class FXCard extends StatelessWidget {
-  final FXModel price;
+  final FXModel fxData;
   late bool isPriceNegative;
 
-  FXCard({Key? key, required this.price});
+  FXCard({Key? key, required this.fxData});
 
   @override
   Widget build(BuildContext context) {
-    isPriceNegative = price.change.startsWith('-');
+    isPriceNegative = fxData.change.startsWith('-');
 
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.white,
-            Colors.grey.shade100,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -51,7 +44,7 @@ class FXCard extends StatelessWidget {
               SizedBox(
                 width: 100,
                 child: Text(
-                  price.symbol.split("  ")[1],
+                  fxData.name,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -70,7 +63,7 @@ class FXCard extends StatelessWidget {
         ),
         Expanded(
           child: Text(
-            price.price.split(" ")[0],
+            fxData.price,
             textAlign: TextAlign.end,
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
@@ -93,7 +86,7 @@ class FXCard extends StatelessWidget {
               Icon(Icons.access_time, size: 14, color: Colors.grey),
               const SizedBox(width: 4),
               Text(
-                '${price.updatedAt.toLocal().toString().split(" ")[1].split(".")[0]}',
+                '${fxData.updatedAt.toLocal().toString().split(" ")[1].split(".")[0]}',
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: Colors.grey,
@@ -103,7 +96,7 @@ class FXCard extends StatelessWidget {
           ),
         ),
         _buildDetail(
-          '${price.change}',
+          '${fxData.change}',
           isPriceNegative ? Colors.red : Colors.green,
         ),
       ],

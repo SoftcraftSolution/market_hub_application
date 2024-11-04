@@ -48,19 +48,19 @@ class MCXItemWidget extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(width: 100,
+              Expanded(
                 child: Text(
                   (marketData['Symbol'] ?? 'N/A').toString().replaceAll("MCX", "").trim(),
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
-
+                
                   ),
-
+                
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(width: 5),
+              // const SizedBox(width: 5),
               Icon(
                 isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                 color: isPriceNegative ? Colors.red : Colors.green,
@@ -69,6 +69,7 @@ class MCXItemWidget extends StatelessWidget {
             ],
           ),
         ),
+        
         Expanded(
           child: Text(
             textAlign: TextAlign.center,

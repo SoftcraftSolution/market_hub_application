@@ -13,7 +13,7 @@ class SpotPricePage extends StatelessWidget {
   var con = Get.put(SpotPriceCon());
   @override
   Widget build(BuildContext context) {
-    Get.put(SpotWatchlistController());
+
     var elements = ["Base Metal", 'Steel', 'Minor Metal', 'BME',];
     var metals = [
       "COPPER", "BRASS", "ALUMINIUM", "GUNMETAL", "ZINC",
@@ -70,7 +70,7 @@ class SpotPricePage extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.hardEdge,
                                 width: double.infinity, // Ensure the width takes the full space available
-                                height: 125, // Set fixed height
+                                // height: 125, // Set fixed height
                                 child: Image.asset(
                                   imgS[index],
                                   fit: BoxFit.cover,
