@@ -40,12 +40,13 @@ class _SettlementPageState extends State<SettlementPage> {
             child: LoadingPage(cardSize: 70,),
           );
         }
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        return ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildFilterButton(),
+            Row(children: [_buildFilterButton(),Expanded(child: SizedBox())],)
+            ,
             const SizedBox(height: 16),
-            Expanded(child: _buildSettlementTable()),
+            _buildSettlementTable(),
           ],
         );
       }),
@@ -56,6 +57,7 @@ class _SettlementPageState extends State<SettlementPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
+        // width: 300,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade400, width: 1), // Grey border
           borderRadius: BorderRadius.circular(20), // Rounded border
@@ -90,36 +92,33 @@ class _SettlementPageState extends State<SettlementPage> {
 
 
   Widget _buildSettlementTable() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        width: MediaQuery.of(context).size.width ,
-        child: DataTable(
-          dataRowHeight: 56,
-          headingRowHeight: 48,
-          horizontalMargin: 16,
-          columnSpacing: 32,
-          headingRowColor: MaterialStateProperty.resolveWith(
-                  (states) => ColorConstants.primeryColor.withOpacity(0.1)),
-          dividerThickness: 0.5,
-          border: TableBorder(
-            horizontalInside: BorderSide(
-              width: 0.8,
-              color: Colors.grey.shade400,
-              style: BorderStyle.solid,
-            ),
+    return Container(
+      width: MediaQuery.of(context).size.width ,
+      child: DataTable(
+        dataRowHeight: 56,
+        headingRowHeight: 48,
+        horizontalMargin: 16,
+        columnSpacing: 32,
+        headingRowColor: MaterialStateProperty.resolveWith(
+                (states) => ColorConstants.primeryColor.withOpacity(0.1)),
+        dividerThickness: 0.5,
+        border: TableBorder(
+          horizontalInside: BorderSide(
+            width: 0.8,
+            color: Colors.grey.shade400,
+            style: BorderStyle.solid,
           ),
-          columns: _buildColumns(),
-          rows: controller.settlements.map((settlement) {
-            final bid = selectedFilter == "3M"
-                ? settlement.threeM.bid.toStringAsFixed(2)
-                : settlement.cash.bid.toStringAsFixed(2);
-            final ask = selectedFilter == "3M"
-                ? settlement.threeM.ask.toStringAsFixed(2)
-                : settlement.cash.ask.toStringAsFixed(2);
-            return _buildDataRow(settlement, bid, ask);
-          }).toList(),
         ),
+        columns: _buildColumns(),
+        rows: controller.settlements.map((settlement) {
+          final bid = selectedFilter == "3M"
+              ? settlement.threeM.bid.toStringAsFixed(2)
+              : settlement.cash.bid.toStringAsFixed(2);
+          final ask = selectedFilter == "3M"
+              ? settlement.threeM.ask.toStringAsFixed(2)
+              : settlement.cash.ask.toStringAsFixed(2);
+          return _buildDataRow(settlement, bid, ask);
+        }).toList(),
       ),
     );
   }

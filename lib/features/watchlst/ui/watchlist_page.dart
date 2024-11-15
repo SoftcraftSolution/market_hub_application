@@ -7,7 +7,7 @@ import 'package:market_hub_application/features/watchlst/page/spot_watchlist/ui/
 import 'package:market_hub_application/shared/components/test_screen.dart';
 
 import '../../../shared/widget/optionBar/list_option_without_border.dart';
-import '../page/spot_watchlist/controller/spot_watchlist_con.dart';
+import '../controller/watchlist_data_con.dart';
 
 class WatchlistPage extends StatelessWidget {
    WatchlistPage({super.key});

@@ -6,7 +6,7 @@ import 'package:market_hub_application/features/future/pages/FX_page/widget/fx_c
 import 'package:market_hub_application/features/future/pages/SHFE_page/widget/shfe_card.dart';
 import 'package:market_hub_application/features/spot_price/widget/sport_card.dart';
 import 'package:market_hub_application/features/watchlst/page/empty_watchlist/empty_watchlist.dart';
-import 'package:market_hub_application/features/watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
+import 'package:market_hub_application/features/watchlst/controller/watchlist_data_con.dart';
 
 import '../../../../future/pages/LME_Page/pages/LME_Future/component/lme_item_widget.dart';
 import '../../../../future/pages/MCX_Page/component/mcx_item_widget.dart';
@@ -17,7 +17,7 @@ class FutureWatchlistPage extends StatefulWidget {
 }
 
 class _FutureWatchlistPageState extends State<FutureWatchlistPage> {
-  final SpotWatchlistController con = Get.find<SpotWatchlistController>();
+  final WatchlistDataController con = Get.find<WatchlistDataController>();
 
   @override
   Widget build(BuildContext context) {

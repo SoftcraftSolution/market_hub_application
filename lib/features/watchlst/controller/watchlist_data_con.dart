@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../future/pages/FX_page/model/fx_model.dart';
-import '../../../../future/pages/SHFE_page/model/shfe_model.dart';
-import '../../../../spot_price/model/item_model.dart';
-import '../../../../user/naviagtion/controller/navigation_controller.dart';
-import '../../../api/spot_watchlist_api_service.dart';
+import '../../../core/utils/utils.dart';
+import '../../future/pages/FX_page/model/fx_model.dart';
+import '../../future/pages/SHFE_page/model/shfe_model.dart';
+import '../../spot_price/model/item_model.dart';
+import '../../user/naviagtion/controller/navigation_controller.dart';
+import '../api/spot_watchlist_api_service.dart';
 
-class SpotWatchlistController extends GetxController {
+class WatchlistDataController extends GetxController {
   final WatchListApiService _apiService = WatchListApiService();
   Timer? _timer;
 

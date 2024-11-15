@@ -40,7 +40,7 @@ class FeedbackFormPage extends StatelessWidget {
                               icon: Icon(
                                 index <= controller.rating.value ? Icons.star_rate_rounded : Icons.star_border_rounded,
                                 color: Colors.amber,
-                                size: 58,
+                                size: 50,
                               ),
 
                               onPressed: () => controller.setRating(index),

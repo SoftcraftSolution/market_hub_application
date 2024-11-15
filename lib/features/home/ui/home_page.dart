@@ -8,7 +8,7 @@ import 'package:market_hub_application/core/utils/userDataCon.dart';
 import 'package:market_hub_application/features/home/widgets/home_update_list.dart';
 
 import '../../user/profile/ui/profile_screen.dart';
-import '../../watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
+import '../../watchlst/controller/watchlist_data_con.dart';
 
 class HomePage extends StatelessWidget {
    HomePage({super.key});
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // for intialization only
-    Get.put(SpotWatchlistController());
+    Get.put(WatchlistDataController());
 
     return SafeArea(
       child: Scaffold(backgroundColor: ColorConstants.backgroundColor,body: Padding(

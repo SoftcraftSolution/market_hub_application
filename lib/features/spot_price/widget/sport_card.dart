@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/core/utils/utils.dart';
-import 'package:market_hub_application/features/watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
+import 'package:market_hub_application/features/watchlst/controller/watchlist_data_con.dart';
 import '../model/item_model.dart'; // Import your model
 
 class SpotItemCard extends StatelessWidget {
   final SpotItem item;
 
    SpotItemCard({Key? key, required this.item}) : super(key: key);
-  var con=Get.find<SpotWatchlistController>();
+  var con=Get.find<WatchlistDataController>();
   @override
   Widget build(BuildContext context) {
     return Padding(

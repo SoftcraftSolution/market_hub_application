@@ -24,7 +24,7 @@ class SHFE_model {
 
   factory SHFE_model.fromJson(Map<String, dynamic> json) {
     return SHFE_model(
-      id:json["_id"],
+      id:json["_id"]??"",
       description: json['description'],
       price: json['price'],
       open: json['open'],

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../../../core/constants/color_constant.dart';
+import '../../../../watchlst/controller/watchlist_data_con.dart';
 
 class MCXItemWidget extends StatelessWidget {
   final Map<String, dynamic> marketData;
 
   MCXItemWidget({required this.marketData});
+  var con = Get.find<WatchlistDataController>();
 
   @override
   Widget build(BuildContext context) {
-    bool isPriceNegative = marketData['Change'].startsWith('-');
+    bool isPriceNegative = marketData['Change'] != null && marketData['Change'].startsWith('-');
 
     return Container(
       decoration: BoxDecoration(
@@ -23,24 +28,26 @@ class MCXItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.01,
+          horizontal: MediaQuery.of(context).size.width * 0.05,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSymbolSection(isPriceNegative),
-            const SizedBox(height: 10),
-
-            _buildPriceSection(isPriceNegative),
-            const SizedBox(height: 10),
-            // _buildLastUpdatedSection(),
-            Divider()
+            _buildSymbolSection(context, isPriceNegative),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            _buildPriceSection(context, isPriceNegative),
+            Divider(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSymbolSection(bool isPriceNegative) {
+  Widget _buildSymbolSection(BuildContext context, bool isPriceNegative) {
+    double fontSize = MediaQuery.of(context).size.width * 0.045;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -53,92 +60,111 @@ class MCXItemWidget extends StatelessWidget {
                   (marketData['Symbol'] ?? 'N/A').toString().replaceAll("MCX", "").trim(),
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                
+                    fontSize: fontSize,
                   ),
-                
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              // const SizedBox(width: 5),
               Icon(
                 isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                 color: isPriceNegative ? Colors.red : Colors.green,
                 size: 26,
               ),
+              Obx(
+                    () {
+                  // Print.p("lme item" + marketData.toString());
+                  return GestureDetector(
+                    onTap: () {
+                      con.mcxWatchlistIds.value.contains(
+                          marketData["_id"].toString())
+                          ? con.removeItem(marketData["_id"].toString())
+                          : con.addItem(mcxIds: [marketData["_id"].toString()]);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      child: con.mcxWatchlistIds.value
+                          .contains(marketData["_id"].toString())
+                          ? Icon(
+                        Icons.bookmark,
+                        color: ColorConstants.primeryColor,
+                      )
+                          : Icon(Icons.bookmark_border_rounded),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
-        
         Expanded(
           child: Text(
             textAlign: TextAlign.center,
             marketData['Last'] ?? 'N/A',
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: fontSize * 0.9,
               color: isPriceNegative ? Colors.red : Colors.green,
             ),
           ),
         ),
-        _buildDetail( "${marketData['High']==""?'N/A':marketData['High']} (High)", Colors.green),
-        const SizedBox(height: 6),
+        _buildDetail(
+          context,
+          "${marketData['High'] == "" ? 'N/A' : marketData['High']} (High)",
+          Colors.green,
+        ),
       ],
     );
   }
 
-  Widget _buildPriceSection(bool isPriceNegative) {
+  Widget _buildPriceSection(BuildContext context, bool isPriceNegative) {
+    double fontSize = MediaQuery.of(context).size.width * 0.035;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Expanded(
           child: Row(
             children: [
-              Icon(Icons.access_time, size: 14, color: Colors.grey),
-              SizedBox(width: 4),
+              Icon(Icons.access_time, size: fontSize, color: Colors.grey),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.01),
               Text(
                 "${DateTime.now().toString().split(' ')[1].split(".")[0]}",
                 style: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: fontSize,
                   color: Colors.grey,
                 ),
               ),
             ],
           ),
         ),
-        _buildDetail( "${marketData['Change']==""?'N/A':marketData['Change'] } (${marketData['ChangePercent'] ?? 'N/A'})"
-            "", isPriceNegative ? Colors.red : Colors.green),
-        _buildDetail("${marketData['Low']==""?'N/A':marketData['Low']} (Low)", const Color(0xFFEF5B4F)),
-        // const SizedBox(height: 8),
-
-
-        // const SizedBox(height: 4),
-        // _buildDetailWithIcon(Icons.percent, "Percent Change: ${marketData['ChangePercent'] ?? ''}", isPriceNegative ? Colors.red : Colors.green),
+        _buildDetail(
+          context,
+          "${marketData['Change'] == "" ? 'N/A' : marketData['Change']} (${marketData['ChangePercent'] ?? 'N/A'})",
+          isPriceNegative ? Colors.red : Colors.green,
+        ),
+        _buildDetail(
+          context,
+          "${marketData['Low'] == "" ? 'N/A' : marketData['Low']} (Low)",
+          const Color(0xFFEF5B4F),
+        ),
       ],
     );
   }
 
-  Widget _buildDetail( String text, Color color) {
+  Widget _buildDetail(BuildContext context, String text, Color color) {
+    double fontSize = MediaQuery.of(context).size.width * 0.035;
+
     return Expanded(
       child: Text(
         textAlign: TextAlign.center,
         text,
         style: GoogleFonts.poppins(
-          fontSize: 14,
+          fontSize: fontSize,
           color: color,
         ),
       ),
     );
   }
-
-  // Widget _buildLastUpdatedSection() {
-  //   return Text(
-  //     "Last Updated: ${marketData['LastTrade']==""?'N/A':marketData['LastTrade']}",
-  //     style: GoogleFonts.poppins(
-  //       fontSize: 12,
-  //       color: Colors.grey,
-  //     ),
-  //   );
-  // }
 }

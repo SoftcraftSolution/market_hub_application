@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/features/spot_price/widget/sport_card.dart';
-import 'package:market_hub_application/features/watchlst/page/spot_watchlist/controller/spot_watchlist_con.dart';
+import 'package:market_hub_application/features/watchlst/controller/watchlist_data_con.dart';
 import 'package:market_hub_application/features/watchlst/page/empty_watchlist/empty_watchlist.dart';
 
 class SpotWatchlistPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class SpotWatchlistPage extends StatefulWidget {
 }
 
 class _SpotWatchlistPageState extends State<SpotWatchlistPage> {
-  final SpotWatchlistController con = Get.find<SpotWatchlistController>();
+  final WatchlistDataController con = Get.find<WatchlistDataController>();
 
   @override
   Widget build(BuildContext context) {

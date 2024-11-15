@@ -11,9 +11,6 @@ class SHFECard extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isPriceNegative = price.change.startsWith('-');
 
-
-
-
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -27,14 +24,16 @@ class SHFECard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.01,
+          horizontal: MediaQuery.of(context).size.width * 0.05,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSymbolSection(isPriceNegative),
-            const SizedBox(height: 10),
-            _buildPriceSection(isPriceNegative),
-            const SizedBox(height: 10),
+            _buildSymbolSection(context, isPriceNegative),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            _buildPriceSection(context, isPriceNegative),
             Divider(color: Colors.grey.shade300),
           ],
         ),
@@ -42,7 +41,9 @@ class SHFECard extends StatelessWidget {
     );
   }
 
-  Widget _buildSymbolSection(bool isPriceNegative) {
+  Widget _buildSymbolSection(BuildContext context, bool isPriceNegative) {
+    double fontSize = MediaQuery.of(context).size.width * 0.045;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -51,21 +52,21 @@ class SHFECard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 100,
+                width: MediaQuery.of(context).size.width * 0.20, // Responsive width
                 child: Text(
                   price.description,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: fontSize,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(width: 5),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
               Icon(
                 isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                 color: isPriceNegative ? Colors.red : Colors.green,
-                size: 30,
+                size: MediaQuery.of(context).size.width * 0.07, // Responsive icon size
               ),
             ],
           ),
@@ -76,29 +77,31 @@ class SHFECard extends StatelessWidget {
             price.price,
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: fontSize * 0.9,
               color: isPriceNegative ? Colors.red : Colors.green,
             ),
           ),
         ),
-        _buildDetail("${price.high} (High)", Colors.green),
+        _buildDetail(context, "${price.high} (High)", Colors.green),
       ],
     );
   }
 
-  Widget _buildPriceSection(bool isPriceNegative) {
+  Widget _buildPriceSection(BuildContext context, bool isPriceNegative) {
+    double fontSize = MediaQuery.of(context).size.width * 0.035;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Row(
             children: [
-              Icon(Icons.access_time, size: 14, color: Colors.grey),
-              const SizedBox(width: 4),
+              Icon(Icons.access_time, size: fontSize, color: Colors.grey),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.01),
               Text(
                 "${DateTime.now().toLocal().toString().split(' ')[1].split('.')[0]}",
                 style: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: fontSize,
                   color: Colors.grey,
                 ),
               ),
@@ -106,21 +109,28 @@ class SHFECard extends StatelessWidget {
           ),
         ),
         _buildDetail(
+          context,
           "${price.change} (chg)",
           isPriceNegative ? Colors.red : Colors.green,
         ),
-        _buildDetail("${price.low} (Low)", const Color(0xFFEF5B4F)),
+        _buildDetail(
+          context,
+          "${price.low} (Low)",
+          const Color(0xFFEF5B4F),
+        ),
       ],
     );
   }
 
-  Widget _buildDetail(String text, Color color) {
+  Widget _buildDetail(BuildContext context, String text, Color color) {
+    double fontSize = MediaQuery.of(context).size.width * 0.035;
+
     return Expanded(
       child: Text(
         textAlign: TextAlign.center,
         text,
         style: GoogleFonts.poppins(
-          fontSize: 14,
+          fontSize: fontSize,
           color: color,
         ),
       ),

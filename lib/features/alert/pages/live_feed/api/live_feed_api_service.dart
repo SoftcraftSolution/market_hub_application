@@ -49,7 +49,7 @@ class LiveFeedApiService {
   //   }
   // }
   Future<List<dynamic>> fetchNews() async {
-    const String url = 'https://rss.app/feeds/v1.1/2Cwgc09Wh8yPDuiw.json';
+    const String url = 'https://rss.app/feeds/v1.1/qCS4s2Kyyy1QVyAl.json';
     try {
       final response = await BaseApiServices.dio.get(url);
       if (response.statusCode == 200) {
