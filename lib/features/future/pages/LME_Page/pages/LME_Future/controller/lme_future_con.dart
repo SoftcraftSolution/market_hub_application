@@ -59,7 +59,7 @@ class LMEFuturePageCon extends GetxController{
 
   @override
   void onClose() {
-    _timer.cancel(); // Stop the timer when the controller is closed
+    stopFetchingData(); // Stop the timer when the controller is closed
     super.onClose();
   }
 }

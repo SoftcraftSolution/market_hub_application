@@ -150,4 +150,10 @@ class WatchlistDataController extends GetxController {
 
     return groupedData;
   }
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    stopFetchingData();
+    super.onClose();
+  }
 }

@@ -59,6 +59,12 @@ class HomeUpdateController extends GetxController {
       Print.p("stopped===> Home updates data fetching");
     }
   }
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    stopFetchingData();
+    super.onClose();
+  }
 
 
 }

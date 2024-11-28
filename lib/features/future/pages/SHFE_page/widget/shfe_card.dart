@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/features/future/pages/SHFE_page/model/shfe_model.dart';
 
+import '../../../../../core/constants/color_constant.dart';
+import '../../../../watchlst/controller/watchlist_data_con.dart';
+
 class SHFECard extends StatelessWidget {
-  final SHFE_model price;
+  final SHFE_model marketData;
 
-  const SHFECard({Key? key, required this.price}) : super(key: key);
-
+   SHFECard({Key? key, required this.marketData}) : super(key: key);
+  var con = Get.find<WatchlistDataController>();
   @override
   Widget build(BuildContext context) {
-    bool isPriceNegative = price.change.startsWith('-');
+    bool isPriceNegative = marketData.change.startsWith('-');
 
     return Container(
       decoration: BoxDecoration(
@@ -51,16 +55,13 @@ class SHFECard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.20, // Responsive width
-                child: Text(
-                  price.description,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold,
-                    fontSize: fontSize,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+              Text(
+                marketData.description,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  fontSize: fontSize,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.02),
               Icon(
@@ -68,13 +69,38 @@ class SHFECard extends StatelessWidget {
                 color: isPriceNegative ? Colors.red : Colors.green,
                 size: MediaQuery.of(context).size.width * 0.07, // Responsive icon size
               ),
+              // Obx(
+              //       () {
+              //     // Print.p("lme item" + marketData.toString());
+              //     return GestureDetector(
+              //       onTap: () {
+              //         con.shfeWatchlistIds.value.contains(
+              //             marketData.id.toString())
+              //             ? con.removeItem(marketData.id.toString())
+              //             : con.addItem(shfeIds: [marketData.id.toString()]);
+              //       },
+              //       child: Padding(
+              //         padding: EdgeInsets.symmetric(
+              //           horizontal: MediaQuery.of(context).size.width * 0.02,
+              //         ),
+              //         child: con.shfeWatchlistIds.value
+              //             .contains(marketData.id.toString())
+              //             ? Icon(
+              //           Icons.bookmark,
+              //           color: ColorConstants.primeryColor,
+              //         )
+              //             : Icon(Icons.bookmark_border_rounded),
+              //       ),
+              //     );
+              //   },
+              // )
             ],
           ),
         ),
         Expanded(
           child: Text(
             textAlign: TextAlign.center,
-            price.price,
+            marketData.price,
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
               fontSize: fontSize * 0.9,
@@ -82,7 +108,7 @@ class SHFECard extends StatelessWidget {
             ),
           ),
         ),
-        _buildDetail(context, "${price.high} (High)", Colors.green),
+        _buildDetail(context, "${marketData.high} (High)", Colors.green),
       ],
     );
   }
@@ -110,12 +136,12 @@ class SHFECard extends StatelessWidget {
         ),
         _buildDetail(
           context,
-          "${price.change} (chg)",
+          "${marketData.change} (chg)",
           isPriceNegative ? Colors.red : Colors.green,
         ),
         _buildDetail(
           context,
-          "${price.low} (Low)",
+          "${marketData.low} (Low)",
           const Color(0xFFEF5B4F),
         ),
       ],

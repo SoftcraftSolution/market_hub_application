@@ -30,7 +30,7 @@ class ShfePage extends StatelessWidget {
             itemCount: shfeCon.data.value.length,
             itemBuilder: (context, index) {
               return SHFECard(
-                price: shfeCon.data.value[index],
+                marketData: shfeCon.data.value[index],
               );
             },
           ),
