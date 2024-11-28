@@ -19,7 +19,7 @@ class RegistrationApiService{
         "whatsappNumber":user.whatsappNumber,
         "phoneNumber": user.phoneNumber,
         "pincode": user.pincode,
-        // "visitingCard":await MultipartFile.fromFile(user.visitingCard.toString()),
+        "visitingCard":await MultipartFile.fromFile(user.visitingCard.toString()),
         "pin":user.pin,
         "planName":user.plan
 
