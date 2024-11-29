@@ -8,8 +8,10 @@ class LMEFutureApiService {
     try {
       final response = await BaseApiServices.dio.get('https://lme-scraping.vercel.app/api/lme-metal-data');
       if (response.statusCode == 200) {
-        // Filter the fetched data
-        List metalData = response.data;
+        // Assuming the actual data is inside a key in the response map
+        List metalData = response.data is List
+            ? response.data
+            : response.data['data'] ?? []; // Adjust the key to match the actual structure.
 
         // Define the abbreviations and mapping
         List<String> abbreviations = ['CU', 'AL', 'ZN', 'NI', 'PB', 'SN'];
@@ -20,7 +22,6 @@ class LMEFutureApiService {
           "LME Nickel": "NI",
           "LME Lead": "PB",
           "LME Tin": "SN",
-        //   hv
         };
 
         // Filtered data based on abbreviations
@@ -28,7 +29,7 @@ class LMEFutureApiService {
           return metalAbbr.containsKey(metal['name']);
         }).map((metal) {
           return {
-            "_id":metal['_id'],
+            "_id": metal['_id'],
             'name': metal['name'],
             'latestPrice': metal['latestPrice'],
             'riseFall': metal['riseFall'],
@@ -43,7 +44,8 @@ class LMEFutureApiService {
         // Sort the filtered data according to the abbreviations
         List finalFilter = [];
         for (var abbr in abbreviations) {
-          finalFilter.add(filteredData.firstWhere((metal) => metalAbbr[metal['name']] == abbr));
+          finalFilter.add(
+              filteredData.firstWhereOrNull((metal) => metalAbbr[metal['name']] == abbr));
         }
 
         // Remove any null values if no match was found for an abbreviation

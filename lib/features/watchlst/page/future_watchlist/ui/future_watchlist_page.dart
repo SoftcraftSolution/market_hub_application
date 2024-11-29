@@ -37,6 +37,7 @@ class _FutureWatchlistPageState extends State<FutureWatchlistPage> {
             _buildWatchlistCategory("London(LME)", con.lmeWatchList.value, (item)=>LMEItemWidget(marketData: item,)),
             _buildWatchlistCategory("Currency(FX)", con.fxWatchList.value, (item) => FXCard(key: ValueKey(item.id), fxData: item)),
             _buildWatchlistCategory("India(MCX)", con.mcxWatchList.value, (item)=>MCXItemWidget(marketData: item,)),
+            _buildWatchlistCategory("United Nation(US)", con.usWatchList.value, (item)=>MCXItemWidget(marketData: item,)),
             _buildWatchlistCategory("China(SHFE)", con.shfeWatchList.value, (item) => SHFECard(key: ValueKey(item.id), marketData: item)),
           ],
         );

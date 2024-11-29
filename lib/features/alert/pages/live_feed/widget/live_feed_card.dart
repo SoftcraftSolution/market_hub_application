@@ -47,19 +47,19 @@ class LiveFeedNewsCard extends StatelessWidget {
               newsItem.description,
               style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey[600]),
             ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'By: ${newsItem.author}',
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    color: Colors.grey[500],
-                  ),
-                ),
-              ],
-            ),
+            // SizedBox(height: 8),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     Text(
+            //       'By: ${newsItem.author}',
+            //       style: GoogleFonts.poppins(
+            //         fontSize: 12,
+            //         color: Colors.grey[500],
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Divider(),
           ],
         ),

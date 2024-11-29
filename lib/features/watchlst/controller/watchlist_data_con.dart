@@ -16,6 +16,7 @@ class WatchlistDataController extends GetxController {
   RxList<FXModel> fxWatchList = <FXModel>[].obs;
   RxList<Map<String, dynamic>> lmeWatchList = <Map<String, dynamic>>[].obs;  // Using Map for LME
   RxList<Map<String, dynamic>> mcxWatchList = <Map<String, dynamic>>[].obs;  // Using Map for MCX
+  RxList<Map<String, dynamic>> usWatchList = <Map<String, dynamic>>[].obs;  // Using Map for MCX
   RxList<SHFE_model> shfeWatchList = <SHFE_model>[].obs;
 
   // Observable lists for watchlist IDs
@@ -23,6 +24,7 @@ class WatchlistDataController extends GetxController {
   RxList<String> fxWatchlistIds = <String>[].obs;
   RxList<String> lmeWatchlistIds = <String>[].obs;
   RxList<String> mcxWatchlistIds = <String>[].obs;
+  RxList<String> usWatchlistIds = <String>[].obs;
   RxList<String> shfeWatchlistIds = <String>[].obs;
 
   var homeCon = Get.find<HomeCon>();
@@ -79,14 +81,22 @@ class WatchlistDataController extends GetxController {
       Print.p("mcx data length==>\n${mcxWatchList.value.length}");
 
       // Directly assigning as list of maps
+      usWatchList.assignAll((items["us"].toList()));
+      Print.p("us data length==>\n${usWatchList.value.length}");
+
+
+      // Directly assigning as list of maps
       shfeWatchList.assignAll((items["shfe"]));
       Print.p("shfe data length==>\n${shfeWatchList.value.length}");
+
+
 
       // Update each category's ID list
       spotWatchlistIds.assignAll(spotWatchList.map((item) => item.id).toList());
       fxWatchlistIds.assignAll(fxWatchList.map((item) => item.id).toList());
       lmeWatchlistIds.assignAll(lmeWatchList.map((item) => item["_id"].toString()).toList());
       mcxWatchlistIds.assignAll(mcxWatchList.map((item) => item["_id"].toString()).toList());
+      usWatchlistIds.assignAll(usWatchList.map((item) => item["_id"].toString()).toList());
       shfeWatchlistIds.assignAll(shfeWatchList.map((item) => item.id).toList());
 
     } catch (e) {
@@ -101,6 +111,7 @@ class WatchlistDataController extends GetxController {
     List<String>? fxIds,
     List<String>? lmeIds,
     List<String>? mcxIds,
+    List<String>? usIds,
     List<String>? shfeIds,
   }) async {
     customToast(msg: "Loading...");
@@ -110,6 +121,7 @@ class WatchlistDataController extends GetxController {
         fxIds: fxIds,
         lmeIds: lmeIds,
         mcxIds: mcxIds,
+        usIds: usIds,
         shfeIds: shfeIds,
       );
       if (success) {

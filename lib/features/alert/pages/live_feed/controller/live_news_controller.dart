@@ -37,7 +37,8 @@ class LiveNewsController extends GetxController {
   Future<void> fetchNewsData() async {
     final newsData = await apiService.fetchNews();
     if (newsData.isNotEmpty) {
-      newsList.value = newsData.map((item) => LiveNewsModel.fromJson(item)).toList();
+      // newsList.value = newsData.map((item) => LiveNewsModel.fromJson(item)).toList();
+      newsList.value =  newsData;
     }
   }
 

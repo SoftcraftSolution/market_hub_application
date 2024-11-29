@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import '../../../../../../../core/utils/utils.dart';
 import '../../../../../../../shared/widget/button/custom_button.dart';
 import '../../../../../../watchlst/controller/watchlist_data_con.dart';
 
@@ -69,7 +70,7 @@ class LMEItemWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    marketData['latestPrice'] ?? 'N/A',
+                    marketData['latestPrice'].toString() ?? 'N/A',
                     textAlign: TextAlign.end,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
@@ -144,7 +145,7 @@ class LMEItemWidget extends StatelessWidget {
                   Icon(Icons.access_time, size: 14, color: Colors.grey),
                   SizedBox(width: 8),
                   Text(
-                    "Updated at: ${DateTime.now().toString().split(' ')[1].split('.')[0]}",
+                    "Last Trade: ${formatDateTime(DateTime.parse(data["updateTime"]))}",
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       color: Colors.grey,

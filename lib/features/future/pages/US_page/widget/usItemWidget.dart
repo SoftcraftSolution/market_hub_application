@@ -70,15 +70,15 @@ class USItemWidget extends StatelessWidget {
                     () {
                   return GestureDetector(
                     onTap: () {
-                      con.mcxWatchlistIds.value.contains(marketData["_id"].toString())
+                      con.usWatchlistIds.value.contains(marketData["_id"].toString())
                           ? con.removeItem(marketData["_id"].toString())
-                          : con.addItem(mcxIds: [marketData["_id"].toString()]);
+                          : con.addItem(usIds: [marketData["_id"].toString()]);
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: screenWidth * 0.02,
                       ),
-                      child: con.mcxWatchlistIds.value.contains(marketData["_id"].toString())
+                      child: con.usWatchlistIds.value.contains(marketData["_id"].toString())
                           ? Icon(
                         Icons.bookmark,
                         color: ColorConstants.primeryColor,

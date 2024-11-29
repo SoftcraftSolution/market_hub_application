@@ -41,6 +41,10 @@ class WatchListApiService {
             ?.cast<Map<String, dynamic>>() ?? [];
         Print.p("after mcx");
 
+        List<Map<String, dynamic>> usItems = (data['us'] as List<dynamic>?)
+            ?.cast<Map<String, dynamic>>() ?? [];
+        Print.p("after us");
+
         List<FXModel> fxItems = (data['fx'] as List<dynamic>?)
             ?.map((item) => FXModel.fromMap(item as Map<String, dynamic>))
             .toList() ?? [];
@@ -52,6 +56,7 @@ class WatchListApiService {
           'shfe': shfeItems,
           'lme': lmeItems,
           'mcx': mcxItems,
+          'us':usItems
         };
       } else {
         Get.snackbar('Error', 'Failed to fetch watchlist: ${response.statusCode}');
@@ -85,7 +90,7 @@ class WatchListApiService {
   //   }
   // }
 
-  Future<bool> addItemToWatchlist({List<String>? baseMetalIds,List<String>? fxIds,List<String>? lmeIds,List<String>? mcxIds,List<String>? shfeIds}) async {
+  Future<bool> addItemToWatchlist({List<String>? baseMetalIds,List<String>? fxIds,List<String>? lmeIds,List<String>? mcxIds,List<String>? usIds,List<String>? shfeIds}) async {
     final email = UserDataController.userDetail!.email;
     final url = '$_baseUrl/user/add-watchlist';
     final data = {
@@ -94,6 +99,7 @@ class WatchListApiService {
       'fxIds':fxIds??[],
       'lmeIds':lmeIds??[],
       'mcxIds':mcxIds??[],
+      'usIds':usIds??[],
       'shfeIds':shfeIds??[],
     };
 

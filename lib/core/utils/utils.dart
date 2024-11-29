@@ -79,3 +79,9 @@ Future<bool> updatePinLDB(String newPin)async{
 
 }
 
+String formatDateTime(DateTime dateTime) {
+  final DateFormat formatter = DateFormat('dd MMM hh:mma');
+  String formattedDate = formatter.format(dateTime).toLowerCase();
+  return formattedDate;
+}
+

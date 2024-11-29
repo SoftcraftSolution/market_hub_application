@@ -161,7 +161,7 @@ class MCXItemWidget extends StatelessWidget {
                   Icon(Icons.access_time, size: 14, color: Colors.grey),
                   SizedBox(width: 8),
                   Text(
-                    "Updated at: ${DateTime.now().toString().split(' ')[1].split('.')[0]}",
+                    "LastTrade: ${marketData["LastTrade"]==""?"N/A":marketData["LastTrade"]}",
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       color: Colors.grey,

@@ -124,8 +124,10 @@ class SHFECard extends StatelessWidget {
 
               // Details Section
               _buildDetailRow("Last Price", data.price),
+              _buildDetailRow("Open", data.open),
               _buildDetailRow("High", data.high, Colors.green),
               _buildDetailRow("Low", data.low, Colors.red),
+              _buildDetailRow("Volume", data.volume),
               _buildDetailRow(
                 "Change",
                 "${data.change} (chg)",
