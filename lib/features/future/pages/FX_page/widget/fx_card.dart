@@ -75,7 +75,7 @@ class FXCard extends StatelessWidget {
                 SizedBox(width: 10),
                 Center(
                   child: Text(
-                    "${fxData.change} (chg)",
+                    "(${fxData.change})",
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       color: Colors.grey,
