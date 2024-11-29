@@ -75,7 +75,7 @@ class LMEItemWidget extends StatelessWidget {
                     color: isPriceNegative ? Colors.red : Colors.green,
                   ),
                 ),
-                SizedBox(width: 14),
+                SizedBox(width: 10),
                 Expanded(
                   child: Center(
                     child: Text(

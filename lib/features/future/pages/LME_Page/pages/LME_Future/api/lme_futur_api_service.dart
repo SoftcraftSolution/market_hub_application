@@ -29,7 +29,7 @@ class LMEFutureApiService {
         }).map((metal) {
           return {
             "_id":metal['_id'],
-            'name': metalAbbr[metal['name']],
+            'name': metal['name'],
             'latestPrice': metal['latestPrice'],
             'riseFall': metal['riseFall'],
             'risefall': metal['risefall'],
@@ -43,7 +43,7 @@ class LMEFutureApiService {
         // Sort the filtered data according to the abbreviations
         List finalFilter = [];
         for (var abbr in abbreviations) {
-          finalFilter.add(filteredData.firstWhere((metal) => metal['name'] == abbr));
+          finalFilter.add(filteredData.firstWhere((metal) => metalAbbr[metal['name']] == abbr));
         }
 
         // Remove any null values if no match was found for an abbreviation
