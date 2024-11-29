@@ -33,13 +33,14 @@ class LMEItemWidget extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.04,
-              vertical: MediaQuery.of(context).size.height * 0.01,
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+              vertical: MediaQuery.of(context).size.height * 0.014,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
+                  // flex: 2,
                   child: Row(
                     children: [
                       Text(
@@ -66,24 +67,24 @@ class LMEItemWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(
-                  marketData['latestPrice'] ?? 'N/A',
-                  textAlign: TextAlign.end,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
-                    color: isPriceNegative ? Colors.red : Colors.green,
+                Expanded(
+                  child: Text(
+                    marketData['latestPrice'] ?? 'N/A',
+                    textAlign: TextAlign.end,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      color: isPriceNegative ? Colors.red : Colors.green,
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      "${marketData['riseFall'] ?? 'N/A'} (${marketData['risefall'] ?? 'N/A'})",
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                Center(
+                  child: Text(
+                    "${marketData['riseFall'] ?? 'N/A'} (${marketData['risefall'] ?? 'N/A'})",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey,
                     ),
                   ),
                 ),

@@ -1,164 +1,193 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:market_hub_application/features/future/pages/SHFE_page/model/shfe_model.dart';
-
-import '../../../../../core/constants/color_constant.dart';
+import 'package:market_hub_application/core/constants/color_constant.dart';
+import '../../../../../../../shared/widget/button/custom_button.dart';
 import '../../../../watchlst/controller/watchlist_data_con.dart';
+import '../model/shfe_model.dart';
+
 
 class SHFECard extends StatelessWidget {
   final SHFE_model marketData;
 
-   SHFECard({Key? key, required this.marketData}) : super(key: key);
-  var con = Get.find<WatchlistDataController>();
+  SHFECard({Key? key,required this.marketData});
+
+  final con = Get.find<WatchlistDataController>();
+
   @override
   Widget build(BuildContext context) {
     bool isPriceNegative = marketData.change.startsWith('-');
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.white,
-            Colors.grey.shade100,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.01,
-          horizontal: MediaQuery.of(context).size.width * 0.05,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSymbolSection(context, isPriceNegative),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            _buildPriceSection(context, isPriceNegative),
-            Divider(color: Colors.grey.shade300),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSymbolSection(BuildContext context, bool isPriceNegative) {
-    double fontSize = MediaQuery.of(context).size.width * 0.045;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                marketData.description,
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.bold,
-                  fontSize: fontSize,
+    return GestureDetector(
+      onTap: () => _showDetailsBottomSheet(context, marketData, isPriceNegative),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+              vertical: MediaQuery.of(context).size.height * 0.014,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text(
+                        marketData.description,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                      Icon(
+                        isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                        color: isPriceNegative ? Colors.red : Colors.green,
+                        size: MediaQuery.of(context).size.width * 0.06,
+                      ),
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: () {
+                            con.shfeWatchlistIds.value.contains(marketData.id.toString())
+                                ? con.removeItem(marketData.id.toString())
+                                : con.addItem(shfeIds: [marketData.id.toString()]);
+                          },
+                          child: con.shfeWatchlistIds.value.contains(marketData.id.toString())
+                              ? Icon(Icons.bookmark, color: ColorConstants.primeryColor)
+                              : Icon(Icons.bookmark_border_rounded),
+                        );
+                      }),
+                    ],
+                  ),
                 ),
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-              Icon(
-                isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                color: isPriceNegative ? Colors.red : Colors.green,
-                size: MediaQuery.of(context).size.width * 0.07, // Responsive icon size
-              ),
-              // Obx(
-              //       () {
-              //     // Print.p("lme item" + marketData.toString());
-              //     return GestureDetector(
-              //       onTap: () {
-              //         con.shfeWatchlistIds.value.contains(
-              //             marketData.id.toString())
-              //             ? con.removeItem(marketData.id.toString())
-              //             : con.addItem(shfeIds: [marketData.id.toString()]);
-              //       },
-              //       child: Padding(
-              //         padding: EdgeInsets.symmetric(
-              //           horizontal: MediaQuery.of(context).size.width * 0.02,
-              //         ),
-              //         child: con.shfeWatchlistIds.value
-              //             .contains(marketData.id.toString())
-              //             ? Icon(
-              //           Icons.bookmark,
-              //           color: ColorConstants.primeryColor,
-              //         )
-              //             : Icon(Icons.bookmark_border_rounded),
-              //       ),
-              //     );
-              //   },
-              // )
-            ],
-          ),
-        ),
-        Expanded(
-          child: Text(
-            textAlign: TextAlign.center,
-            marketData.price,
-            style: GoogleFonts.poppins(
-              fontWeight: FontWeight.bold,
-              fontSize: fontSize * 0.9,
-              color: isPriceNegative ? Colors.red : Colors.green,
+                Expanded(
+                  child: Text(
+                    marketData.price,
+                    textAlign: TextAlign.end,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      color: isPriceNegative ? Colors.red : Colors.green,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Center(
+                  child: Text(
+                    "(${marketData.change})",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-        _buildDetail(context, "${marketData.high} (High)", Colors.green),
-      ],
+          Divider(),
+        ],
+      ),
     );
   }
 
-  Widget _buildPriceSection(BuildContext context, bool isPriceNegative) {
-    double fontSize = MediaQuery.of(context).size.width * 0.035;
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Row(
+  void _showDetailsBottomSheet(
+      BuildContext context, SHFE_model data, bool isPriceNegative) {
+    showModalBottomSheet(
+      backgroundColor: ColorConstants.backgroundColor,
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.access_time, size: fontSize, color: Colors.grey),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-              Text(
-                "${DateTime.now().toLocal().toString().split(' ')[1].split('.')[0]}",
-                style: GoogleFonts.poppins(
-                  fontSize: fontSize,
-                  color: Colors.grey,
+              // Title Section
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text(
+                    data.description,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Divider(thickness: 1, height: 20),
+
+              // Details Section
+              _buildDetailRow("Last Price", data.price),
+              _buildDetailRow("High", data.high, Colors.green),
+              _buildDetailRow("Low", data.low, Colors.red),
+              _buildDetailRow(
+                "Change",
+                "${data.change} (chg)",
+                isPriceNegative ? Colors.red : Colors.green,
+              ),
+              SizedBox(height: 24),
+
+              // Timestamp
+              Row(
+                children: [
+                  Icon(Icons.access_time, size: 14, color: Colors.grey),
+                  SizedBox(width: 8),
+                  Text(
+                    "Updated at: ${DateTime.now().toString().split(' ')[1].split('.')[0]}",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 24),
+
+              // Close Button
+              Center(
+                child: CustomButton(
+                  title: "Close",
+                  onPress: () async {
+                    Navigator.pop(context); // Close the bottom sheet
+                  },
                 ),
               ),
             ],
           ),
-        ),
-        _buildDetail(
-          context,
-          "${marketData.change} (chg)",
-          isPriceNegative ? Colors.red : Colors.green,
-        ),
-        _buildDetail(
-          context,
-          "${marketData.low} (Low)",
-          const Color(0xFFEF5B4F),
-        ),
-      ],
+        );
+      },
     );
   }
 
-  Widget _buildDetail(BuildContext context, String text, Color color) {
-    double fontSize = MediaQuery.of(context).size.width * 0.035;
-
-    return Expanded(
-      child: Text(
-        textAlign: TextAlign.center,
-        text,
-        style: GoogleFonts.poppins(
-          fontSize: fontSize,
-          color: color,
-        ),
+  Widget _buildDetailRow(String label, dynamic value, [Color? color]) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+            ),
+          ),
+          Text(
+            value?.toString() ?? 'N/A',
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              color: color ?? Colors.black,
+            ),
+          ),
+        ],
       ),
     );
   }

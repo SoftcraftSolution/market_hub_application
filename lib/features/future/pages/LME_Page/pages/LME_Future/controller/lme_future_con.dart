@@ -42,7 +42,7 @@ class LMEFuturePageCon extends GetxController{
     lme_data.value=response==[]?lme_data.value:response;
     // lme_data.value=await LMEFutureApiService().fetchLMEData(); // Fetch data immediately on start
     // Schedule to fetch data every 10 seconds
-    _timer = Timer.periodic(Duration(seconds: 20), (_) async{
+    _timer = Timer.periodic(Duration(seconds: 3), (_) async{
       var response=await LMEFutureApiService().fetchLMEFutureData();
       lme_data.value=response==[]?lme_data.value:response;
     });
