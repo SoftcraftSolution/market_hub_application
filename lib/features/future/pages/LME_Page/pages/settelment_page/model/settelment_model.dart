@@ -1,11 +1,9 @@
-// models/settlement.dart
-
 class Settlement {
   final String id;
   final String symbol;
   final String date;
-  final BidAsk threeM;
-  final BidAsk cash;
+  BidAsk threeM; // 3M bid/ask data
+  BidAsk cash; // Cash bid/ask data
 
   Settlement({
     required this.id,
@@ -15,15 +13,28 @@ class Settlement {
     required this.cash,
   });
 
-  factory Settlement.fromJson(Map<String, dynamic> json) {
+  // Factory method to parse data from the API
+  factory Settlement.fromApiJson(Map<String, dynamic> json, String type) {
+    final bidAsk = BidAsk(
+      bid: json['Bid'].toDouble(),
+      ask: json['Ask'].toDouble(),
+    );
     return Settlement(
       id: json['_id'],
-      symbol: json['symbol'],
-      date: json['date'],
-      threeM: BidAsk.fromJson(json['3m']),
-      cash: BidAsk.fromJson(json['cash']),
+      symbol: json['Symbol'],
+      date: json['Date'],
+      threeM: type == '3m' ? bidAsk : BidAsk.empty(),
+      cash: type == 'cash' ? bidAsk : BidAsk.empty(),
     );
   }
+
+  // Factory for creating an empty settlement object
+  Settlement.empty()
+      : id = '',
+        symbol = '',
+        date = '',
+        threeM = BidAsk.empty(),
+        cash = BidAsk.empty();
 }
 
 class BidAsk {
@@ -35,10 +46,6 @@ class BidAsk {
     required this.ask,
   });
 
-  factory BidAsk.fromJson(Map<String, dynamic> json) {
-    return BidAsk(
-      bid: json['bid'].toDouble(),
-      ask: json['ask'].toDouble(),
-    );
-  }
+  // Factory for creating empty BidAsk data
+  factory BidAsk.empty() => BidAsk(bid: 0.0, ask: 0.0);
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/core/utils/utils.dart';
 import '../../../../../../../shared/widget/button/custom_button.dart';
 import '../../../../watchlst/controller/watchlist_data_con.dart';
 import '../model/shfe_model.dart';
@@ -16,7 +17,7 @@ class SHFECard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isPriceNegative = marketData.change.startsWith('-');
+    bool isPriceNegative = marketData.riseFall.toString().startsWith('-');
 
     return GestureDetector(
       onTap: () => _showDetailsBottomSheet(context, marketData, isPriceNegative),
@@ -34,7 +35,7 @@ class SHFECard extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        marketData.description,
+                        marketData.name.toString().split(" ")[0].toString(),
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.bold,
                           fontSize: MediaQuery.of(context).size.width * 0.04,
@@ -64,7 +65,7 @@ class SHFECard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    marketData.price,
+                    marketData.latestPrice.toString(),
                     textAlign: TextAlign.end,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
@@ -76,7 +77,7 @@ class SHFECard extends StatelessWidget {
                 SizedBox(width: 10),
                 Center(
                   child: Text(
-                    "(${marketData.change})",
+                    "(${marketData.riseFall})",
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       color: Colors.grey,
@@ -112,7 +113,7 @@ class SHFECard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Text(
-                    data.description,
+                    data.name.toString().split(" ")[0].toString(),
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -123,14 +124,14 @@ class SHFECard extends StatelessWidget {
               Divider(thickness: 1, height: 20),
 
               // Details Section
-              _buildDetailRow("Last Price", data.price),
-              _buildDetailRow("Open", data.open),
-              _buildDetailRow("High", data.high, Colors.green),
-              _buildDetailRow("Low", data.low, Colors.red),
-              _buildDetailRow("Volume", data.volume),
+              _buildDetailRow("Last Price", data.latestPrice),
+              // _buildDetailRow("Open", data.),
+              _buildDetailRow("High", data.highest, Colors.green),
+              _buildDetailRow("Low", data.lowest, Colors.red),
+              // _buildDetailRow("Volume", data.),
               _buildDetailRow(
                 "Change",
-                "${data.change} (chg)",
+                "${data.riseFall} (chg)",
                 isPriceNegative ? Colors.red : Colors.green,
               ),
               SizedBox(height: 24),
@@ -141,7 +142,7 @@ class SHFECard extends StatelessWidget {
                   Icon(Icons.access_time, size: 14, color: Colors.grey),
                   SizedBox(width: 8),
                   Text(
-                    "Updated at: ${DateTime.now().toString().split(' ')[1].split('.')[0]}",
+                    "Last Trade: ${formatDateTime(DateTime.parse(data.updateTime))}",
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       color: Colors.grey,

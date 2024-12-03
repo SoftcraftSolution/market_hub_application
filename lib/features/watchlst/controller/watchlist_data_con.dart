@@ -101,7 +101,7 @@ class WatchlistDataController extends GetxController {
 
     } catch (e) {
       Print.p("Error fetching watchlist: $e");
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
     }
   }
 
@@ -129,7 +129,7 @@ class WatchlistDataController extends GetxController {
       }
     } catch (e) {
       Print.p("Error adding item to watchlist: $e");
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
     }
   }
 
@@ -142,7 +142,7 @@ class WatchlistDataController extends GetxController {
       }
     } catch (e) {
       Print.p("Error removing item from watchlist: $e");
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
     }
   }
 

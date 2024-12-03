@@ -59,12 +59,12 @@ class WatchListApiService {
           'us':usItems
         };
       } else {
-        Get.snackbar('Error', 'Failed to fetch watchlist: ${response.statusCode}');
+        // Get.snackbar('Error', 'Failed to fetch watchlist: ${response.statusCode}');
         return {};
       }
     } catch (e) {
       Print.p(" in fetch watch list exception=>${e.toString()}");
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
       return {};
     }
   }
@@ -110,12 +110,12 @@ class WatchListApiService {
         Get.snackbar('Success', 'Item added to watchlist');
         return true;
       } else {
-        Get.snackbar('Error', 'Failed to add item: ${response.statusCode}');
+        // Get.snackbar('Error', 'Failed to add item: ${response.statusCode}');
         return false;
       }
     } catch (e) {
       Print.p(" in add watch list exception=>${e.toString()}");
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
       return false;
     }
   }

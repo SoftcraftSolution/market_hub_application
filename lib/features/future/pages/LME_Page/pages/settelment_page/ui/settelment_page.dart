@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
+import '../../../../../../../core/utils/utils.dart';
 import '../controller/settelment_con.dart';
 import '../model/settelment_model.dart';
 
@@ -88,9 +89,6 @@ class _SettlementPageState extends State<SettlementPage> {
     );
   }
 
-
-
-
   Widget _buildSettlementTable() {
     return Container(
       width: MediaQuery.of(context).size.width ,
@@ -153,7 +151,7 @@ class _SettlementPageState extends State<SettlementPage> {
         DataCell(
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(settlement.date,
+            child: Text(formatDateTime(DateTime.parse(settlement.date.toString())).split("12")[0].toString(),
                 style: GoogleFonts.poppins(fontSize: 14)),
           ),
         ),

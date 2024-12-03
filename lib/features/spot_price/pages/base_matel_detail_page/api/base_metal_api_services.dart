@@ -15,11 +15,11 @@ class BaseMetalApiServices {
       if (response.statusCode == 200) {
         return SpotListResponse.fromJson(response.data);
       } else {
-        Get.snackbar('Error', 'Failed to load data: ${response.statusCode}');
+        // Get.snackbar('Error', 'Failed to load data: ${response.statusCode}');
         return null;
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
       return null;
     }
   }

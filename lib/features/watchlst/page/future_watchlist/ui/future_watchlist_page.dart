@@ -10,6 +10,7 @@ import 'package:market_hub_application/features/watchlst/controller/watchlist_da
 
 import '../../../../future/pages/LME_Page/pages/LME_Future/component/lme_item_widget.dart';
 import '../../../../future/pages/MCX_Page/component/mcx_item_widget.dart';
+import '../../../../future/pages/US_page/widget/usItemWidget.dart';
 
 class FutureWatchlistPage extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _FutureWatchlistPageState extends State<FutureWatchlistPage> {
             _buildWatchlistCategory("London(LME)", con.lmeWatchList.value, (item)=>LMEItemWidget(marketData: item,)),
             _buildWatchlistCategory("Currency(FX)", con.fxWatchList.value, (item) => FXCard(key: ValueKey(item.id), fxData: item)),
             _buildWatchlistCategory("India(MCX)", con.mcxWatchList.value, (item)=>MCXItemWidget(marketData: item,)),
-            _buildWatchlistCategory("United Nation(US)", con.usWatchList.value, (item)=>MCXItemWidget(marketData: item,)),
+            _buildWatchlistCategory("United Nation(US)", con.usWatchList.value, (item)=>USItemWidget(marketData: item,)),
             _buildWatchlistCategory("China(SHFE)", con.shfeWatchList.value, (item) => SHFECard(key: ValueKey(item.id), marketData: item)),
           ],
         );

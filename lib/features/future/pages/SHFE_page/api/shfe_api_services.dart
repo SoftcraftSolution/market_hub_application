@@ -14,7 +14,7 @@ class SHFEPageApiService {
       final response = await BaseApiServices.dio.get(url); // Use Dio to get data
 
       if (response.statusCode == 200) {
-        List<dynamic> jsonResponse = response.data;
+        List<dynamic> jsonResponse = response.data["data"];
         return jsonResponse.map((price) => SHFE_model.fromJson(price)).toList();
       } else {
         throw Exception('Failed to load prices: ${response.statusCode}');
