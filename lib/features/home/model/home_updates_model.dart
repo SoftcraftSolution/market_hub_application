@@ -1,14 +1,16 @@
 // lib/models/home_update.dart
 class HomeUpdate {
   final String id;
-  final String text;
+  final String? text;
   final String? image;
+  final String? imageBase64;
   final DateTime createdAt;
 
   HomeUpdate({
     required this.id,
-    required this.text,
+     this.text,
     this.image,
+    this.imageBase64,
     required this.createdAt,
   });
 
@@ -16,7 +18,8 @@ class HomeUpdate {
     return HomeUpdate(
       id: json['_id'],
       text: json['text'] ?? 'No Text',
-      image: json['image'],
+      image: json['image']?? null,
+      imageBase64: json["imageBase64"]?? null,
       createdAt: DateTime.parse(json['createdAt']),
     );
   }

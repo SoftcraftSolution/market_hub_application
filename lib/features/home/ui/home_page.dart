@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +28,7 @@ class HomePage extends StatelessWidget {
             SizedBox(child: Row(
               children: [
                 Image.asset("assets/splash_screeen_img/logo.png",height: 70,width: 70,),
+
                 Expanded(child: Text(" Hello ${userDetailCon!.name} 👋",style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700,),)),
                 GestureDetector(
                     onTap: (){

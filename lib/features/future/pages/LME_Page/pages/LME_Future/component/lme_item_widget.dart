@@ -41,7 +41,7 @@ class LMEItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  // flex: 2,
+                  flex: 2,
                   child: Row(
                     children: [
                       Text(
@@ -68,20 +68,20 @@ class LMEItemWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    marketData['latestPrice'].toString() ?? 'N/A',
-                    textAlign: TextAlign.end,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: MediaQuery.of(context).size.width * 0.04,
-                      color: isPriceNegative ? Colors.red : Colors.green,
-                    ),
+                Text(
+
+                  marketData['latestPrice'].toString() ?? 'N/A',
+                  textAlign: TextAlign.end,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    color: isPriceNegative ? Colors.red : Colors.green,
                   ),
                 ),
-                SizedBox(width: 10),
-                Center(
+                // SizedBox(width: 10),
+                Expanded(
                   child: Text(
+                    textAlign: TextAlign.right,
                     "${marketData['riseFall'] ?? 'N/A'} (${marketData['risefall'] ?? 'N/A'})",
                     style: GoogleFonts.poppins(
                       fontSize: 14,

@@ -1,8 +1,11 @@
 // lib/views/home_update_page.dart
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:market_hub_application/core/constants/color_constant.dart';
+import 'package:market_hub_application/core/utils/utils.dart';
 import 'package:market_hub_application/shared/components/loading_page/ui/loading_page.dart';
 import '../controller/home_page_con.dart';
 import '../model/home_updates_model.dart';
@@ -19,6 +22,7 @@ class HomeUpdatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       backgroundColor: ColorConstants.backgroundColor, // Background color for the page
@@ -30,6 +34,7 @@ class HomeUpdatePage extends StatelessWidget {
           itemCount: controller.homeUpdates.length,
           itemBuilder: (context, index) {
             HomeUpdate update = controller.homeUpdates[index];
+            Print.p(update.toString());
             return Container(
               margin: EdgeInsets.all(10), // Margin around the card
               decoration: BoxDecoration(
@@ -49,7 +54,7 @@ class HomeUpdatePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      update.text,
+                      update.text!,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -57,24 +62,31 @@ class HomeUpdatePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10),
-                    if (update.image != null) ...[
+
                       GestureDetector(
-                        onTap: () => Get.to(FullScreenImage(imageUrl: update.image!)),
+                        onTap: () => Get.to(FullScreenImage(update)),
                         child: Hero(
-                          tag: update.image!,
+                          tag: update.id,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12), // Rounded image corners
-                            child: Image.network(
-                              update.image!,
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                            child:
+                              update.image==null?
+                           Image.memory(base64Decode(update.imageBase64!),
+                                height: 200,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ): Image.network(
+                                update.image!,
+                                height: 200,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              )
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
-                    ],
+
+
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Icon(Icons.access_time, color: Colors.grey[600]), // Icon for date
