@@ -32,17 +32,23 @@ class SHFECard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
+                  flex: 4,
                   child: Row(
                     children: [
-                      Text(
-                        marketData.name.toString().split(" ")[0].toString(),
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                      SizedBox(
+                        width: 100,
+                        child: Text(
+                          marketData.name.toString().split(" ")[0].toString(),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02
+
+                      ),
                       Icon(
                         isPriceNegative ? Icons.arrow_drop_down : Icons.arrow_drop_up,
                         color: isPriceNegative ? Colors.red : Colors.green,
@@ -63,7 +69,10 @@ class SHFECard extends StatelessWidget {
                     ],
                   ),
                 ),
+                // Expanded(child: SizedBox()),
                 Expanded(
+                  flex: 3,
+
                   child: Text(
                     marketData.latestPrice.toString(),
                     textAlign: TextAlign.end,
@@ -75,13 +84,11 @@ class SHFECard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10),
-                Center(
-                  child: Text(
-                    "(${marketData.riseFall})",
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                Text(
+                  "(${marketData.riseFall})",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: Colors.grey,
                   ),
                 ),
               ],

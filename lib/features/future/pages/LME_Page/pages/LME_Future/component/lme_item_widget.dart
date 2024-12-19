@@ -42,32 +42,40 @@ class LMEItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Row(
-                    children: [
-                      Text(
-                        symbol,
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                  child: GestureDetector(
+                    onTap: () => _showDetailsBottomSheet(context, symbol, marketData, isPriceNegative),
+                    child: Row(
+                      children: [
+                        
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.08,
+                          child: Text(
+                            symbol,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: MediaQuery.of(context).size.width * 0.04,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                      Obx(() {
-                        return GestureDetector(
-                          onTap: () {
-                            con.lmeWatchlistIds.value.contains(marketData["_id"].toString())
-                                ? con.removeItem(marketData["_id"].toString())
-                                : con.addItem(lmeIds: [marketData["_id"].toString()]);
-                          },
-                          child: con.lmeWatchlistIds.value.contains(marketData["_id"].toString())
-                              ? Icon(Icons.bookmark, color: ColorConstants.primeryColor)
-                              : Icon(Icons.bookmark_border_rounded),
-                        );
-                      }),
-                    ],
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () {
+                              con.lmeWatchlistIds.value.contains(marketData["_id"].toString())
+                                  ? con.removeItem(marketData["_id"].toString())
+                                  : con.addItem(lmeIds: [marketData["_id"].toString()]);
+                            },
+                            child: con.lmeWatchlistIds.value.contains(marketData["_id"].toString())
+                                ? Icon(Icons.bookmark, color: ColorConstants.primeryColor)
+                                : Icon(Icons.bookmark_border_rounded),
+                          );
+                        }),
+                        Expanded(child: Text(""))
+                      ],
+                    ),
                   ),
                 ),
+
                 Text(
 
                   marketData['latestPrice'].toString() ?? 'N/A',
@@ -78,7 +86,6 @@ class LMEItemWidget extends StatelessWidget {
                     color: isPriceNegative ? Colors.red : Colors.green,
                   ),
                 ),
-                // SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.right,
