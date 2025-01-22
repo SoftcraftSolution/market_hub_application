@@ -1,4 +1,5 @@
 import '../../../../../core/api/api_services.dart';
+import '../../../../../core/constants/api_constant.dart';
 import '../../../../../core/utils/utils.dart';
 import '../model/exchange_rate_model.dart';
 // Import your ExchangeRate model
@@ -7,7 +8,7 @@ class RefRateApiService {
   Future<Map<String, List<ExchangeRate>>> fetchRefRateData() async {
     try {
       final response = await BaseApiServices.dio.get(
-          'https://markethub-app-backend.onrender.com/user/get-reference-rate');
+          '${ApiConstants.baseUrl}/user/get-reference-rate');
 
       if (response.statusCode == 200) {
         Print.p(response.data.toString());
