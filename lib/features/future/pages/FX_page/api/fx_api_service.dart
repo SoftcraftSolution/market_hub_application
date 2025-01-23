@@ -4,7 +4,7 @@ import '../model/fx_model.dart';
 
 class FXApiServices {
   Future<List<FXModel>> fetchFXData() async {
-    const url = 'https://fx-scrap.vercel.app/api/currencies';
+    const url = 'http://fx.markethubindia.com/api/currencies';
     try {
       final response = await BaseApiServices.dio.get(url);
       if (response.statusCode == 200) {

@@ -12,7 +12,7 @@ class TechnicalNewsApiService {
 
   Future<List<NewsFeedModel>> fetchNews() async {
     try {
-      final response = await BaseApiServices.dio.get("https://markethub-backend-ceka.onrender.com/admin/get-technical-news"); // Use Dio to make the GET request
+      final response = await BaseApiServices.dio.get("http://admin.markethubindia.com/admin/get-technical-news"); // Use Dio to make the GET request
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = response.data['data'];

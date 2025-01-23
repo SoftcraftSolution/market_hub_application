@@ -18,6 +18,7 @@ class VerifyEmailApiService{
     try {
 
       var finalPath = "${ApiConstants.baseUrl}${ApiConstants.verifyEmailEndPoint}";
+      // var finalPath = "https://markethub-app-backend.onrender.com${ApiConstants.verifyEmailEndPoint}";
       var data ={
         "email":email,
         "verifyUser":verifyUser

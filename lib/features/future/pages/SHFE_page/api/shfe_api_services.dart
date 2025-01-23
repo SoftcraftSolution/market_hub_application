@@ -6,7 +6,7 @@ import 'package:market_hub_application/features/future/pages/SHFE_page/model/shf
 
 
 class SHFEPageApiService {
-  final String url = 'https://shfe-scrap.vercel.app/api/shfe-prices';
+  final String url = 'http://shfe.markethubindia.com/api/shfe-prices';
  // Create a Dio instance
 
   Future<List<SHFE_model>> fetchShfeData() async {

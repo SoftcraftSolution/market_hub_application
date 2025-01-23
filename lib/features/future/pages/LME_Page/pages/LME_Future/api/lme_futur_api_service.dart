@@ -6,7 +6,7 @@ import '../../../../../../../core/api/api_services.dart';
 class LMEFutureApiService {
   Future<List> fetchLMEFutureData() async {
     try {
-      final response = await BaseApiServices.dio.get('https://lme-scraping.vercel.app/api/lme-metal-data');
+      final response = await BaseApiServices.dio.get('http://lme.markethubindia.com/api/lme-metal-data');
       if (response.statusCode == 200) {
         // Assuming the actual data is inside a key in the response map
         List metalData = response.data is List
