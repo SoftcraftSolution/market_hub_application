@@ -37,6 +37,9 @@ class OptionBarWithBorder extends StatelessWidget {
                 child: Obx(
                   ()=> Row(
                     children: List.generate(options.length, (index) {
+                      if (options[index]=="India"){
+                        return SizedBox();
+                      }
                       return GestureDetector(
                         onTap: () {
                           onIndexChanged(index); // Call the method to update the index
