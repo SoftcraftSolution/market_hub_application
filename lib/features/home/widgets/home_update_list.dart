@@ -28,8 +28,15 @@ class HomeUpdatePage extends StatelessWidget {
       backgroundColor: ColorConstants.backgroundColor, // Background color for the page
       body: Obx(() {
         if (controller.homeUpdates.value.isEmpty) {
-          return Center(child: LoadingPage(cardSize: 250,));
+          if(controller.isLoading.value==true){
+            return Center(child: LoadingPage(cardSize: 250,));
+          }
+          return Center(child: Text("No Data Found.",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w600),),);
+
+
         }
+
+
         return ListView.builder(
           itemCount: controller.homeUpdates.length,
           itemBuilder: (context, index) {

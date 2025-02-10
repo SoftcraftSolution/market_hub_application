@@ -12,6 +12,7 @@ import '../../../model/news_feed_model.dart';
 class TechnicalNewsCon extends GetxController {
   RxList<NewsFeedModel> newsList = <NewsFeedModel>[].obs; // Observable list for news articles
   var _timer;
+  var isLoading=false.obs;
   var homeCon=Get.find<HomeCon>();
   var alertCon=Get.find<AlertCon>();
 // Instantiate the ApiService
@@ -23,7 +24,7 @@ class TechnicalNewsCon extends GetxController {
     startFetchingData(); // Start periodic fetching of news data
     everAll([homeCon.pageIndex,alertCon.pageIndex],
             (_)async{
-          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==2){
+          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==3){
             await startFetchingData();
           }else{
             stopFetchingData();
@@ -34,10 +35,13 @@ class TechnicalNewsCon extends GetxController {
   // Fetch news from the API
   Future<void> fetchNews() async {
     try {
+      isLoading(true);
       List<NewsFeedModel> news = await TechnicalNewsApiService().fetchNews();
       // Print.p("middel");
       newsList.assignAll(news); // Assign fetched news to observable list
+      isLoading(false);
     } catch (e) {
+      isLoading(false);
       print('Error fetching news: $e'); // Handle error
     }
   }

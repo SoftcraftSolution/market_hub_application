@@ -9,6 +9,7 @@ import '../../../model/news_feed_model.dart';
 
 
 class SelfNewsController extends GetxController {
+  var isLoading=false.obs;
   RxList<NewsFeedModel> newsList = <NewsFeedModel>[].obs; // Observable list for news articles
   var _timer;
   var homeCon=Get.find<HomeCon>();
@@ -33,9 +34,12 @@ class SelfNewsController extends GetxController {
   // Fetch news from the API
   Future<void> fetchNews() async {
     try {
+      isLoading(true);
       List<NewsFeedModel> news = await SelfNewsApiService().fetchNews();
       newsList.assignAll(news); // Assign fetched news to observable list
+      isLoading(false);
     } catch (e) {
+      isLoading(false);
       print('Error fetching news: $e'); // Handle error
     }
   }

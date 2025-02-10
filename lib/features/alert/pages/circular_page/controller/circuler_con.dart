@@ -15,6 +15,7 @@ class CirculerCon extends GetxController {
   var _timer;
   var homeCon=Get.find<HomeCon>();
   var alertCon=Get.find<AlertCon>();
+  var isLoading=false.obs;
 // Instantiate the ApiService
 
   @override
@@ -24,7 +25,7 @@ class CirculerCon extends GetxController {
     startFetchingData(); // Start periodic fetching of news data
     everAll([homeCon.pageIndex,alertCon.pageIndex],
             (_)async{
-          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==4){
+          if(homeCon.pageIndex.value==3 && alertCon.pageIndex.value==5){
             await startFetchingData();
           }else{
             stopFetchingData();
@@ -35,10 +36,13 @@ class CirculerCon extends GetxController {
   // Fetch news from the API
   Future<void> fetchCirculer() async {
     try {
+      isLoading(true);
       List<NewsFeedModel> news = await CirculerApiService().fetchNews();
-      // Print.p("middel");
+      Print.p(news.toString());
       circulerList.assignAll(news); // Assign fetched news to observable list
+      isLoading(false);
     } catch (e) {
+      isLoading(false);
       print('Error fetching news: $e'); // Handle error
     }
   }
