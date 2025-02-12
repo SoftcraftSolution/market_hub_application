@@ -70,25 +70,26 @@ class SHFECard extends StatelessWidget {
                   ),
                 ),
                 // Expanded(child: SizedBox()),
-                Expanded(
-                  flex: 3,
+                Text(
 
-                  child: Text(
-                    marketData.latestPrice.toString(),
-                    textAlign: TextAlign.end,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: MediaQuery.of(context).size.width * 0.04,
-                      color: isPriceNegative ? Colors.red : Colors.green,
-                    ),
+                  marketData.latestPrice.toString(),
+                  textAlign: TextAlign.end,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    color: isPriceNegative ? Colors.red : Colors.green,
                   ),
                 ),
-                SizedBox(width: 10),
-                Text(
-                  "(${marketData.riseFall})",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: Colors.grey,
+                // SizedBox(width: 10),
+                Expanded(
+
+                  child: Text(
+                    textAlign: TextAlign.end,
+                    "(${marketData.riseFall})",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               ],

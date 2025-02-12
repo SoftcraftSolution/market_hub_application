@@ -23,10 +23,10 @@ class SetPinController
     Print.p(email);
     if(isResetPage){
       var result=await updatePin();
-      result?Get.offAll(()=>nextPage):"";
+      result?Get.off(()=>nextPage):"";
     }else{
       saveInRegistCon();
-      Get.offAll(()=>nextPage);
+      Get.off(()=>nextPage);
     }
   }
   }
@@ -50,7 +50,7 @@ class SetPinController
   }
 
   void saveInRegistCon(){
-    var userDataCon=Get.find<RegistrationCon>();
+    var userDataCon=Get.put(RegistrationCon());
 
       userDataCon.user!.setPin(pin: this.fotp.text);
 

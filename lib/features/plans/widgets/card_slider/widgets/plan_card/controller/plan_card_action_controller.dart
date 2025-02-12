@@ -29,6 +29,7 @@ class PlanCardActionController {
   }
 
   void onConfirmTrial()async{
+    Get.put(RegistrationCon());
     Get.find<RegistrationCon>().user!.setPlan(plan: planName);
     var response = await RegistrationApiService()
         .registrationApiService(user: Get.find<RegistrationCon>().user!);

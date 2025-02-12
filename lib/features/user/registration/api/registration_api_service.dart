@@ -10,6 +10,7 @@ class RegistrationApiService{
    Future<Map<String, dynamic>?> registrationApiService(
       {required UserDetail user }) async {
     // Print.p("in Login api ");
+     Print.p("this is the path of img"+user.visitingCard.toString());
     try {
 
       var finalPath = "${ApiConstants.baseUrl}${ApiConstants.registrationEndPoint}";
@@ -19,7 +20,7 @@ class RegistrationApiService{
         "whatsappNumber":user.whatsappNumber,
         "phoneNumber": user.phoneNumber,
         "pincode": user.pincode,
-        "visitingCard":await MultipartFile.fromFile(user.visitingCard.toString()),
+        // "visitingCard":await MultipartFile.fromFile(user.visitingCard.toString()),
         "pin":user.pin,
         "planName":user.plan
 
